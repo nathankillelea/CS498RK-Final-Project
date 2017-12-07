@@ -1,20 +1,19 @@
 import React from 'react';
-import { StyleSheet, Text, View, AppRegistry, TouchableOpacity, Alert, TextInput, KeyboardAvoidingView, Image, StatusBar } from 'react-native';
+import { StyleSheet, Text, View, AppRegistry, TouchableOpacity, TextInput, KeyboardAvoidingView, Image, StatusBar } from 'react-native';
 
 export default class Login extends React.Component {
+	static navigationOptions = {
+		title: 'Login',
+		header: null,
+	};
 	constructor() {
 		super();
 		this.state = {
 
 		}
 	}
-	loginHandler() {
-		Alert.alert('LOGIN BUD');
-	}
-	signUpHandler() {
-		Alert.alert('SIGN UP LAD');
-	}
 	render() {
+		const { navigate } = this.props.navigation;
 		return (
     		<View style={styles.container}>
 				<StatusBar
@@ -41,12 +40,12 @@ export default class Login extends React.Component {
 							ref={(input) => this.passwordInput = input}
 						/>
 					</View>
-					<TouchableOpacity style={styles.loginButtonContainer} onPress={this.loginHandler}>
+					<TouchableOpacity style={styles.loginButtonContainer} onPress={() => navigate('NavBar')}>
 						<Text style={styles.buttonText}>Login</Text>
 					</TouchableOpacity>
 					<View style={styles.signUpWrapper}>
 						<Text style={styles.signUpText}>Not a user?</Text>
-						<TouchableOpacity style={styles.signUpButtonContainer} onPress={this.signUpHandler}>
+						<TouchableOpacity style={styles.signUpButtonContainer} onPress={() => navigate('SignUp')}>
 							<Text style={styles.buttonText}>Sign Up</Text>
 						</TouchableOpacity>
 					</View>
