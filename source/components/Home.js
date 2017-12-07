@@ -15,23 +15,19 @@ export default class Home extends React.Component {
 	render() {
 		const { navigate } = this.props.navigation;
 		return (
-    		<View style={styles.container}>
-				<StatusBar
-					barStyle="light-content"
-				/>
-				<Text>HOME</Text>
-    		</View>
+			<Image
+				source={require('../assets/lower-res-beach.png')}
+				style={styles.background}
+			/>
     	);
 	}
 }
 
 const styles = StyleSheet.create({
-	container: {
+	background: {
 		flex: 1,
-		backgroundColor: '#fff',
-		justifyContent: 'center',
-		alignItems: 'center',
-		padding: 20,
+		width: null,
+		height: null,
 	},
 });
 
