@@ -1,9 +1,5 @@
 import React from 'react';
-<<<<<<< HEAD
-import { StyleSheet, Text, View, Button, AppRegistry, Modal, TouchableOpacity, Alert, TextInput, KeyboardAvoidingView, Image, StatusBar } from 'react-native';
-=======
-import { StyleSheet, Text, View, AppRegistry, TouchableOpacity, Alert, TextInput, KeyboardAvoidingView, Image } from 'react-native';
->>>>>>> 0dfe439ea8719423697dbdab068832c4888d6b99
+import { StyleSheet, Text, View, AppRegistry, Modal, TouchableOpacity, Alert, TextInput, KeyboardAvoidingView, Image } from 'react-native';
 
 export default class BlackBay extends React.Component {
 	static navigationOptions = {
@@ -66,7 +62,7 @@ export default class BlackBay extends React.Component {
 							color="#c4301d"
 						/>
 					</View>
-					<View/>
+
 				</Modal>
 
 				<Button
