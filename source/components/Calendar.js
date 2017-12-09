@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, AppRegistry, TouchableOpacity, Alert, TextInput, KeyboardAvoidingView, Image, StatusBar } from 'react-native';
+import { StyleSheet, Text, View, AppRegistry, TouchableOpacity, Alert, TextInput, KeyboardAvoidingView, Image } from 'react-native';
 
 export default class Calendar extends React.Component {
 	static navigationOptions = {
@@ -16,9 +16,6 @@ export default class Calendar extends React.Component {
 		const { navigate } = this.props.navigation;
 		return (
     		<View style={styles.container}>
-				<StatusBar
-					barStyle="light-content"
-				/>
 				<Text>CALENDAR</Text>
     		</View>
     	);
