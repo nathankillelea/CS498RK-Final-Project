@@ -17,7 +17,7 @@ export default class Login extends React.Component {
 		return (
     		<View style={styles.container}>
 				<StatusBar
-					barStyle="light-content"
+
 				/>
 				<View style={styles.logoContainer}>
 					<Image style={styles.logo}
