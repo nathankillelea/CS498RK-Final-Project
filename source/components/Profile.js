@@ -1,23 +1,22 @@
 import React from 'react';
 import { StyleSheet, Text, View, AppRegistry, TouchableOpacity, Alert, TextInput, KeyboardAvoidingView, Image } from 'react-native';
 
-export default class Bottle extends React.Component {
+export default class Profile extends React.Component {
 	static navigationOptions = {
-		title: 'Bottle',
+		title: 'Profile',
 		header: null,
 	};
-	constructor(props) {
-		super(props);
+	constructor() {
+		super();
 		this.state = {
-			name: this.props.navigation.state.params.name,
-			type: this.props.navigation.state.params.type,
+
 		}
 	}
 	render() {
 		const { navigate } = this.props.navigation;
 		return (
     		<View style={styles.container}>
-				<Text>{this.state.name}</Text>
+				<Text>Profile</Text>
     		</View>
     	);
 	}
@@ -33,4 +32,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-AppRegistry.registerComponent('Bottle', () => Bottle);
+AppRegistry.registerComponent('Profile', () => Profile);

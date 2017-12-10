@@ -1,6 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, AppRegistry, Modal, Button, TextInput, Image, FlatList } from 'react-native';
-import { List, ListItem, SearchBar } from 'react-native-elements';
+import { StyleSheet, Text, View, AppRegistry, Modal, TouchableOpacity, Alert, TextInput, KeyboardAvoidingView, Image, Button } from 'react-native';
 
 export default class BlackBay extends React.Component {
 	static navigationOptions = {
@@ -10,120 +9,28 @@ export default class BlackBay extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			showBottleCreateModal: false,
-			showBottleListModal: false,
-			newBottleText: "Hello Bottle",
-            data: [
-                {
-                    name: 'Bottle 1',
-                    subtitle: 'Inspirational Bottle',
-                    id: 1,
-                },
-                {
-                    name: 'Bottle 2',
-                    subtitle: 'Funny Bottle',
-                    id: 2,
-                },
-                {
-                    name: 'Bottle 3',
-                    subtitle: 'Motivational Bottle',
-                    id: 3,
-                },
-                {
-                    name: 'Bottle 4',
-                    subtitle: 'Motivational Bottle',
-                    id: 4,
-                },
-                {
-                    name: 'Bottle 5',
-                    subtitle: 'Motivational Bottle',
-                    id: 5,
-                },
-                {
-                    name: 'Bottle 6',
-                    subtitle: 'Motivational Bottle',
-                    id: 6,
-                },
-                {
-                    name: 'Bottle 7',
-                    subtitle: 'Motivational Bottle',
-                    id: 7,
-                },
-                {
-                    name: 'Bottle 8',
-                    subtitle: 'Motivational Bottle',
-                    id: 8,
-                },
-                {
-                    name: 'Bottle 9',
-                    subtitle: 'Motivational Bottle',
-                    id: 9,
-                },
-                {
-                    name: 'Bottle 10',
-                    subtitle: 'Motivational Bottle',
-                    id: 10,
-                },
-                {
-                    name: 'Bottle 11',
-                    subtitle: 'Motivational Bottle',
-                    id: 11,
-                },
-                {
-                    name: 'Bottle 12',
-                    subtitle: 'Motivational Bottle',
-                    id: 12,
-                },
-            ],
+			showModal: false,
+			newBottleText: "Hello Bottle"
 		}
 	}
 
-	showNewBottleModal = () => {
-		this.setState({showBottleCreateModal: true})
+	createNewBottle = () => {
+		this.setState({showModal: true});
 	};
 
-	showBottleListModal = () => {
-		this.setState({showBottleListModal: true})
+	selectBottleList() {
+
 	};
 
-	closeNewBottleModal = () => {
-		this.setState({showBottleCreateModal: false});
-	};
 
-    closeBottleListModal = () => {
-        this.setState({showBottleListModal: false});
-    };
+
+	closeModal = () => {
+		this.setState({showModal: false});
+	};
 
 	saveModalData = (text) => {
 		this.setState({newBottleText: text})
 	};
-
-    renderSeparator = () => {
-        return (
-			<View
-				style={{
-                    height: 1,
-                    backgroundColor: '#CED0CE',
-                    width: '100%',
-                }}
-			/>
-        );
-    };
-    renderHeader = () => {
-        return(
-			<View style={{backgroundColor: '#FAFAFA'}}>
-				<View style={{paddingHorizontal: 7.5}}>
-					<Text style={{fontWeight: "bold", fontSize: 48, }}>Bottles</Text>
-				</View>
-				<SearchBar
-					containerStyle={{backgroundColor: '#FAFAFA', borderTopWidth: 0, borderColor: '#CED0CE'}}
-					inputStyle={{backgroundColor: '#E6E6E6', color: 'black'}}
-					placeholder="Search"
-					lightTheme
-				/>
-			</View>
-        );
-    };
 
 	render() {
 		const { navigate } = this.props.navigation;
@@ -133,7 +40,8 @@ export default class BlackBay extends React.Component {
 				<Image
 					source={require('../assets/bleckbae2.jpg')}
 				/>
-				<Modal visible={this.state.showBottleCreateModal}>
+				<Modal visible={this.state.showModal}>
+					<View style={styles.container}>
 						<TextInput style={styles.input}
 								   placeholder={this.state.newBottleText}
 								   autoCapitalize="none"
@@ -143,20 +51,26 @@ export default class BlackBay extends React.Component {
 								   blurOnSubmit={true}
 								   onChangeText={this.saveModalData}
 						/>
-					<Button
-						onPress={this.closeNewBottleModal}
-						title="Close Window"
-					/>
+						<Button
+							onPress={this.closeModal}
+							title="Keep Bottle"
+							color="#17c11a"
+						/>
+						<Button
+							onPress={this.closeModal}
+							title="Throw Away"
+							color="#c4301d"
+						/>
+					</View>
+
 				</Modal>
 
-
-
 				<Button
-					onPress={this.showNewBottleModal}
+					onPress={this.createNewBottle}
 					title="Make New Bottle"
 				/>
 				<Button
-					onPress={this.showBottleListModal}
+					onPress={this.createNewBottle}
 					title="Choose From Collection"
 				/>
 			</View>
