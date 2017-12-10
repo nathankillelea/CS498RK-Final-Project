@@ -6,17 +6,18 @@ export default class Bottle extends React.Component {
 		title: 'Bottle',
 		header: null,
 	};
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 		this.state = {
-
+			name: this.props.navigation.state.params.name,
+			type: this.props.navigation.state.params.type,
 		}
 	}
 	render() {
 		const { navigate } = this.props.navigation;
 		return (
     		<View style={styles.container}>
-				<Text>BOTTLE</Text>
+				<Text>{this.state.name}</Text>
     		</View>
     	);
 	}

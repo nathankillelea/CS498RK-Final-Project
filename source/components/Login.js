@@ -40,7 +40,7 @@ export default class Login extends React.Component {
 							ref={(input) => this.passwordInput = input}
 						/>
 					</View>
-					<TouchableOpacity style={styles.loginButtonContainer} onPress={() => navigate('NavBar')}>
+					<TouchableOpacity style={styles.loginButtonContainer} onPress={() => navigate('Home')}>
 						<Text style={styles.buttonText}>Login</Text>
 					</TouchableOpacity>
 					<View style={styles.signUpWrapper}>

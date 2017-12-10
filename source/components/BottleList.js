@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, AppRegistry, TouchableOpacity, TextInput, Image, StatusBar, FlatList, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, AppRegistry, TouchableOpacity, TextInput, Image, StatusBar, FlatList, ActivityIndicator, Alert } from 'react-native';
 import { List, ListItem, SearchBar } from 'react-native-elements';
 
 export default class BottleList extends React.Component {
@@ -116,6 +116,8 @@ export default class BottleList extends React.Component {
 								subtitle={item.subtitle}
 								avatar={require('../assets/paper.png')}
 								containerStyle={{borderBottomWidth: 0, borderTopWidth: 0, backgroundColor: '#fff', borderColor: '#fff'}}
+								button
+								onPress={() => navigate('Bottle', {name: item.name, type: item.subtitle})}
 							/>
 						)}
 						keyExtractor={item => item.id}
