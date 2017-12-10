@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, AppRegistry, TouchableOpacity, Alert, TextInput, KeyboardAvoidingView, Image } from 'react-native';
+import { StyleSheet, Text, View, AppRegistry, Button, Alert, TextInput, KeyboardAvoidingView, Image } from 'react-native';
 
 export default class Settings extends React.Component {
 	static navigationOptions = {
@@ -12,11 +12,56 @@ export default class Settings extends React.Component {
 
 		}
 	}
+
+	changeUsername = () => {
+
+	};
+
+    changeProfilePicture = () => {
+
+    };
+
+    changePassword = () => {
+
+    };
+
+    changePreference = () => {
+
+    };
+
+    logOut = () => {
+
+	};
+
 	render() {
 		const { navigate } = this.props.navigation;
 		return (
     		<View style={styles.container}>
+				<Image
+					source={require('../assets/userfrog.jpg')}
+					style={styles.background}
+				/>
 				<Text>SETTINGS</Text>
+				<Button
+					title="Change Profile Picture"
+					onPress={this.changeProfilePicture}
+				/>
+				<Button
+					title="Change Username"
+					onPress={this.changeUsername}
+				/>
+				<Button
+					title="Change Password"
+					onPress={this.changePassword}
+				/>
+				<Button
+					title="Change Quote Preference"
+					onPress={this.changePreference}
+				/>
+				<Button
+					title="Log Out"
+					onPress={this.logOut}
+				/>
     		</View>
     	);
 	}
@@ -30,6 +75,13 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		padding: 20,
 	},
+    background: {
+        flex: 1,
+        width: 150,
+        height: 20,
+		padding: 10,
+		margin: 10,
+    },
 });
 
 AppRegistry.registerComponent('Settings', () => Settings);

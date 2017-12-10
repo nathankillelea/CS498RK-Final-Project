@@ -23,7 +23,7 @@ export const Tabs = TabNavigator({
 		screen: BottleList,
 		navigationOptions: {
 			tabBarLabel: 'Bottles',
-			tabBarIcon: ({ tintColor }) => (<EntypoIcon name="cup" size={35} color={tintColor} />),
+			tabBarIcon: ({ tintColor }) => (<FontAwesomeIcon name="flask" size={35} color={tintColor} />),
 		},
 	},
 	Calendar: {
