@@ -9,6 +9,10 @@ export default class Settings extends React.Component {
 	constructor() {
 		super();
 		this.state = {
+			username: "Jamaul the Titan",
+			profilePicture: 1,
+			password: "",
+			preference: 1
 
 		}
 	}
@@ -41,7 +45,8 @@ export default class Settings extends React.Component {
 					source={require('../assets/userfrog.jpg')}
 					style={styles.background}
 				/>
-				<Text>SETTINGS</Text>
+				<Text>{this.state.username}</Text>
+				<Text>Preference: {this.state.preference}</Text>
 				<Button
 					title="Change Profile Picture"
 					onPress={this.changeProfilePicture}
