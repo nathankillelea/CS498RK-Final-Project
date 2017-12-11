@@ -37,7 +37,6 @@ export default class BlackBay extends React.Component {
 		return (
     		<View style={styles.container}>
 				<Text>BLACK BAY</Text>
-				<Text>A Place to Vent your Frustration.</Text>
 				<Image
 					source={require('../assets/bleckbae2.jpg')}
 				/>
@@ -66,10 +65,13 @@ export default class BlackBay extends React.Component {
 
 				</Modal>
 
-
 				<Button
 					onPress={this.createNewBottle}
-					title="New Rant Bottle"
+					title="Make New Bottle"
+				/>
+				<Button
+					onPress={this.createNewBottle}
+					title="Choose From Collection"
 				/>
 			</View>
     	);
