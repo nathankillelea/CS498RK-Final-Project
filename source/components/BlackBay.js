@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, AppRegistry, Modal, TouchableOpacity, Alert, TextInput, KeyboardAvoidingView, Image, Button } from 'react-native';
+import { StyleSheet, Text, View, AppRegistry, Modal, TouchableOpacity, Alert, TextInput, KeyboardAvoidingView, Image, Button, ImageBackground } from 'react-native';
 
 export default class BlackBay extends React.Component {
 	static navigationOptions = {
@@ -35,56 +35,74 @@ export default class BlackBay extends React.Component {
 	render() {
 		const { navigate } = this.props.navigation;
 		return (
-    		<View style={styles.container}>
-				<Text>BLACK BAY</Text>
-				<Image
-					source={require('../assets/bleckbae2.jpg')}
-				/>
+	        <ImageBackground style={{width: '100%', height: '100%'}} source={require('../assets/blackbay_nathan.jpg')}>
 				<Modal visible={this.state.showModal}>
 					<View style={styles.container}>
 						<TextInput style={styles.input}
-								   placeholder={this.state.newBottleText}
-								   autoCapitalize="none"
-								   autoCorrect={true}
-								   multiline={true}
-								   numberOfLines={10}
-								   blurOnSubmit={true}
-								   onChangeText={this.saveModalData}
+							placeholder={this.state.newBottleText}
+							autoCapitalize="none"
+							autoCorrect={true}
+							multiline={true}
+							numberOfLines={10}
+							blurOnSubmit={true}
+							onChangeText={this.saveModalData}
 						/>
-						<Button
-							onPress={this.closeModal}
-							title="Keep Bottle"
-							color="#17c11a"
-						/>
-						<Button
-							onPress={this.closeModal}
-							title="Throw Away"
-							color="#c4301d"
-						/>
+						<View style={styles.modalButtonContainer}>
+							<TouchableOpacity style={[styles.modalButton, {backgroundColor: '#17c11a'}]} onPress={this.closeModal}>
+								<Text style={[styles.buttonText, {color: '#fff'}]}>Keep Bottle</Text>
+							</TouchableOpacity>
+							<TouchableOpacity style={[styles.modalButton, {backgroundColor: '#c4301d'}]} onPress={this.closeModal}>
+								<Text style={[styles.buttonText, {color: '#fff'}]}>Throw Away</Text>
+							</TouchableOpacity>
+						</View>
 					</View>
-
 				</Modal>
-
-				<Button
-					onPress={this.createNewBottle}
-					title="Make New Bottle"
-				/>
-				<Button
-					onPress={this.createNewBottle}
-					title="Choose From Collection"
-				/>
-			</View>
+				<View style={styles.buttonContainer}>
+					<TouchableOpacity style={styles.button} onPress={this.createNewBottle}>
+						<Text style={styles.buttonText}>Make New Bottle</Text>
+					</TouchableOpacity>
+					<TouchableOpacity style={styles.button} onPress={this.createNewBottle}>
+						<Text style={styles.buttonText}>Choose From Collection</Text>
+					</TouchableOpacity>
+				</View>
+	        </ImageBackground>
     	);
 	}
 }
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
-		backgroundColor: '#fff',
+
+	},
+    backgroundImage: {
+		height: '100%',
+		width: '100%',
+    },
+	buttonContainer: {
 		justifyContent: 'center',
 		alignItems: 'center',
-		padding: 20,
+		paddingTop: 400,
+	},
+	button: {
+		backgroundColor: 'rgba(255, 255, 255, 0.7)',
+		paddingVertical: 15,
+		marginBottom: 20,
+		width: 250,
+		borderRadius: 10,
+	},
+	buttonText: {
+		textAlign: 'center',
+		fontWeight: '700',
+	},
+	modalButtonContainer: {
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	modalButton: {
+		paddingVertical: 15,
+		marginBottom: 20,
+		width: 250,
+		borderRadius: 10,
 	},
 });
 
