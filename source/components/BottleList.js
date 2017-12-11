@@ -79,15 +79,17 @@ export default class BottleList extends React.Component {
 	};
 
 	componentWillMount(){
-		/* axios.get('http://localhost:3000/api/tasks?where={"owner":"boog"}')
-			.then((response) => {
-				console.log("Response went through.");
-				console.log(response);
-				console.log("Is your response.");
-			})
-			.catch((error) => {
-                console.log('Error', error);
-			}) */
+		let hostname = "LAPTOP-F1020140"; //Doug's computer
+		let bottleEndpt = "http://" + hostname + ":3000/api/bottles";
+		 axios.get(bottleEndpt)
+            .then((response) => {
+                console.log("Response went through.");
+                console.log(response);
+                console.log("Is your response.");
+            })
+            .catch((error) => {
+                console.log('Error', JSON.stringify(error));
+            });
 	}
 
 	renderSeparator = () => {
