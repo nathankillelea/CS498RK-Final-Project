@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, AppRegistry, Modal, TouchableOpacity, Alert, TextInput, KeyboardAvoidingView, Image, Button, ImageBackground } from 'react-native';
+import { Font } from 'expo';
 
 export default class BlackBay extends React.Component {
 	static navigationOptions = {
@@ -10,9 +11,16 @@ export default class BlackBay extends React.Component {
 		super();
 		this.state = {
 			showModal: false,
-			newBottleText: "Hello Bottle"
+			newBottleText: "Hello Bottle",
 		}
 	}
+
+	async componentDidMount() {
+    	await Font.loadAsync({
+    		'Allura-Regular': require('../assets/fonts/Allura-Regular.ttf'),
+		});
+	}
+
 
 	createNewBottle = () => {
 		this.setState({showModal: true});
@@ -40,7 +48,7 @@ export default class BlackBay extends React.Component {
 					<View style={[styles.container]}>
 						<ImageBackground style={{flex:1, justifyContent: 'center', alignSelf: 'center', width: '100%', height: '100%', marginTop: 30,}} source={require('../assets/scroll2.png')}>
 						<TextInput style={styles.input}
-							placeholder='Type Here...'
+							placeholder='Rant Here...'
 							autoCorrect={true}
 							multiline={true}
 							numberOfLines={10}
@@ -110,6 +118,8 @@ const styles = StyleSheet.create({
 		backgroundColor: 'rgba(255, 255, 255, 0)',
 		paddingHorizontal: 10,
 		margin: 20,
+		fontFamily: 'Allura-Regular',
+		fontSize: 24,
 	},
 });
 
