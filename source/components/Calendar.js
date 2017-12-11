@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, AppRegistry, TouchableOpacity, Alert, TextInput, KeyboardAvoidingView, Image } from 'react-native';
+import { StyleSheet, Text, View, Modal, AppRegistry, TouchableOpacity, Alert, TextInput, KeyboardAvoidingView, Image } from 'react-native';
 import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
+import axios from 'axios';
 
 export default class CalendarView extends React.Component {
 	static navigationOptions = {
@@ -10,17 +11,88 @@ export default class CalendarView extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-
+			taskData: [],
+			showTaskModal: false,
+			tasksForModal: []
 		}
 	};
 
+	componentWillMount(){
+        let hostname = "LAPTOP-F1020140"; //Doug's computer
+
+        let taskEndpt = 'http://' + secrets.access + '/api/tasks?where={\"owner\":\"boog\"}';
+        axios.get(taskEndpt)
+            .then((response) => {
+
+                let newTaskData = [];
+
+                //console.log(response.data.data);
+
+                for (let i= 0; i < response.data.data.length; i++){
+                	let id = i;
+                	let description = response.data.data[i].description;
+                	let title = response.data.data[i].title;
+                	let deadline = response.data.data[i].deadline;
+                	let completed = response.data.data[i].completed;
+
+                	newTaskData.push({
+						"id" : id,
+						"description" : description,
+						"title" : title,
+						"deadline" : deadline,
+						"completed" : completed
+					})
+				}
+				this.setState({taskData:newTaskData});
+				console.log(this.state.taskData.length);
+            })
+            .catch((error) => {
+                console.log('Error', JSON.stringify(error));
+            });
+	}
+
 	getTasksGivenDay = (day) => {
 		console.log("Today is", day.day);
+		tasksOnDay = [];
+
+		let dayTimeStamp = day.timestamp;
+		let tomorrowTimeStamp = day.timestamp + 86400000;
+		let displayTasks = [];
+		let allTasks = this.state.taskData;
+
+		console.log(dayTimeStamp);
+
+		for (let i = 0; i < allTasks.length; i++){
+			let taskDate = Date.parse(allTasks[i].deadline);
+			console.log(taskDate);
+
+			if(taskDate	 >= dayTimeStamp && taskDate < tomorrowTimeStamp){
+				console.log("We got a hit!");
+				displayTasks.push(allTasks[i]);
+			}
+
+		}
+
+		console.log(displayTasks.length);
+
+		if(displayTasks.length > 0){
+			console.log("Set the Modal to True");
+			this.setState({showTaskModal:true});
+		}
+		else{
+			this.setState({showTaskModal:false});
+		}
+
+		this.setState({tasksForModal:displayTasks});
+
+		console.log(this.state.tasksForModal.length);
+		console.log(this.state.showTaskModal);
 	};
 
 	render() {
 		const { navigate } = this.props.navigation;
 		return (
+
 			<CalendarList
 				// Callback which gets executed when visible months change in scroll view. Default = undefined
 				// onVisibleMonthsChange={(months) => {console.log('now these months are visible', months);}}
@@ -41,6 +113,7 @@ export default class CalendarView extends React.Component {
                     '2017-12-18': {disabled: true}
                 }}
 			/>
+
     	);
 	}
 }
