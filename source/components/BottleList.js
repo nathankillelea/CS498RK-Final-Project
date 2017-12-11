@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, AppRegistry, TouchableOpacity, TextInput, Image, StatusBar, FlatList, ActivityIndicator, Alert } from 'react-native';
 import { List, ListItem, SearchBar } from 'react-native-elements';
+import axios from 'axios';
 
 export default class BottleList extends React.Component {
 	static navigationOptions = {
@@ -76,6 +77,19 @@ export default class BottleList extends React.Component {
 			],
 		}
 	};
+
+	componentWillMount(){
+		/* axios.get('http://localhost:3000/api/tasks?where={"owner":"boog"}')
+			.then((response) => {
+				console.log("Response went through.");
+				console.log(response);
+				console.log("Is your response.");
+			})
+			.catch((error) => {
+                console.log('Error', error);
+			}) */
+	}
+
 	renderSeparator = () => {
 		return (
 			<View
