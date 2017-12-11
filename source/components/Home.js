@@ -78,9 +78,11 @@ export default class Home extends React.Component {
 		if(this.state.beach_tier == 0){
 			return (
 					<ImageBackground source={require('../assets/beachtier0_0.png')} style={styles.background}>
-						<TouchableOpacity style={styles.button} onPress={this.addBottle}>
-							<Text style={styles.buttonText}>Get New Bottle</Text>
-						</TouchableOpacity>
+						<View style={styles.buttonContainer}>
+							<TouchableOpacity style={styles.button} onPress={this.addBottle}>
+								<Text style={styles.buttonText}>Get New Bottle</Text>
+							</TouchableOpacity>
+						</View>
 						{this.state.showbottle1 &&
 							<TouchableOpacity style={styles.bottles} onPress={this.clickedBottle1} id = 'bottle1'>
 								<Image source = {require('../assets/bottle1.png')} style={[styles.bottles,styles.bottle1]}/>
@@ -108,11 +110,15 @@ const styles = StyleSheet.create({
 		height: '100%',
 	},
 	button: {
-		backgroundColor: '#E4645E',
+		backgroundColor: 'rgba(255, 255, 255, 0.7)',
 		paddingVertical: 15,
 		marginBottom: 20,
 		width: 250,
 		borderRadius: 10,
+	},
+	buttonContainer: {
+		justifyContent: 'center',
+		alignItems: 'center',
 	},
 	bottles:{
 
