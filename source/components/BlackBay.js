@@ -37,16 +37,17 @@ export default class BlackBay extends React.Component {
 		return (
 	        <ImageBackground style={{width: '100%', height: '100%'}} source={require('../assets/blackbay_nathan.jpg')}>
 				<Modal visible={this.state.showModal}>
-					<View style={styles.container}>
+					<View style={[styles.container]}>
+						<ImageBackground style={{flex:1, justifyContent: 'center', alignSelf: 'center', width: '100%', height: '100%', marginTop: 30,}} source={require('../assets/scroll2.png')}>
 						<TextInput style={styles.input}
-							placeholder={this.state.newBottleText}
-							autoCapitalize="none"
+							placeholder='Type Here...'
 							autoCorrect={true}
 							multiline={true}
 							numberOfLines={10}
 							blurOnSubmit={true}
 							onChangeText={this.saveModalData}
 						/>
+						</ImageBackground>
 						<View style={styles.modalButtonContainer}>
 							<TouchableOpacity style={[styles.modalButton, {backgroundColor: '#17c11a'}]} onPress={this.closeModal}>
 								<Text style={[styles.buttonText, {color: '#fff'}]}>Keep Bottle</Text>
@@ -72,7 +73,7 @@ export default class BlackBay extends React.Component {
 
 const styles = StyleSheet.create({
 	container: {
-
+		flex: 1,
 	},
     backgroundImage: {
 		height: '100%',
@@ -103,6 +104,12 @@ const styles = StyleSheet.create({
 		marginBottom: 20,
 		width: 250,
 		borderRadius: 10,
+	},
+	input: {
+		height: 360,
+		backgroundColor: 'rgba(255, 255, 255, 0)',
+		paddingHorizontal: 10,
+		margin: 20,
 	},
 });
 
