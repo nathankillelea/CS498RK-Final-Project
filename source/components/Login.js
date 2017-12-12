@@ -27,7 +27,7 @@ export default class Login extends React.Component {
 				<KeyboardAvoidingView behavior="padding">
 					<View style={styles.formContainer}>
 						<TextInput style={styles.input}
-							placeholder="Username"
+							placeholder="Email"
 							returnKeyType="next"
 							onSubmitEditing={() => this.passwordInput.focus()}
 							autoCapitalize="none"

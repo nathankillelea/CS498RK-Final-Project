@@ -2,109 +2,110 @@ import React from 'react';
 import { StyleSheet, Text, View, AppRegistry, TouchableOpacity, TextInput, Image, StatusBar, FlatList, ActivityIndicator, Alert } from 'react-native';
 import { List, ListItem, SearchBar } from 'react-native-elements';
 import axios from 'axios';
+secrets = require('../secret/secret');
 
 export default class BottleList extends React.Component {
-	static navigationOptions = {
-		title: 'BottleList',
-		header: null,
-	};
-	constructor() {
-		super();
-		this.state = {
-			loading: false,
-			refreshing: false,
-			data: [
-				{
-					name: 'Bottle 1',
-					subtitle: 'Inspirational Bottle',
-					id: 1,
-				},
-				{
-					name: 'Bottle 2',
-					subtitle: 'Funny Bottle',
-					id: 2,
-				},
-				{
-					name: 'Bottle 3',
-					subtitle: 'Motivational Bottle',
-					id: 3,
-				},
-				{
-					name: 'Bottle 4',
-					subtitle: 'Motivational Bottle',
-					id: 4,
-				},
-				{
-					name: 'Bottle 5',
-					subtitle: 'Motivational Bottle',
-					id: 5,
-				},
-				{
-					name: 'Bottle 6',
-					subtitle: 'Motivational Bottle',
-					id: 6,
-				},
-				{
-					name: 'Bottle 7',
-					subtitle: 'Motivational Bottle',
-					id: 7,
-				},
-				{
-					name: 'Bottle 8',
-					subtitle: 'Motivational Bottle',
-					id: 8,
-				},
-				{
-					name: 'Bottle 9',
-					subtitle: 'Motivational Bottle',
-					id: 9,
-				},
-				{
-					name: 'Bottle 10',
-					subtitle: 'Motivational Bottle',
-					id: 10,
-				},
-				{
-					name: 'Bottle 11',
-					subtitle: 'Motivational Bottle',
-					id: 11,
-				},
-				{
-					name: 'Bottle 12',
-					subtitle: 'Motivational Bottle',
-					id: 12,
-				},
-			],
-		}
-	};
+    static navigationOptions = {
+        title: 'BottleList',
+        header: null,
+    };
+    constructor() {
+        super();
+        this.state = {
+            loading: false,
+            refreshing: false,
+            data: [
+                {
+                    name: 'Bottle 1',
+                    subtitle: 'Inspirational Bottle',
+                    id: 1,
+                },
+                {
+                    name: 'Bottle 2',
+                    subtitle: 'Funny Bottle',
+                    id: 2,
+                },
+                {
+                    name: 'Bottle 3',
+                    subtitle: 'Motivational Bottle',
+                    id: 3,
+                },
+                {
+                    name: 'Bottle 4',
+                    subtitle: 'Motivational Bottle',
+                    id: 4,
+                },
+                {
+                    name: 'Bottle 5',
+                    subtitle: 'Motivational Bottle',
+                    id: 5,
+                },
+                {
+                    name: 'Bottle 6',
+                    subtitle: 'Motivational Bottle',
+                    id: 6,
+                },
+                {
+                    name: 'Bottle 7',
+                    subtitle: 'Motivational Bottle',
+                    id: 7,
+                },
+                {
+                    name: 'Bottle 8',
+                    subtitle: 'Motivational Bottle',
+                    id: 8,
+                },
+                {
+                    name: 'Bottle 9',
+                    subtitle: 'Motivational Bottle',
+                    id: 9,
+                },
+                {
+                    name: 'Bottle 10',
+                    subtitle: 'Motivational Bottle',
+                    id: 10,
+                },
+                {
+                    name: 'Bottle 11',
+                    subtitle: 'Motivational Bottle',
+                    id: 11,
+                },
+                {
+                    name: 'Bottle 12',
+                    subtitle: 'Motivational Bottle',
+                    id: 12,
+                },
+            ],
+        }
+    };
 
-	componentWillMount(){
-		let hostname = "Nathan-PC"; //NATHAN's computer
-		let bottleEndpt = "http://" + hostname + ":3000/api/bottles";
-		 axios.get(bottleEndpt)
+    componentWillMount(){
+        let hostname = "LAPTOP-F1020140"; //Doug's computer
+        let bottleEndpt = 'http://' + secrets.access + '/api/bottles';
+        axios.get('http://' + secrets.access + '/api/bottles')
             .then((response) => {
-                console.log("Response went through.");
+                /* console.log("Response went through.");
                 console.log(response);
-                console.log("Is your response.");
+                console.log("Is your response."); */
             })
             .catch((error) => {
                 console.log('Error', JSON.stringify(error));
             });
-	}
+    }
 
-	renderSeparator = () => {
-		return (
+    renderSeparator = () => {
+        return (
 			<View
 				style={{
-					height: 1,
-					backgroundColor: '#CED0CE',
-					width: '100%',
-				}}
+                    height: 1,
+                    backgroundColor: '#CED0CE',
+                    width: '100%',
+                }}
 			/>
-		);
-	};
-	renderHeader = () => {
-		return(
+        );
+    };
+    renderHeader = () => {
+        return(
 			<View style={{backgroundColor: '#FAFAFA'}}>
 				<View style={{paddingHorizontal: 7.5}}>
 					<Text style={{fontWeight: "bold", fontSize: 48, }}>Bottles</Text>
@@ -116,11 +117,11 @@ export default class BottleList extends React.Component {
 					lightTheme
 				/>
 			</View>
-		);
-	};
-	render() {
-		const { navigate } = this.props.navigation;
-		return (
+        );
+    };
+    render() {
+        const { navigate } = this.props.navigation;
+        return (
 			<View style={{backgroundColor: '#FAFAFA'}}>
 				<List containerStyle={{borderTopWidth: 0, borderBottomWidth: 0, marginTop: 20, backgroundColor: '#FAFAFA'}}>
 					<FlatList
@@ -135,15 +136,15 @@ export default class BottleList extends React.Component {
 								button
 								onPress={() => navigate('Bottle', {name: item.name, type: item.subtitle})}
 							/>
-						)}
+                        )}
 						keyExtractor={item => item.id}
 						ItemSeparatorComponent={this.renderSeparator}
 						ListHeaderComponent={this.renderHeader}
 					/>
 				</List>
 			</View>
-    	);
-	}
+        );
+    }
 }
 
 const styles = StyleSheet.create({

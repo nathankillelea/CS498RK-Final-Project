@@ -38,8 +38,9 @@ export default class BlackBay extends React.Component {
 	        <ImageBackground style={{width: '100%', height: '100%'}} source={require('../assets/blackbay_nathan.jpg')}>
 				<Modal visible={this.state.showModal}>
 					<View style={styles.container}>
+						<Text>New Rant Bottle</Text>
 						<TextInput style={styles.input}
-							placeholder={this.state.newBottleText}
+							placeholder='Start Rant Here'
 							autoCapitalize="none"
 							autoCorrect={true}
 							multiline={true}
@@ -60,9 +61,6 @@ export default class BlackBay extends React.Component {
 				<View style={styles.buttonContainer}>
 					<TouchableOpacity style={styles.button} onPress={this.createNewBottle}>
 						<Text style={styles.buttonText}>Make New Bottle</Text>
-					</TouchableOpacity>
-					<TouchableOpacity style={styles.button} onPress={this.createNewBottle}>
-						<Text style={styles.buttonText}>Choose From Collection</Text>
 					</TouchableOpacity>
 				</View>
 	        </ImageBackground>
@@ -94,9 +92,14 @@ const styles = StyleSheet.create({
 		textAlign: 'center',
 		fontWeight: '700',
 	},
+	input: {
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
 	modalButtonContainer: {
 		justifyContent: 'center',
 		alignItems: 'center',
+
 	},
 	modalButton: {
 		paddingVertical: 15,
