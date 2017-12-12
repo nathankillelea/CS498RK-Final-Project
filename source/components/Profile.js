@@ -75,6 +75,29 @@ export default class Settings extends React.Component {
         this.setState({uri: imgPath})
 	}
 
+	updatePreferenceText = () => {
+        let pref = '';
+
+        //thankful, inspirational, comical, meme
+        switch(this.state.preference){
+            case 0:
+                pref = 'Thankful';
+                break;
+            case 1:
+                pref = 'Inspirational';
+                break;
+            case 2:
+                pref = 'Comical';
+                break;
+            case 3:
+                pref = 'Meme';
+                break;
+            //TODO: Personal Bottle Type Add to Schema
+        }
+
+        this.setState({pref: pref});
+    };
+
 	updateProfilePath = () => {
         let imgPath = require('../assets/avatars/beachball.jpg');
         switch(this.state.profilePicture){
@@ -166,32 +189,36 @@ export default class Settings extends React.Component {
         this.updateProfilePath();
     };
 
-    changePreferenceThankful = () => {
+    changeThankful = () => {
         this.setState({preference:0});
         this.setState({showPreferences:false});
+        this.updatePreferenceText();
     };
 
-    changeProfilePicturePelican = () => {
+    changeInspirational = () => {
         this.setState({preference:1});
         this.setState({showPreferences:false});
+        this.updatePreferenceText();
     };
 
-    changeProfilePictureShark = () => {
+    changeComical = () => {
         this.setState({preference:2});
         this.setState({showPreferences:false});
+        this.updatePreferenceText();
     };
 
-    changeProfilePictureTreasure = () => {
+    changeMeme = () => {
         this.setState({preference:3});
         this.setState({showPreferences:false});
+        this.updatePreferenceText();
     };
 
     changePassword = () => {
 
     };
 
-    changePreference = () => {
-        this.setState({showPreferences:false});
+    togglePreference = () => {
+        this.setState({showPreferences:true});
     };
 
     logOut = () => {
@@ -226,7 +253,7 @@ export default class Settings extends React.Component {
 					</View>
 				</Modal>
 
-				<Modal id='Username' visible={this.state.showProfilePicture}>
+				<Modal id='Profile' visible={this.state.showProfilePicture}>
 					<View style={styles.container}>
 						<Text>Change Profile Picture</Text>
 						<TouchableOpacity style={[styles.modalButton, {backgroundColor: '#17c11a'}]} onPress={this.changeProfilePictureBall}>
@@ -253,6 +280,25 @@ export default class Settings extends React.Component {
 						</TouchableOpacity>
 					</View>
 				</Modal>
+
+                <Modal id='Preferences' visible={this.state.showPreferences}>
+                    <View style={styles.container}>
+                        <Text>Change Profile Picture</Text>
+                        <TouchableOpacity style={[styles.modalButton, {backgroundColor: '#17c11a'}]} onPress={this.changeThankful}>
+                            <Text style={[styles.buttonText, {color: '#fff'}]}>Thankful</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={[styles.modalButton, {backgroundColor: '#17c11a'}]} onPress={this.changeInspirational}>
+                            <Text style={[styles.buttonText, {color: '#fff'}]}>Inspirational</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={[styles.modalButton, {backgroundColor: '#17c11a'}]} onPress={this.changeComical}>
+                            <Text style={[styles.buttonText, {color: '#fff'}]}>Comical</Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity style={[styles.modalButton, {backgroundColor: '#17c11a'}]} onPress={this.changeMeme}>
+                            <Text style={[styles.buttonText, {color: '#fff'}]}>Meme</Text>
+                        </TouchableOpacity>
+                    </View>
+                </Modal>
 
 				<View style={styles.avatarContainer}>
 					<Avatar

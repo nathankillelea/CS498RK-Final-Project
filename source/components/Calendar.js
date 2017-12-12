@@ -1,7 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView, AppRegistry, Button, TouchableOpacity, Alert, TextInput, KeyboardAvoidingView, Image } from 'react-native';
 import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
-import axios from 'axios';
+import axios from 'axios'
+secrets = require('../secret/secret');
 
 export default class CalendarView extends React.Component {
 	static navigationOptions = {
@@ -18,7 +19,7 @@ export default class CalendarView extends React.Component {
 	};
 
 	componentWillMount(){
-        let hostname = "192.168.1.67"; //Alec's IP
+        let hostname = secrets.access; //Alec's IP
         let taskEndpt = 'http://' + hostname + '/api/tasks?where={\"owner\":\"boog\"}';
         axios.get(taskEndpt)
             .then((response) => {
@@ -90,7 +91,7 @@ export default class CalendarView extends React.Component {
 
 	returnToCalendar = () => {
 		this.setState({showTaskModal: false});
-	}
+	};
 
 	render() {
 		const { navigate } = this.props.navigation;
