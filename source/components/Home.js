@@ -113,7 +113,7 @@ export default class Home extends React.Component {
 				<ImageBackground source={require('../assets/beachtier0.png')} style={styles.background}>
 					<Modal visible={this.state.showModal}>
 						<View style={[styles.container]}>
-							<ImageBackground style={{flex:1, justifyContent: 'center', alignSelf: 'center', width: '100%', height: '100%', marginTop: 30,}} source={require('../assets/scroll2.png')}>
+							<ImageBackground style={{flex: 1, justifyContent: 'center', alignSelf: 'center', width: '100%', height: '100%', marginTop: 30,}} source={require('../assets/scroll2.png')}>
 								<Text style={styles.content}>{this.state.modalMessage}</Text>
 								<Text style={styles.author}>-{this.state.modalAuthor}</Text>
 							</ImageBackground>
@@ -124,11 +124,6 @@ export default class Home extends React.Component {
 							</View>
 						</View>
 					</Modal>
-					<View style={styles.buttonContainer}>
-						<TouchableOpacity style={styles.button} onPress={this.addBottle}>
-							<Text style={styles.buttonText}>Get New Bottle</Text>
-						</TouchableOpacity>
-					</View>
 					{this.state.showbottle1 &&
 						<TouchableOpacity style={styles.bottles} onPress={this.clickedBottle1} id = 'bottle1'>
 							<Image source = {require('../assets/bottle1.png')} style={[styles.bottles,styles.bottle1]}/>
@@ -144,6 +139,11 @@ export default class Home extends React.Component {
 							<Image source = {require('../assets/bottle3.png')} style={[styles.bottles,styles.bottle3]}/>
 						</TouchableOpacity>
 					}
+					<View style={styles.buttonContainer}>
+						<TouchableOpacity style={styles.button} onPress={this.addBottle}>
+							<Text style={styles.buttonText}>Get New Bottle</Text>
+						</TouchableOpacity>
+					</View>
 				</ImageBackground>
 		    );
 		}
@@ -165,35 +165,34 @@ const styles = StyleSheet.create({
 	buttonContainer: {
 		justifyContent: 'center',
 		alignItems: 'center',
-		marginTop: 20,
+		marginTop: 525,
 	},
-	bottles:{
+	bottles: {
 
 	},
-	bottle1:{
+	bottle1: {
 		position: 'absolute',
-		top: 295,
+		top: 380, // 295
 		left: 20,
 		width: 65,
 		height: 65
 	},
-	bottle2:{
+	bottle2: {
 		position: 'absolute',
-		top: 260,
+		top: 345, // 260
 		left: 75,
 		width: 100,
 		height: 100
 	},
-	bottle3:{
+	bottle3: {
 		position: 'absolute',
-		top: 230,
+		top: 315, // 230
 		left: 135,
 		width: 70,
 		height: 70
 	},
 	buttonText: {
 		textAlign: 'center',
-		color: '#fff',
 		fontWeight: '700',
 	},
 	modalButtonContainer: {

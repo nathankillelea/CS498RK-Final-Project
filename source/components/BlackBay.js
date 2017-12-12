@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
 	buttonContainer: {
 		justifyContent: 'center',
 		alignItems: 'center',
-		paddingTop: 400,
+		marginTop: 525,
 	},
 	button: {
 		backgroundColor: 'rgba(255, 255, 255, 0.7)',
