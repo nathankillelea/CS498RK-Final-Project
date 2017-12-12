@@ -8,7 +8,7 @@ export default class SignUp extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-
+				showCreated: false,
 		}
 	}
 	render() {
@@ -40,7 +40,7 @@ export default class SignUp extends React.Component {
 							ref={(input) => this.passwordInput = input}
 						/>
 					</View>
-					<TouchableOpacity style={styles.createButtonContainer} onPress={this.loginHandler}>
+					<TouchableOpacity style={styles.createButtonContainer} onPress={() => navigate('Login')}>
 						<Text style={styles.buttonText}>Create My Account</Text>
 					</TouchableOpacity>
 				</KeyboardAvoidingView>

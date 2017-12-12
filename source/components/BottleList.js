@@ -19,7 +19,7 @@ export default class BottleList extends React.Component {
 
 
 	componentWillMount(){
-		let hostname = "10.193.3.50"; //NATHAN's computer
+		let hostname = "10.193.238.104"; //NATHAN's computer
 		let bottleEndpt = "http://" + hostname + ":3000/api/bottles";
 		 axios.get(bottleEndpt)
             .then((response) => {
@@ -74,7 +74,7 @@ export default class BottleList extends React.Component {
 								avatar={require('../assets/paper.png')}
 								containerStyle={{borderBottomWidth: 0, borderTopWidth: 0, backgroundColor: '#fff', borderColor: '#fff'}}
 								button
-								onPress={() => navigate('Bottle', {name: item.content, type: item.genre})}
+								onPress={() => navigate('Bottle', {name: item.content, type: item.genre, author: item.author})}
 							/>
                         )}
 						keyExtractor={item => item._id}

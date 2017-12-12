@@ -26,6 +26,7 @@ export default class Home extends React.Component {
 			showbottle3: false,
 			showModal: false,
 			modalMessage: '',
+			modalAuthor: '',
 		}
 	}
 	//Adds a bottle if there aren't already 3 on the beach and the user has available bottles
@@ -51,6 +52,7 @@ export default class Home extends React.Component {
 			//var bottle_id = Math.floor(Math.random()*this.state.available_list.length);
 			var bottle_id = 0;
 			this.setState({modalMessage: this.state.available_list[bottle_id].content});
+			this.setState({modalAuthor: this.state.available_list[bottle_id].author});
 			this.state.owned_list.push(this.state.available_list[bottle_id]);
 			this.state.available_list.splice(bottle_id, 1);
 			this.state.owned_bottles = this.state.owned_list.length;
@@ -64,6 +66,7 @@ export default class Home extends React.Component {
 			//var bottle_id = Math.floor(Math.random()*this.state.available_list.length);
 			var bottle_id = 0;
 			this.setState({modalMessage: this.state.available_list[bottle_id].content});
+			this.setState({modalAuthor: this.state.available_list[bottle_id].author});
 			this.state.owned_list.push(this.state.available_list[bottle_id]);
 			this.state.available_list.splice(bottle_id, 1);
 			this.state.owned_bottles = this.state.owned_list.length;
@@ -77,6 +80,7 @@ export default class Home extends React.Component {
 			//var bottle_id = Math.floor(Math.random()*this.state.available_list.length);
 			var bottle_id = 0;
 			this.setState({modalMessage: this.state.available_list[bottle_id].content});
+			this.setState({modalAuthor: this.state.available_list[bottle_id].author});
 			this.state.owned_list.push(this.state.available_list[bottle_id]);
 			this.state.available_list.splice(bottle_id, 1);
 			this.state.owned_bottles = this.state.owned_list.length;
@@ -88,7 +92,7 @@ export default class Home extends React.Component {
 	};
 	//Get all the bottles into an array
 	componentWillMount(){
-		let hostname = "10.193.3.50"; //Alec's IP
+		let hostname = "10.193.238.104"; //Alec's IP
 		let bottleEndpt = "http://" + hostname + ":3000/api/bottles";
 		 axios.get(bottleEndpt)
             .then((response) => {
@@ -111,6 +115,7 @@ export default class Home extends React.Component {
 						<View style={[styles.container]}>
 							<ImageBackground style={{flex:1, justifyContent: 'center', alignSelf: 'center', width: '100%', height: '100%', marginTop: 30,}} source={require('../assets/scroll2.png')}>
 								<Text style={styles.content}>{this.state.modalMessage}</Text>
+								<Text style={styles.author}>-{this.state.modalAuthor}</Text>
 							</ImageBackground>
 							<View style={styles.modalButtonContainer}>
 								<TouchableOpacity style={[styles.modalButton, {backgroundColor: '#17c11a'}]} onPress={this.closeModal}>
@@ -204,6 +209,7 @@ const styles = StyleSheet.create({
 	},
 	container: {
 		flex: 1,
+		backgroundColor: '#ADD8E6',
 	},
 	content: {
 		alignItems: 'center',
@@ -211,9 +217,20 @@ const styles = StyleSheet.create({
 		height: 360,
 		backgroundColor: 'rgba(255, 255, 255, 0)',
 		paddingHorizontal: 10,
-		margin: 20,
+		marginLeft: 20,
 		fontFamily: 'Allura-Regular',
 		fontSize: 24,
+		marginBottom: 10,
+	},
+	author: {
+		alignItems: 'center',
+		justifyContent: 'center',
+		backgroundColor: 'rgba(255, 255, 255, 0)',
+		paddingHorizontal: 10,
+		marginLeft: 20,
+		fontFamily: 'Allura-Regular',
+		fontSize: 24,
+		marginBottom: 10,
 	},
 });
 

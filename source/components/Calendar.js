@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, ScrollView, AppRegistry, Button, TouchableOpacity, Alert, TextInput, KeyboardAvoidingView, Image } from 'react-native';
 import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
 import axios from 'axios'
-secrets = require('../secret/secret');
+
 
 export default class CalendarView extends React.Component {
 	static navigationOptions = {
@@ -19,7 +19,7 @@ export default class CalendarView extends React.Component {
 	};
 
 	componentWillMount(){
-        let hostname = secrets.access; //Alec's IP
+        let hostname = "10.193.238.104"; //Alec's IP
         let taskEndpt = 'http://' + hostname + '/api/tasks?where={\"owner\":\"boog\"}';
         axios.get(taskEndpt)
             .then((response) => {
@@ -75,13 +75,8 @@ export default class CalendarView extends React.Component {
 
 		console.log(displayTasks.length);
 
-		if(displayTasks.length > 0){
-			console.log("Set the Modal to True");
+
 			this.setState({showTaskModal:true});
-		}
-		else{
-			this.setState({showTaskModal:false});
-		}
 
 		this.setState({tasksForModal:displayTasks});
 

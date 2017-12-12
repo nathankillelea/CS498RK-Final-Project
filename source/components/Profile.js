@@ -10,7 +10,7 @@ export default class Settings extends React.Component {
     constructor() {
         super();
         this.state = {
-            username: "Jamaul the Titan",
+            username: "John",
             profilePicture: 4,
             password: "",
             preference: 0,
@@ -124,7 +124,7 @@ export default class Settings extends React.Component {
                 break;
         }
 
-        this.setState({uri: imgPath})
+        this.setState({uri: imgPath});
 	};
 
 	toggleUserName = () => {
@@ -222,7 +222,7 @@ export default class Settings extends React.Component {
     };
 
     logOut = () => {
-
+				navigate('Login')
     };
 
     updateText = (text) => {
@@ -235,68 +235,71 @@ export default class Settings extends React.Component {
         return (
 			<View style={styles.container}>
 
-				<Modal id='Username' visible={this.state.showUsername}>
-					<View style={styles.container}>
-						<Text>Change UserName</Text>
+			<Modal id='Username' visible={this.state.showUsername}>
+				<View style={styles.container}>
+					<Text style={styles.headerText}>Change Username</Text>
+					<KeyboardAvoidingView behavior="padding">
 						<TextInput style={styles.input}
-								   placeholder='New UserName'
-								   autoCapitalize="none"
-								   autoCorrect={true}
-								   multiline={true}
-								   numberOfLines={10}
-								   blurOnSubmit={true}
-								   onChangeText={this.updateText}
+									 placeholder='New Username'
+									 autoCapitalize="none"
+									 blurOnSubmit={true}
+									 onChangeText={this.updateText}
 						/>
-						<TouchableOpacity style={[styles.modalButton, {backgroundColor: '#17c11a'}]} onPress={this.changeUsername}>
-							<Text style={[styles.buttonText, {color: '#fff'}]}>Keep Bottle</Text>
+						<TouchableOpacity style={[styles.button, {backgroundColor: '#E4645E'}]} onPress={this.changeUsername}>
+							<Text style={[styles.buttonText, {color: '#fff'}]}>Save Username</Text>
 						</TouchableOpacity>
-					</View>
-				</Modal>
+					</KeyboardAvoidingView>
+				</View>
+			</Modal>
 
-				<Modal id='Profile' visible={this.state.showProfilePicture}>
-					<View style={styles.container}>
-						<Text>Change Profile Picture</Text>
-						<TouchableOpacity style={[styles.modalButton, {backgroundColor: '#17c11a'}]} onPress={this.changeProfilePictureBall}>
-							<Text style={[styles.buttonText, {color: '#fff'}]}>Beach Ball</Text>
-						</TouchableOpacity>
-						<TouchableOpacity style={[styles.modalButton, {backgroundColor: '#17c11a'}]} onPress={this.changeProfilePictureCrab}>
-							<Text style={[styles.buttonText, {color: '#fff'}]}>Crab</Text>
-						</TouchableOpacity>
-						<TouchableOpacity style={[styles.modalButton, {backgroundColor: '#17c11a'}]} onPress={this.changeProfilePictureFrog}>
-							<Text style={[styles.buttonText, {color: '#fff'}]}>Frog</Text>
-						</TouchableOpacity>
+			<Modal id='Username' visible={this.state.showProfilePicture}>
+				<View style={styles.container}>
+					<Text style={styles.headerText}>Change Profile Picture</Text>
+					<View style={styles.pictureContainer}>
+					<TouchableOpacity style={[styles.button, {backgroundColor: '#E4645E'}]} onPress={this.changeProfilePictureBall}>
+						<Text style={[styles.buttonText, {color: '#fff'}]}>Beach Ball</Text>
+					</TouchableOpacity>
+					<TouchableOpacity style={[styles.button, {backgroundColor: '#E4645E'}]} onPress={this.changeProfilePictureCrab}>
+						<Text style={[styles.buttonText, {color: '#fff'}]}>Crab</Text>
+					</TouchableOpacity>
+					<TouchableOpacity style={[styles.button, {backgroundColor: '#E4645E'}]} onPress={this.changeProfilePictureFrog}>
+						<Text style={[styles.buttonText, {color: '#fff'}]}>Frog</Text>
+					</TouchableOpacity>
 
-						<TouchableOpacity style={[styles.modalButton, {backgroundColor: '#17c11a'}]} onPress={this.changeProfilePictureMermaid}>
-							<Text style={[styles.buttonText, {color: '#fff'}]}>Mermaid</Text>
-						</TouchableOpacity>
-						<TouchableOpacity style={[styles.modalButton, {backgroundColor: '#17c11a'}]} onPress={this.changeProfilePicturePelican}>
-							<Text style={[styles.buttonText, {color: '#fff'}]}>Pelican</Text>
-						</TouchableOpacity>
-						<TouchableOpacity style={[styles.modalButton, {backgroundColor: '#17c11a'}]} onPress={this.changeProfilePictureShark}>
-							<Text style={[styles.buttonText, {color: '#fff'}]}>Shark</Text>
-						</TouchableOpacity>
-						<TouchableOpacity style={[styles.modalButton, {backgroundColor: '#17c11a'}]} onPress={this.changeProfilePictureTreasure}>
-							<Text style={[styles.buttonText, {color: '#fff'}]}>Treasure</Text>
-						</TouchableOpacity>
+					<TouchableOpacity style={[styles.button, {backgroundColor: '#E4645E'}]} onPress={this.changeProfilePictureMermaid}>
+						<Text style={[styles.buttonText, {color: '#fff'}]}>Mermaid</Text>
+					</TouchableOpacity>
+					<TouchableOpacity style={[styles.button, {backgroundColor: '#E4645E'}]} onPress={this.changeProfilePicturePelican}>
+						<Text style={[styles.buttonText, {color: '#fff'}]}>Pelican</Text>
+					</TouchableOpacity>
+					<TouchableOpacity style={[styles.button, {backgroundColor: '#E4645E'}]} onPress={this.changeProfilePictureShark}>
+						<Text style={[styles.buttonText, {color: '#fff'}]}>Shark</Text>
+					</TouchableOpacity>
+					<TouchableOpacity style={[styles.button, {backgroundColor: '#E4645E'}]} onPress={this.changeProfilePictureTreasure}>
+						<Text style={[styles.buttonText, {color: '#fff'}]}>Treasure</Text>
+					</TouchableOpacity>
 					</View>
-				</Modal>
+				</View>
+			</Modal>
 
                 <Modal id='Preferences' visible={this.state.showPreferences}>
                     <View style={styles.container}>
-                        <Text>Change Profile Picture</Text>
-                        <TouchableOpacity style={[styles.modalButton, {backgroundColor: '#17c11a'}]} onPress={this.changeThankful}>
+                        <Text style={styles.headerText}>Change Preferences</Text>
+												<View style={styles.preferencesContainer}>
+                        <TouchableOpacity style={[styles.button, {backgroundColor: '#E4645E'}]} onPress={this.changeThankful}>
                             <Text style={[styles.buttonText, {color: '#fff'}]}>Thankful</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={[styles.modalButton, {backgroundColor: '#17c11a'}]} onPress={this.changeInspirational}>
+                        <TouchableOpacity style={[styles.button, {backgroundColor: '#E4645E'}]} onPress={this.changeInspirational}>
                             <Text style={[styles.buttonText, {color: '#fff'}]}>Inspirational</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={[styles.modalButton, {backgroundColor: '#17c11a'}]} onPress={this.changeComical}>
+                        <TouchableOpacity style={[styles.button, {backgroundColor: '#E4645E'}]} onPress={this.changeComical}>
                             <Text style={[styles.buttonText, {color: '#fff'}]}>Comical</Text>
                         </TouchableOpacity>
 
-                        <TouchableOpacity style={[styles.modalButton, {backgroundColor: '#17c11a'}]} onPress={this.changeMeme}>
+                        <TouchableOpacity style={[styles.button, {backgroundColor: '#E4645E'}]} onPress={this.changeMeme}>
                             <Text style={[styles.buttonText, {color: '#fff'}]}>Meme</Text>
                         </TouchableOpacity>
+												</View>
                     </View>
                 </Modal>
 
@@ -366,6 +369,26 @@ const styles = StyleSheet.create({
 		color: '#fff',
 		fontWeight: '700',
 	},
+	headerText: {
+		marginTop: 10,
+		marginBottom: 10,
+		fontWeight: "bold",
+		fontSize: 36,
+	},
+	input: {
+		height: 40,
+		backgroundColor: 'rgba(255, 255, 255, 0.7)',
+		paddingHorizontal: 10,
+		marginBottom: 10,
+		width: 250,
+		marginTop: 225,
+	},
+	preferencesContainer: {
+		marginTop: 150,
+	},
+	pictureContainer: {
+		marginTop: 75,
+	}
 });
 
 AppRegistry.registerComponent('Settings', () => Settings);

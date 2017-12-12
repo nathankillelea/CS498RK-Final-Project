@@ -96,6 +96,7 @@ export default class BlackBay extends React.Component {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
+		backgroundColor: '#ADD8E6',
 	},
     backgroundImage: {
 		height: '100%',

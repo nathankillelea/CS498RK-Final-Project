@@ -11,6 +11,7 @@ export default class Bottle extends React.Component {
 		this.state = {
 			name: this.props.navigation.state.params.name,
 			type: this.props.navigation.state.params.type,
+			author: this.props.navigation.state.params.author
 		}
 	}
 	render() {
@@ -19,6 +20,7 @@ export default class Bottle extends React.Component {
     		<View style={styles.container}>
 					<ImageBackground style={{flex:1, justifyContent: 'center', alignSelf: 'center', width: '100%', height: '100%', marginTop: 30,}} source={require('../assets/scroll2.png')}>
 						<Text style={styles.content}>{this.state.name}</Text>
+						<Text style={styles.author}>-{this.state.author}</Text>
 					</ImageBackground>
 					<View style={styles.buttonContainer}>
 						<TouchableOpacity style={[styles.button, {backgroundColor: '#17c11a'}]} onPress={() => navigate('BottleList')}>
@@ -37,6 +39,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center',
 		padding: 20,
+		backgroundColor: '#ADD8E6',
 	},
 	content: {
 		alignItems: 'center',
@@ -44,9 +47,20 @@ const styles = StyleSheet.create({
 		height: 360,
 		backgroundColor: 'rgba(255, 255, 255, 0)',
 		paddingHorizontal: 10,
-		margin: 20,
+		marginLeft: 20,
 		fontFamily: 'Allura-Regular',
 		fontSize: 24,
+		marginBottom: 10,
+	},
+	author: {
+		alignItems: 'center',
+		justifyContent: 'center',
+		backgroundColor: 'rgba(255, 255, 255, 0)',
+		paddingHorizontal: 10,
+		marginLeft: 20,
+		fontFamily: 'Allura-Regular',
+		fontSize: 24,
+		marginBottom: 10,
 	},
 	buttonText: {
 		textAlign: 'center',
