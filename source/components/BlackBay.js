@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, AppRegistry, Modal, TouchableOpacity, Alert, TextInput, KeyboardAvoidingView, Image, Button, ImageBackground } from 'react-native';
+import { Font } from 'expo';
 
 export default class BlackBay extends React.Component {
 	static navigationOptions = {
@@ -10,9 +11,16 @@ export default class BlackBay extends React.Component {
 		super();
 		this.state = {
 			showModal: false,
-			newBottleText: "Hello Bottle"
+			newBottleText: "Hello Bottle",
 		}
 	}
+
+	async componentDidMount() {
+    	await Font.loadAsync({
+    		'Allura-Regular': require('../assets/fonts/Allura-Regular.ttf'),
+		});
+	}
+
 
 	createNewBottle = () => {
 		this.setState({showModal: true});
@@ -37,17 +45,17 @@ export default class BlackBay extends React.Component {
 		return (
 	        <ImageBackground style={{width: '100%', height: '100%'}} source={require('../assets/blackbay_nathan.jpg')}>
 				<Modal visible={this.state.showModal}>
-					<View style={styles.container}>
-						<Text>New Rant Bottle</Text>
+					<View style={[styles.container]}>
+						<ImageBackground style={{flex:1, justifyContent: 'center', alignSelf: 'center', width: '100%', height: '100%', marginTop: 30,}} source={require('../assets/scroll2.png')}>
 						<TextInput style={styles.input}
-							placeholder='Start Rant Here'
-							autoCapitalize="none"
+							placeholder='Rant Here...'
 							autoCorrect={true}
 							multiline={true}
 							numberOfLines={10}
 							blurOnSubmit={true}
 							onChangeText={this.saveModalData}
 						/>
+						</ImageBackground>
 						<View style={styles.modalButtonContainer}>
 							<TouchableOpacity style={[styles.modalButton, {backgroundColor: '#17c11a'}]} onPress={this.closeModal}>
 								<Text style={[styles.buttonText, {color: '#fff'}]}>Keep Bottle</Text>
@@ -70,7 +78,7 @@ export default class BlackBay extends React.Component {
 
 const styles = StyleSheet.create({
 	container: {
-
+		flex: 1,
 	},
     backgroundImage: {
 		height: '100%',
@@ -106,6 +114,14 @@ const styles = StyleSheet.create({
 		marginBottom: 20,
 		width: 250,
 		borderRadius: 10,
+	},
+	input: {
+		height: 360,
+		backgroundColor: 'rgba(255, 255, 255, 0)',
+		paddingHorizontal: 10,
+		margin: 20,
+		fontFamily: 'Allura-Regular',
+		fontSize: 24,
 	},
 });
 
