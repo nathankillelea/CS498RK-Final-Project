@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, AppRegistry, Modal, TouchableOpacity, Alert, TextInput, KeyboardAvoidingView, Image, Button, ImageBackground } from 'react-native';
 import { Font } from 'expo';
+import axios from 'axios';
 
 export default class BlackBay extends React.Component {
 	static navigationOptions = {
@@ -11,7 +12,7 @@ export default class BlackBay extends React.Component {
 		super();
 		this.state = {
 			showModal: false,
-			newBottleText: "Hello Bottle",
+			newBottleText: "",
 		}
 	}
 
@@ -26,18 +27,34 @@ export default class BlackBay extends React.Component {
 		this.setState({showModal: true});
 	};
 
-	selectBottleList() {
-
-	};
-
-
-
 	closeModal = () => {
 		this.setState({showModal: false});
 	};
 
 	saveModalData = (text) => {
 		this.setState({newBottleText: text})
+	};
+
+	sendBottle = () => {
+		console.log(this.state.newBottleText);
+		body = {
+			"content": this.state.newBottleText,
+			"userID": "123",
+			"genre": 0,
+			"isPublic": true
+		}
+		let hostname = "10.193.238.104"; //NATHAN's computer
+		let bottleEndpt = "http://" + hostname + ":3000/api/bottles";
+		axios.post(bottleEndpt, body)
+			.then((response) => {
+				console.log("Response went through.");
+				console.log(response);
+				console.log("Is your response.");
+			})
+			.catch((error) => {
+				console.log('Error', JSON.stringify(error));
+			});
+		this.setState({showModal: false});
 	};
 
 	render() {
@@ -57,8 +74,8 @@ export default class BlackBay extends React.Component {
 						/>
 						</ImageBackground>
 						<View style={styles.modalButtonContainer}>
-							<TouchableOpacity style={[styles.modalButton, {backgroundColor: '#17c11a'}]} onPress={this.closeModal}>
-								<Text style={[styles.buttonText, {color: '#fff'}]}>Keep Bottle</Text>
+							<TouchableOpacity style={[styles.modalButton, {backgroundColor: '#17c11a'}]} onPress={this.sendBottle}>
+								<Text style={[styles.buttonText, {color: '#fff'}]} >Keep Bottle</Text>
 							</TouchableOpacity>
 							<TouchableOpacity style={[styles.modalButton, {backgroundColor: '#c4301d'}]} onPress={this.closeModal}>
 								<Text style={[styles.buttonText, {color: '#fff'}]}>Throw Away</Text>
@@ -100,14 +117,9 @@ const styles = StyleSheet.create({
 		textAlign: 'center',
 		fontWeight: '700',
 	},
-	input: {
-		alignItems: 'center',
-		justifyContent: 'center',
-	},
 	modalButtonContainer: {
 		justifyContent: 'center',
 		alignItems: 'center',
-
 	},
 	modalButton: {
 		paddingVertical: 15,
