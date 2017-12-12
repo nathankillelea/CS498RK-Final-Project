@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, AppRegistry, TouchableOpacity, Alert, TextInput, KeyboardAvoidingView, Image } from 'react-native';
+import { StyleSheet, Text, View, AppRegistry, TouchableOpacity, Alert, TextInput, KeyboardAvoidingView, Image, ImageBackground } from 'react-native';
 
 export default class Bottle extends React.Component {
 	static navigationOptions = {
@@ -17,8 +17,15 @@ export default class Bottle extends React.Component {
 		const { navigate } = this.props.navigation;
 		return (
     		<View style={styles.container}>
-				<Text>{this.state.name}</Text>
-    		</View>
+					<ImageBackground style={{flex:1, justifyContent: 'center', alignSelf: 'center', width: '100%', height: '100%', marginTop: 30,}} source={require('../assets/scroll2.png')}>
+						<Text style={styles.content}>{this.state.name}</Text>
+					</ImageBackground>
+					<View style={styles.buttonContainer}>
+						<TouchableOpacity style={[styles.button, {backgroundColor: '#17c11a'}]} onPress={() => navigate('BottleList')}>
+							<Text style={[styles.buttonText, {color: '#fff'}]}>BACK</Text>
+						</TouchableOpacity>
+					</View>
+				</View>
     	);
 	}
 }
@@ -30,6 +37,31 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center',
 		padding: 20,
+	},
+	content: {
+		alignItems: 'center',
+		justifyContent: 'center',
+		height: 360,
+		backgroundColor: 'rgba(255, 255, 255, 0)',
+		paddingHorizontal: 10,
+		margin: 20,
+		fontFamily: 'Allura-Regular',
+		fontSize: 24,
+	},
+	buttonText: {
+		textAlign: 'center',
+		color: '#fff',
+		fontWeight: '700',
+	},
+	buttonContainer: {
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	button: {
+		paddingVertical: 15,
+		marginBottom: 20,
+		width: 250,
+		borderRadius: 10,
 	},
 });
 

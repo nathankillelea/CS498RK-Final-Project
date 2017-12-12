@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, AppRegistry, TouchableOpacity, Alert, TextInput, KeyboardAvoidingView, Image, ImageBackground } from 'react-native';
+import { StyleSheet, Text, View, AppRegistry, TouchableOpacity, Alert, TextInput, KeyboardAvoidingView, Image, ImageBackground , Modal} from 'react-native';
 import axios from 'axios';
 export default class Home extends React.Component {
 	static navigationOptions = {
@@ -15,14 +15,17 @@ export default class Home extends React.Component {
 		super();
 		this.state = {
 			//filled with ints for testing, api stopped working for me
-			available_list: [1,2,3,4,5,6,7,8,9,0],
-			owned_bottles: [],
+			available_list: [],
+			owned_list: [],
 			pending_bottles: 0,
 			available_bottles: 10,
+			owned_bottles: 0,
 			beach_tier: 0,
 			showbottle1: false,
 			showbottle2: false,
-			showbottle3: false
+			showbottle3: false,
+			showModal: false,
+			modalMessage: '',
 		}
 	}
 	//Adds a bottle if there aren't already 3 on the beach and the user has available bottles
@@ -45,28 +48,54 @@ export default class Home extends React.Component {
 		if(this.state.showbottle1){
 			this.setState({showbottle1: false});
 			this.state.pending_bottles = this.state.pending_bottles - 1;
+			//var bottle_id = Math.floor(Math.random()*this.state.available_list.length);
+			var bottle_id = 0;
+			this.setState({modalMessage: this.state.available_list[bottle_id].content});
+			this.state.owned_list.push(this.state.available_list[bottle_id]);
+			this.state.available_list.splice(bottle_id, 1);
+			this.state.owned_bottles = this.state.owned_list.length;
+			this.setState({showModal: true});
 		}
 	}
 	clickedBottle2 = () => {
 		if(this.state.showbottle2){
 			this.setState({showbottle2: false});
 			this.state.pending_bottles = this.state.pending_bottles - 1;
+			//var bottle_id = Math.floor(Math.random()*this.state.available_list.length);
+			var bottle_id = 0;
+			this.setState({modalMessage: this.state.available_list[bottle_id].content});
+			this.state.owned_list.push(this.state.available_list[bottle_id]);
+			this.state.available_list.splice(bottle_id, 1);
+			this.state.owned_bottles = this.state.owned_list.length;
+			this.setState({showModal: true});
 		}
 	}
 	clickedBottle3 = () => {
 		if(this.state.showbottle3){
 			this.setState({showbottle3: false});
 			this.state.pending_bottles = this.state.pending_bottles - 1;
+			//var bottle_id = Math.floor(Math.random()*this.state.available_list.length);
+			var bottle_id = 0;
+			this.setState({modalMessage: this.state.available_list[bottle_id].content});
+			this.state.owned_list.push(this.state.available_list[bottle_id]);
+			this.state.available_list.splice(bottle_id, 1);
+			this.state.owned_bottles = this.state.owned_list.length;
+			this.setState({showModal: true});
 		}
 	}
+	closeModal = () => {
+		this.setState({showModal: false});
+	};
 	//Get all the bottles into an array
 	componentWillMount(){
-		let hostname = "192.168.1.67"; //Alec's IP
+		let hostname = "10.193.3.50"; //Alec's IP
 		let bottleEndpt = "http://" + hostname + ":3000/api/bottles";
 		 axios.get(bottleEndpt)
             .then((response) => {
 								this.setState({available_list: response.data.data});
 								console.log("Filled avaiable bottle array");
+								console.log(this.state.available_list.length);
+								console.log(this.state.available_list);
             })
             .catch((error) => {
                 console.log('Error', JSON.stringify(error));
@@ -77,7 +106,19 @@ export default class Home extends React.Component {
 		const { navigate } = this.props.navigation;
 		if(this.state.beach_tier == 0){
 			return (
-					<ImageBackground source={require('../assets/beachtier0_0.png')} style={styles.background}>
+					<ImageBackground source={require('../assets/beachtier0.png')} style={styles.background}>
+					<Modal visible={this.state.showModal}>
+						<View style={[styles.container]}>
+							<ImageBackground style={{flex:1, justifyContent: 'center', alignSelf: 'center', width: '100%', height: '100%', marginTop: 30,}} source={require('../assets/scroll2.png')}>
+								<Text style={styles.content}>{this.state.modalMessage}</Text>
+							</ImageBackground>
+							<View style={styles.modalButtonContainer}>
+								<TouchableOpacity style={[styles.modalButton, {backgroundColor: '#17c11a'}]} onPress={this.closeModal}>
+									<Text style={[styles.buttonText, {color: '#fff'}]}>OK</Text>
+								</TouchableOpacity>
+							</View>
+						</View>
+					</Modal>
 						<View style={styles.buttonContainer}>
 							<TouchableOpacity style={styles.button} onPress={this.addBottle}>
 								<Text style={styles.buttonText}>Get New Bottle</Text>
@@ -119,27 +160,28 @@ const styles = StyleSheet.create({
 	buttonContainer: {
 		justifyContent: 'center',
 		alignItems: 'center',
+		marginTop: 20,
 	},
 	bottles:{
 
 	},
 	bottle1:{
 		position: 'absolute',
-		top: 315,
+		top: 295,
 		left: 20,
 		width: 65,
 		height: 65
 	},
 	bottle2:{
 		position: 'absolute',
-		top: 280,
+		top: 260,
 		left: 75,
 		width: 100,
 		height: 100
 	},
 	bottle3:{
 		position: 'absolute',
-		top: 250,
+		top: 230,
 		left: 135,
 		width: 70,
 		height: 70
@@ -148,7 +190,31 @@ const styles = StyleSheet.create({
 		textAlign: 'center',
 		color: '#fff',
 		fontWeight: '700',
-	}
+	},
+	modalButtonContainer: {
+		justifyContent: 'center',
+		alignItems: 'center',
+
+	},
+	modalButton: {
+		paddingVertical: 15,
+		marginBottom: 20,
+		width: 250,
+		borderRadius: 10,
+	},
+	container: {
+		flex: 1,
+	},
+	content: {
+		alignItems: 'center',
+		justifyContent: 'center',
+		height: 360,
+		backgroundColor: 'rgba(255, 255, 255, 0)',
+		paddingHorizontal: 10,
+		margin: 20,
+		fontFamily: 'Allura-Regular',
+		fontSize: 24,
+	},
 });
 
 AppRegistry.registerComponent('Home', () => Home);

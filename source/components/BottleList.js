@@ -2,7 +2,6 @@ import React from 'react';
 import { StyleSheet, Text, View, AppRegistry, TouchableOpacity, TextInput, Image, StatusBar, FlatList, ActivityIndicator, Alert } from 'react-native';
 import { List, ListItem, SearchBar } from 'react-native-elements';
 import axios from 'axios';
-secrets = require('../secret/secret');
 
 export default class BottleList extends React.Component {
     static navigationOptions = {
@@ -14,80 +13,20 @@ export default class BottleList extends React.Component {
         this.state = {
             loading: false,
             refreshing: false,
-            data: [
-                {
-                    name: 'Bottle 1',
-                    subtitle: 'Inspirational Bottle',
-                    id: 1,
-                },
-                {
-                    name: 'Bottle 2',
-                    subtitle: 'Funny Bottle',
-                    id: 2,
-                },
-                {
-                    name: 'Bottle 3',
-                    subtitle: 'Motivational Bottle',
-                    id: 3,
-                },
-                {
-                    name: 'Bottle 4',
-                    subtitle: 'Motivational Bottle',
-                    id: 4,
-                },
-                {
-                    name: 'Bottle 5',
-                    subtitle: 'Motivational Bottle',
-                    id: 5,
-                },
-                {
-                    name: 'Bottle 6',
-                    subtitle: 'Motivational Bottle',
-                    id: 6,
-                },
-                {
-                    name: 'Bottle 7',
-                    subtitle: 'Motivational Bottle',
-                    id: 7,
-                },
-                {
-                    name: 'Bottle 8',
-                    subtitle: 'Motivational Bottle',
-                    id: 8,
-                },
-                {
-                    name: 'Bottle 9',
-                    subtitle: 'Motivational Bottle',
-                    id: 9,
-                },
-                {
-                    name: 'Bottle 10',
-                    subtitle: 'Motivational Bottle',
-                    id: 10,
-                },
-                {
-                    name: 'Bottle 11',
-                    subtitle: 'Motivational Bottle',
-                    id: 11,
-                },
-                {
-                    name: 'Bottle 12',
-                    subtitle: 'Motivational Bottle',
-                    id: 12,
-                },
-            ],
-        }
+            data: [],
+        };
     };
 
 
 	componentWillMount(){
-		let hostname = "192.168.1.67"; //NATHAN's computer
+		let hostname = "10.193.3.50"; //NATHAN's computer
 		let bottleEndpt = "http://" + hostname + ":3000/api/bottles";
 		 axios.get(bottleEndpt)
             .then((response) => {
                 /* console.log("Response went through.");
                 console.log(response);
                 console.log("Is your response."); */
+                this.setState({data: response.data.data});
             })
             .catch((error) => {
                 console.log('Error', JSON.stringify(error));
@@ -130,15 +69,15 @@ export default class BottleList extends React.Component {
 						renderItem={({ item }) => (
 							<ListItem
 								roundAvatar
-								title={item.name}
-								subtitle={item.subtitle}
+								title={item.author}
+								subtitle={item.content}
 								avatar={require('../assets/paper.png')}
 								containerStyle={{borderBottomWidth: 0, borderTopWidth: 0, backgroundColor: '#fff', borderColor: '#fff'}}
 								button
-								onPress={() => navigate('Bottle', {name: item.name, type: item.subtitle})}
+								onPress={() => navigate('Bottle', {name: item.content, type: item.genre})}
 							/>
                         )}
-						keyExtractor={item => item.id}
+						keyExtractor={item => item._id}
 						ItemSeparatorComponent={this.renderSeparator}
 						ListHeaderComponent={this.renderHeader}
 					/>
