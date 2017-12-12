@@ -14,20 +14,23 @@ export default class Bottle extends React.Component {
 			author: this.props.navigation.state.params.author
 		}
 	}
+	ComponentWillMount() {
+		//Image.prefetch(require('../assets/scroll2.png'))
+	}
 	render() {
 		const { navigate } = this.props.navigation;
 		return (
     		<View style={styles.container}>
-					<ImageBackground style={{flex:1, justifyContent: 'center', alignSelf: 'center', width: '100%', height: '100%', marginTop: 30,}} source={require('../assets/scroll2.png')}>
-						<Text style={styles.content}>{this.state.name}</Text>
-						<Text style={styles.author}>-{this.state.author}</Text>
-					</ImageBackground>
-					<View style={styles.buttonContainer}>
-						<TouchableOpacity style={[styles.button, {backgroundColor: '#17c11a'}]} onPress={() => navigate('BottleList')}>
-							<Text style={[styles.buttonText, {color: '#fff'}]}>BACK</Text>
-						</TouchableOpacity>
-					</View>
+				<ImageBackground style={{flex:1, justifyContent: 'center', alignSelf: 'center', width: '100%', height: '100%', marginTop: 30,}} source={require('../assets/scroll2.png')}>
+					<Text style={styles.content}>{this.state.name}</Text>
+					<Text style={styles.author}>-{this.state.author}</Text>
+				</ImageBackground>
+				<View style={styles.buttonContainer}>
+					<TouchableOpacity style={[styles.button, {backgroundColor: '#17c11a'}]} onPress={() => navigate('BottleList')}>
+						<Text style={[styles.buttonText, {color: '#fff'}]}>BACK</Text>
+					</TouchableOpacity>
 				</View>
+			</View>
     	);
 	}
 }

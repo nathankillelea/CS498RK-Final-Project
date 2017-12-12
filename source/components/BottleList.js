@@ -19,7 +19,7 @@ export default class BottleList extends React.Component {
 
 
 	componentWillMount(){
-		let hostname = "10.193.238.104"; //NATHAN's computer
+		let hostname = "Nathan-PC"; //NATHAN's computer
 		let bottleEndpt = "http://" + hostname + ":3000/api/bottles";
 		 axios.get(bottleEndpt)
             .then((response) => {

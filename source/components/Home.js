@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, AppRegistry, TouchableOpacity, Alert, TextInput, KeyboardAvoidingView, Image, ImageBackground , Modal} from 'react-native';
 import axios from 'axios';
+import { AppLoading, Asset, Font } from 'expo';
+
 export default class Home extends React.Component {
 	static navigationOptions = {
 		title: 'Home',
@@ -8,13 +10,10 @@ export default class Home extends React.Component {
 	};
 	//TO-DO:
 	//Style a "get bottle" button and display # of available bottles to user
-	//Make clicking a bottle do more than just make it disappear
-	//Figure out why API not working xd
 	//Add # to available bottles each day @ midnight
 	constructor() {
 		super();
 		this.state = {
-			//filled with ints for testing, api stopped working for me
 			available_list: [],
 			owned_list: [],
 			pending_bottles: 0,
@@ -29,6 +28,7 @@ export default class Home extends React.Component {
 			modalAuthor: '',
 		}
 	}
+
 	//Adds a bottle if there aren't already 3 on the beach and the user has available bottles
 	addBottle = () => {
 		if(this.state.pending_bottles < 3 && this.state.available_bottles > 0){
@@ -91,15 +91,15 @@ export default class Home extends React.Component {
 		this.setState({showModal: false});
 	};
 	//Get all the bottles into an array
-	componentWillMount(){
-		let hostname = "10.193.238.104"; //Alec's IP
+	componentWillMount() {
+		let hostname = "Nathan-PC"; //Alec's IP
 		let bottleEndpt = "http://" + hostname + ":3000/api/bottles";
-		 axios.get(bottleEndpt)
+		axios.get(bottleEndpt)
             .then((response) => {
-								this.setState({available_list: response.data.data});
-								console.log("Filled avaiable bottle array");
-								console.log(this.state.available_list.length);
-								console.log(this.state.available_list);
+				this.setState({available_list: response.data.data});
+				console.log("Filled avaiable bottle array");
+				console.log(this.state.available_list.length);
+				console.log(this.state.available_list);
             })
             .catch((error) => {
                 console.log('Error', JSON.stringify(error));
@@ -108,9 +108,9 @@ export default class Home extends React.Component {
 	//Currently have to put a render for each possible image which is awful because require() needs a string literal
 	render() {
 		const { navigate } = this.props.navigation;
-		if(this.state.beach_tier == 0){
+		if(this.state.beach_tier == 0) {
 			return (
-					<ImageBackground source={require('../assets/beachtier0.png')} style={styles.background}>
+				<ImageBackground source={require('../assets/beachtier0.png')} style={styles.background}>
 					<Modal visible={this.state.showModal}>
 						<View style={[styles.container]}>
 							<ImageBackground style={{flex:1, justifyContent: 'center', alignSelf: 'center', width: '100%', height: '100%', marginTop: 30,}} source={require('../assets/scroll2.png')}>
@@ -124,29 +124,29 @@ export default class Home extends React.Component {
 							</View>
 						</View>
 					</Modal>
-						<View style={styles.buttonContainer}>
-							<TouchableOpacity style={styles.button} onPress={this.addBottle}>
-								<Text style={styles.buttonText}>Get New Bottle</Text>
-							</TouchableOpacity>
-						</View>
-						{this.state.showbottle1 &&
-							<TouchableOpacity style={styles.bottles} onPress={this.clickedBottle1} id = 'bottle1'>
-								<Image source = {require('../assets/bottle1.png')} style={[styles.bottles,styles.bottle1]}/>
-							</TouchableOpacity>
-						}
-						{this.state.showbottle2 &&
-							<TouchableOpacity style={styles.bottles} onPress={this.clickedBottle2} id = 'bottle2'>
-								<Image source = {require('../assets/bottle2.png')} style={[styles.bottles,styles.bottle2]}/>
-							</TouchableOpacity>
-						}
-						{this.state.showbottle3 &&
-							<TouchableOpacity style={styles.bottles} onPress={this.clickedBottle3} id = 'bottle3'>
-								<Image source = {require('../assets/bottle3.png')} style={[styles.bottles,styles.bottle3]}/>
-							</TouchableOpacity>
-						}
-					</ImageBackground>
-	    );
-	  }
+					<View style={styles.buttonContainer}>
+						<TouchableOpacity style={styles.button} onPress={this.addBottle}>
+							<Text style={styles.buttonText}>Get New Bottle</Text>
+						</TouchableOpacity>
+					</View>
+					{this.state.showbottle1 &&
+						<TouchableOpacity style={styles.bottles} onPress={this.clickedBottle1} id = 'bottle1'>
+							<Image source = {require('../assets/bottle1.png')} style={[styles.bottles,styles.bottle1]}/>
+						</TouchableOpacity>
+					}
+					{this.state.showbottle2 &&
+						<TouchableOpacity style={styles.bottles} onPress={this.clickedBottle2} id = 'bottle2'>
+							<Image source = {require('../assets/bottle2.png')} style={[styles.bottles,styles.bottle2]}/>
+						</TouchableOpacity>
+					}
+					{this.state.showbottle3 &&
+						<TouchableOpacity style={styles.bottles} onPress={this.clickedBottle3} id = 'bottle3'>
+							<Image source = {require('../assets/bottle3.png')} style={[styles.bottles,styles.bottle3]}/>
+						</TouchableOpacity>
+					}
+				</ImageBackground>
+		    );
+		}
 	}
 }
 
