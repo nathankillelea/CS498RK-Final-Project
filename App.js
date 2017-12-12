@@ -80,7 +80,7 @@ export default class App extends React.Component {
 	async _loadAssetsAsync() {
 		const imageAssets = cacheImages([
 			require('./source/assets/beachtier0.png'),
-			require('./source/assets/scroll2.png'),
+			require('./source/assets/lower-res-scroll2.png'),
 			require('./source/assets/bottle1.png'),
 			require('./source/assets/bottle2.png'),
 			require('./source/assets/bottle3.png'),

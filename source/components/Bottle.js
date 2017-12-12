@@ -15,13 +15,13 @@ export default class Bottle extends React.Component {
 		}
 	}
 	ComponentWillMount() {
-		//Image.prefetch(require('../assets/scroll2.png'))
+		//Image.prefetch(require('../assets/lower-res-scroll2.png'))
 	}
 	render() {
 		const { navigate } = this.props.navigation;
 		return (
     		<View style={styles.container}>
-				<ImageBackground style={{flex:1, justifyContent: 'center', alignSelf: 'center', width: '100%', height: '100%', marginTop: 30,}} source={require('../assets/scroll2.png')}>
+				<ImageBackground style={{flex:1, justifyContent: 'center', alignSelf: 'center', width: '100%', height: '100%', marginTop: 30,}} source={require('../assets/lower-res-scroll2.png')}>
 					<Text style={styles.content}>{this.state.name}</Text>
 					<Text style={styles.author}>-{this.state.author}</Text>
 				</ImageBackground>

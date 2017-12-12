@@ -113,7 +113,7 @@ export default class Home extends React.Component {
 				<ImageBackground source={require('../assets/beachtier0.png')} style={styles.background}>
 					<Modal visible={this.state.showModal}>
 						<View style={[styles.container]}>
-							<ImageBackground style={{flex: 1, justifyContent: 'center', alignSelf: 'center', width: '100%', height: '100%', marginTop: 30,}} source={require('../assets/scroll2.png')}>
+							<ImageBackground style={{flex: 1, justifyContent: 'center', alignSelf: 'center', width: '100%', height: '100%', marginTop: 30,}} source={require('../assets/lower-res-scroll2.png')}>
 								<Text style={styles.content}>{this.state.modalMessage}</Text>
 								<Text style={styles.author}>-{this.state.modalAuthor}</Text>
 							</ImageBackground>
