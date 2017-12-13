@@ -9,25 +9,25 @@ export default class Settings extends React.Component {
     };
     constructor() {
         super();
+				// CHANGE THIS TO B E THE REAL USERNAME LOL
         this.state = {
             username: "John",
-            profilePicture: 4,
+            profilePicture: 0,
             password: "",
             preference: 0,
-			uri: require('../assets/avatars/beachball.jpg'),
-			pref: '',
-			showUsername: false,
-			showPassword: false,
-			showProfilePicture: false,
-			showPreferences: false,
-			textField: ''
+						uri: require('../assets/avatars/beachball.jpg'),
+						pref: '',
+						showUsername: false,
+						showPassword: false,
+						showProfilePicture: false,
+						showPreferences: false,
+						textField: ''
 
         }
     }
 
-    componentWillMount(){
+    componentWillMount() {
         let pref = '';
-
         //thankful, inspirational, comical, meme
         switch(this.state.preference){
             case 0:
@@ -44,88 +44,34 @@ export default class Settings extends React.Component {
                 break;
             //TODO: Personal Bottle Type Add to Schema
         }
-
         this.setState({pref: pref});
 
         let imgPath = require('../assets/avatars/beachball.jpg');
-        switch(this.state.profilePicture){
+        switch(this.state.profilePicture) {
             case 0:
-                imgPath = require('../assets/avatars/beachball.jpg'); // Okay
+                imgPath = require('../assets/avatars/beachball.jpg');
                 break;
             case 1:
-                imgPath = require('../assets/avatars/crab.jpg'); // Okay
+                imgPath = require('../assets/avatars/crab.jpg');
                 break;
             case 2:
-                imgPath = require('../assets/avatars/frog.jpg'); //
+                imgPath = require('../assets/avatars/frog.jpg');
                 break;
             case 3:
-                imgPath = require('../assets/avatars/mermaid.png'); //Okay
+                imgPath = require('../assets/avatars/mermaid.png');
                 break;
             case 4:
-                imgPath = require('../assets/avatars/pelican.jpg'); // Okay
+                imgPath = require('../assets/avatars/pelican.jpg');
                 break;
             case 5:
-                imgPath = require('../assets/avatars/shark.png'); //Okay
+                imgPath = require('../assets/avatars/shark.png');
                 break;
             case 6:
-                imgPath = require('../assets/avatars/treasurechest.jpg'); //Okay
+                imgPath = require('../assets/avatars/treasurechest.jpg');
                 break;
         }
-
         this.setState({uri: imgPath})
 	}
-
-	updatePreferenceText = () => {
-        let pref = '';
-
-        //thankful, inspirational, comical, meme
-        switch(this.state.preference){
-            case 0:
-                pref = 'Thankful';
-                break;
-            case 1:
-                pref = 'Inspirational';
-                break;
-            case 2:
-                pref = 'Comical';
-                break;
-            case 3:
-                pref = 'Meme';
-                break;
-            //TODO: Personal Bottle Type Add to Schema
-        }
-
-        this.setState({pref: pref}, this.forceUpdate());
-    };
-
-	updateProfilePath = () => {
-        let imgPath = require('../assets/avatars/beachball.jpg');
-        switch(this.state.profilePicture){
-            case 0:
-                imgPath = require('../assets/avatars/beachball.jpg'); // Okay
-                break;
-            case 1:
-                imgPath = require('../assets/avatars/crab.jpg'); // Okay
-                break;
-            case 2:
-                imgPath = require('../assets/avatars/frog.jpg'); //
-                break;
-            case 3:
-                imgPath = require('../assets/avatars/mermaid.png'); //Okay
-                break;
-            case 4:
-                imgPath = require('../assets/avatars/pelican.jpg'); // Okay
-                break;
-            case 5:
-                imgPath = require('../assets/avatars/shark.png'); //Okay
-                break;
-            case 6:
-                imgPath = require('../assets/avatars/treasurechest.jpg'); //Okay
-                break;
-        }
-
-        this.setState({uri: imgPath}, this.forceUpdate());
-	};
 
 	toggleUserName = () => {
 		this.setState({showUsername:true});
@@ -140,76 +86,76 @@ export default class Settings extends React.Component {
     };
 
     changeUsername = () => {
-
     	let newUsername = this.state.textField;
     	console.log(this.newUsername);
     	this.setState({username: newUsername});
-		this.setState({showUsername: false});
+			this.setState({showUsername: false});
     };
 
     changeProfilePictureBall = () => {
-    	this.setState({profilePicture:0}, this.updateProfilePath());
-        this.setState({showProfilePicture:false});
+	    	this.setState({profilePicture:0});
+	      this.setState({showProfilePicture:false});
+				this.setState({uri: require('../assets/avatars/beachball.jpg')});
     };
 
     changeProfilePictureCrab = () => {
-        this.setState({profilePicture:1}, this.updateProfilePath());
-        this.setState({showProfilePicture:false});
-
+	      this.setState({profilePicture:1});
+	      this.setState({showProfilePicture:false});
+				this.setState({uri: require('../assets/avatars/crab.jpg')});
     };
 
     changeProfilePictureFrog = () => {
-        this.setState({profilePicture:2}, this.updateProfilePath());
+        this.setState({profilePicture:2});
         this.setState({showProfilePicture:false});
+				this.setState({uri: require('../assets/avatars/frog.jpg')});
     };
 
     changeProfilePictureMermaid = () => {
-        this.setState({profilePicture:3}, this.updateProfilePath());
+        this.setState({profilePicture:3});
         this.setState({showProfilePicture:false});
+				this.setState({uri: require('../assets/avatars/mermaid.png')});
     };
 
     changeProfilePicturePelican = () => {
-        this.setState({profilePicture:4}, this.updateProfilePath());
+        this.setState({profilePicture:4});
         this.setState({showProfilePicture:false});
+				this.setState({uri: require('../assets/avatars/pelican.jpg')});
     };
 
     changeProfilePictureShark = () => {
-        this.setState({profilePicture:5},this.updateProfilePath());
+        this.setState({profilePicture:5});
         this.setState({showProfilePicture:false});
+				this.setState({uri: require('../assets/avatars/shark.png')});
     };
 
     changeProfilePictureTreasure = () => {
-        this.setState({profilePicture:6}, this.updateProfilePath());
+        this.setState({profilePicture:6});
         this.setState({showProfilePicture:false});
-
+				this.setState({uri: require('../assets/avatars/treasurechest.jpg')});
     };
 
     changeThankful = () => {
         this.setState({preference:0});
         this.setState({showPreferences:false});
-        this.updatePreferenceText();
+				this.setState({pref: 'Thankful'});
     };
 
     changeInspirational = () => {
         this.setState({preference:1});
         this.setState({showPreferences:false});
-        this.updatePreferenceText();
+				this.setState({pref: 'Inspirational'});
     };
 
     changeComical = () => {
         this.setState({preference:2});
         this.setState({showPreferences:false});
-        this.updatePreferenceText();
+				this.setState({pref: 'Comical'});
     };
 
     changeMeme = () => {
         this.setState({preference:3});
         this.setState({showPreferences:false});
-        this.updatePreferenceText();
-    };
-
-    changePassword = () => {
-
+				this.setState({pref: 'Meme'});
     };
 
     togglePreference = () => {
@@ -222,56 +168,54 @@ export default class Settings extends React.Component {
 
     render() {
         const { navigate } = this.props.navigation;
-
         return (
-			<View style={styles.container}>
+					<View style={styles.container}>
+					<Modal id='Username' visible={this.state.showUsername}>
+						<View style={styles.container}>
+							<Text style={styles.headerText}>Change Username</Text>
+							<KeyboardAvoidingView behavior="padding">
+								<TextInput style={styles.input}
+											 placeholder='New Username'
+											 autoCapitalize="none"
+											 blurOnSubmit={true}
+											 onChangeText={this.updateText}
+								/>
+								<TouchableOpacity style={[styles.button, {backgroundColor: '#E4645E'}]} onPress={this.changeUsername}>
+									<Text style={[styles.buttonText, {color: '#fff'}]}>Save Username</Text>
+								</TouchableOpacity>
+							</KeyboardAvoidingView>
+						</View>
+					</Modal>
 
-			<Modal id='Username' visible={this.state.showUsername}>
-				<View style={styles.container}>
-					<Text style={styles.headerText}>Change Username</Text>
-					<KeyboardAvoidingView behavior="padding">
-						<TextInput style={styles.input}
-									 placeholder='New Username'
-									 autoCapitalize="none"
-									 blurOnSubmit={true}
-									 onChangeText={this.updateText}
-						/>
-						<TouchableOpacity style={[styles.button, {backgroundColor: '#E4645E'}]} onPress={this.changeUsername}>
-							<Text style={[styles.buttonText, {color: '#fff'}]}>Save Username</Text>
-						</TouchableOpacity>
-					</KeyboardAvoidingView>
-				</View>
-			</Modal>
+					<Modal id='Username' visible={this.state.showProfilePicture}>
+						<View style={styles.container}>
+							<Text style={styles.headerText}>Change Profile Picture</Text>
+							<View style={styles.pictureContainer}>
+							<TouchableOpacity style={[styles.button, {backgroundColor: '#E4645E'}]} onPress={this.changeProfilePictureBall}>
+								<Text style={[styles.buttonText, {color: '#fff'}]}>Beach Ball</Text>
+							</TouchableOpacity>
+							<TouchableOpacity style={[styles.button, {backgroundColor: '#E4645E'}]} onPress={this.changeProfilePictureCrab}>
+								<Text style={[styles.buttonText, {color: '#fff'}]}>Crab</Text>
+							</TouchableOpacity>
+							<TouchableOpacity style={[styles.button, {backgroundColor: '#E4645E'}]} onPress={this.changeProfilePictureFrog}>
+								<Text style={[styles.buttonText, {color: '#fff'}]}>Frog</Text>
+							</TouchableOpacity>
 
-			<Modal id='Username' visible={this.state.showProfilePicture}>
-				<View style={styles.container}>
-					<Text style={styles.headerText}>Change Profile Picture</Text>
-					<View style={styles.pictureContainer}>
-					<TouchableOpacity style={[styles.button, {backgroundColor: '#E4645E'}]} onPress={this.changeProfilePictureBall}>
-						<Text style={[styles.buttonText, {color: '#fff'}]}>Beach Ball</Text>
-					</TouchableOpacity>
-					<TouchableOpacity style={[styles.button, {backgroundColor: '#E4645E'}]} onPress={this.changeProfilePictureCrab}>
-						<Text style={[styles.buttonText, {color: '#fff'}]}>Crab</Text>
-					</TouchableOpacity>
-					<TouchableOpacity style={[styles.button, {backgroundColor: '#E4645E'}]} onPress={this.changeProfilePictureFrog}>
-						<Text style={[styles.buttonText, {color: '#fff'}]}>Frog</Text>
-					</TouchableOpacity>
-
-					<TouchableOpacity style={[styles.button, {backgroundColor: '#E4645E'}]} onPress={this.changeProfilePictureMermaid}>
-						<Text style={[styles.buttonText, {color: '#fff'}]}>Mermaid</Text>
-					</TouchableOpacity>
-					<TouchableOpacity style={[styles.button, {backgroundColor: '#E4645E'}]} onPress={this.changeProfilePicturePelican}>
-						<Text style={[styles.buttonText, {color: '#fff'}]}>Pelican</Text>
-					</TouchableOpacity>
-					<TouchableOpacity style={[styles.button, {backgroundColor: '#E4645E'}]} onPress={this.changeProfilePictureShark}>
-						<Text style={[styles.buttonText, {color: '#fff'}]}>Shark</Text>
-					</TouchableOpacity>
-					<TouchableOpacity style={[styles.button, {backgroundColor: '#E4645E'}]} onPress={this.changeProfilePictureTreasure}>
-						<Text style={[styles.buttonText, {color: '#fff'}]}>Treasure</Text>
-					</TouchableOpacity>
-					</View>
-				</View>
-			</Modal>
+							<TouchableOpacity style={[styles.button, {backgroundColor: '#E4645E'}]} onPress={this.changeProfilePictureMermaid}>
+								<Text style={[styles.buttonText, {color: '#fff'}]}>Mermaid</Text>
+							</TouchableOpacity>
+							<TouchableOpacity style={[styles.button, {backgroundColor: '#E4645E'}]} onPress={this.changeProfilePicturePelican}>
+								<Text style={[styles.buttonText, {color: '#fff'}]}>Pelican</Text>
+							</TouchableOpacity>
+							<TouchableOpacity style={[styles.button, {backgroundColor: '#E4645E'}]} onPress={this.changeProfilePictureShark}>
+								<Text style={[styles.buttonText, {color: '#fff'}]}>Shark</Text>
+							</TouchableOpacity>
+							<TouchableOpacity style={[styles.button, {backgroundColor: '#E4645E'}]} onPress={this.changeProfilePictureTreasure}>
+								<Text style={[styles.buttonText, {color: '#fff'}]}>Treasure</Text>
+							</TouchableOpacity>
+							</View>
+						</View>
+					</Modal>
 
                 <Modal id='Preferences' visible={this.state.showPreferences}>
                     <View style={styles.container}>
@@ -299,7 +243,6 @@ export default class Settings extends React.Component {
 						xlarge
 						rounded
 						source={this.state.uri}
-						onPress={() => console.log("Works!")}
 					/>
 					<Text style={{marginTop: 10, fontWeight: "bold", fontSize: 24,}}>{this.state.username}</Text>
 					<Text style={{marginBottom: 25, marginTop: 5, fontSize: 20}}>Preference: {this.state.pref}</Text>
@@ -329,7 +272,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         paddingTop: 20,
-		backgroundColor: '#FE6F69',
+				backgroundColor: '#FE6F69',
     },
 	avatarContainer: {
 		flex: 1,
