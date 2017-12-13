@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, AppRegistry, TouchableOpacity, Alert, TextInput, KeyboardAvoidingView, Image, ImageBackground , Modal, Platform } from 'react-native';
+import { StyleSheet, Text, View, AppRegistry, TouchableOpacity, Alert, TextInput, KeyboardAvoidingView, Image, ImageBackground , Modal, Platform, Dimensions } from 'react-native';
 import axios from 'axios';
 import { AppLoading, Asset, Font } from 'expo';
 
@@ -266,8 +266,14 @@ export default class Home extends React.Component {
 								<Text style={styles.author}>-{this.state.modalAuthor}</Text>
 							</ImageBackground>
 							<View style={styles.modalButtonContainer}>
-								<TouchableOpacity style={[styles.modalButton, {backgroundColor: '#17c11a'}]} onPress={this.closeModal}>
-									<Text style={[styles.buttonText, {color: '#fff'}]}>OK</Text>
+								<TouchableOpacity style={[styles.modalButton, {backgroundColor: '#17c11a'}]}
+
+								  onPress={() => {
+	                  this.setState({showModal: false});
+	                  this.props.navigation.navigate('BottleList', {user_data: this.state.user_data, available_list: this.state.available_list, owned_list_bottles: this.state.owned_list_bottles})
+                	}}>
+
+									<Text style={[styles.buttonText, {color: '#fff'}]}>SEE BOTTLE LIST</Text>
 								</TouchableOpacity>
 							</View>
 						</View>
@@ -305,8 +311,14 @@ export default class Home extends React.Component {
 								<Text style={styles.author}>-{this.state.modalAuthor}</Text>
 							</ImageBackground>
 							<View style={styles.modalButtonContainer}>
-								<TouchableOpacity style={[styles.modalButton, {backgroundColor: '#17c11a'}]} onPress={this.closeModal}>
-									<Text style={[styles.buttonText, {color: '#fff'}]}>OK</Text>
+								<TouchableOpacity style={[styles.modalButton, {backgroundColor: '#17c11a'}]}
+
+								  onPress={() => {
+	                  this.setState({showModal: false});
+	                  this.props.navigation.navigate('BottleList', {user_data: this.state.user_data, available_list: this.state.available_list, owned_list_bottles: this.state.owned_list_bottles})
+                	}}>
+
+									<Text style={[styles.buttonText, {color: '#fff'}]}>SEE BOTTLE LIST</Text>
 								</TouchableOpacity>
 							</View>
 						</View>
@@ -344,8 +356,14 @@ export default class Home extends React.Component {
 								<Text style={styles.author}>-{this.state.modalAuthor}</Text>
 							</ImageBackground>
 							<View style={styles.modalButtonContainer}>
-								<TouchableOpacity style={[styles.modalButton, {backgroundColor: '#17c11a'}]} onPress={this.closeModal}>
-									<Text style={[styles.buttonText, {color: '#fff'}]}>OK</Text>
+								<TouchableOpacity style={[styles.modalButton, {backgroundColor: '#17c11a'}]}
+
+								  onPress={() => {
+	                  this.setState({showModal: false});
+	                  this.props.navigation.navigate('BottleList', {user_data: this.state.user_data, available_list: this.state.available_list, owned_list_bottles: this.state.owned_list_bottles})
+                	}}>
+
+									<Text style={[styles.buttonText, {color: '#fff'}]}>SEE BOTTLE LIST</Text>
 								</TouchableOpacity>
 							</View>
 						</View>
@@ -383,8 +401,14 @@ export default class Home extends React.Component {
 								<Text style={styles.author}>-{this.state.modalAuthor}</Text>
 							</ImageBackground>
 							<View style={styles.modalButtonContainer}>
-								<TouchableOpacity style={[styles.modalButton, {backgroundColor: '#17c11a'}]} onPress={this.closeModal}>
-									<Text style={[styles.buttonText, {color: '#fff'}]}>OK</Text>
+								<TouchableOpacity style={[styles.modalButton, {backgroundColor: '#17c11a'}]}
+
+								  onPress={() => {
+	                  this.setState({showModal: false});
+	                  this.props.navigation.navigate('BottleList', {user_data: this.state.user_data, available_list: this.state.available_list, owned_list_bottles: this.state.owned_list_bottles})
+                	}}>
+
+									<Text style={[styles.buttonText, {color: '#fff'}]}>SEE BOTTLE LIST</Text>
 								</TouchableOpacity>
 							</View>
 						</View>
@@ -422,8 +446,14 @@ export default class Home extends React.Component {
 								<Text style={styles.author}>-{this.state.modalAuthor}</Text>
 							</ImageBackground>
 							<View style={styles.modalButtonContainer}>
-								<TouchableOpacity style={[styles.modalButton, {backgroundColor: '#17c11a'}]} onPress={this.closeModal}>
-									<Text style={[styles.buttonText, {color: '#fff'}]}>OK</Text>
+								<TouchableOpacity style={[styles.modalButton, {backgroundColor: '#17c11a'}]}
+
+								  onPress={() => {
+	                  this.setState({showModal: false});
+	                  this.props.navigation.navigate('BottleList', {user_data: this.state.user_data, available_list: this.state.available_list, owned_list_bottles: this.state.owned_list_bottles})
+                	}}>
+
+									<Text style={[styles.buttonText, {color: '#fff'}]}>SEE BOTTLE LIST</Text>
 								</TouchableOpacity>
 							</View>
 						</View>
@@ -461,8 +491,14 @@ export default class Home extends React.Component {
 								<Text style={styles.author}>-{this.state.modalAuthor}</Text>
 							</ImageBackground>
 							<View style={styles.modalButtonContainer}>
-								<TouchableOpacity style={[styles.modalButton, {backgroundColor: '#17c11a'}]} onPress={this.closeModal}>
-									<Text style={[styles.buttonText, {color: '#fff'}]}>OK</Text>
+								<TouchableOpacity style={[styles.modalButton, {backgroundColor: '#17c11a'}]}
+
+								  onPress={() => {
+	                  this.setState({showModal: false});
+	                  this.props.navigation.navigate('BottleList', {user_data: this.state.user_data, available_list: this.state.available_list, owned_list_bottles: this.state.owned_list_bottles})
+                	}}>
+
+									<Text style={[styles.buttonText, {color: '#fff'}]}>SEE BOTTLE LIST</Text>
 								</TouchableOpacity>
 							</View>
 						</View>
@@ -506,33 +542,63 @@ const styles = StyleSheet.create({
 		borderRadius: 10,
 	},
 	buttonContainer: {
+		...Platform.select({
+			ios: {
+				marginTop: 525,
+			},
+			android: {
+				position: 'absolute',
+				top: 525, // 295
+				left: 80,
+			},
+		}),
 		justifyContent: 'center',
 		alignItems: 'center',
-		marginTop: 525,
-	},
-	bottles: {
-
 	},
 	bottle1: {
-		position: 'absolute',
-		top: 380, // 295
-		left: 20,
+		...Platform.select({
+      ios: {
+				position: 'absolute',
+				top: 380, // 295
+				left: 20,
+
+      },
+      android: {
+				marginTop: 340, // 295
+				marginLeft: 160,
+      },
+    }),
 		width: 65,
-		height: 65
+		height: 65,
 	},
 	bottle2: {
-		position: 'absolute',
-		top: 345, // 260
-		left: 75,
+		...Platform.select({
+			ios: {
+				position: 'absolute',
+				top: 345, // 260
+				left: 75,
+
+			},
+			android: {
+
+			},
+		}),
 		width: 100,
-		height: 100
+		height: 100,
 	},
 	bottle3: {
-		position: 'absolute',
-		top: 315, // 230
-		left: 135,
+		...Platform.select({
+			ios: {
+				position: 'absolute',
+				top: 315, // 230
+				left: 135,
+
+			},
+			android: {
+			},
+		}),
 		width: 70,
-		height: 70
+		height: 70,
 	},
 	buttonText: {
 		textAlign: 'center',
@@ -541,7 +607,6 @@ const styles = StyleSheet.create({
 	modalButtonContainer: {
 		justifyContent: 'center',
 		alignItems: 'center',
-
 	},
 	modalButton: {
 		paddingVertical: 15,

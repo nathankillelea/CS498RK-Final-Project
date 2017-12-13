@@ -55,7 +55,7 @@ export default class BottleList extends React.Component {
               <Text style={styles.author}>-{this.state.modalAuthor}</Text>
             </ImageBackground>
             <View style={styles.buttonContainer}>
-              <TouchableOpacity style={[styles.button, {backgroundColor: '#17c11a'}]} onPress={this.closeModal}>
+              <TouchableOpacity style={[styles.button, {backgroundColor: '#c4301d'}]} onPress={this.closeModal}>
                 <Text style={[styles.buttonText, {color: '#fff'}]}>BACK</Text>
               </TouchableOpacity>
             </View>
