@@ -22,7 +22,6 @@ export default class Settings extends React.Component {
 						showProfilePicture: false,
 						showPreferences: false,
 						textField: ''
-
         }
     }
 
@@ -180,7 +179,7 @@ export default class Settings extends React.Component {
 											 blurOnSubmit={true}
 											 onChangeText={this.updateText}
 								/>
-								<TouchableOpacity style={[styles.button, {backgroundColor: '#E4645E'}]} onPress={this.changeUsername}>
+								<TouchableOpacity style={[styles.button, {backgroundColor: '#2C5461'}]} onPress={this.changeUsername}>
 									<Text style={[styles.buttonText, {color: '#fff'}]}>Save Username</Text>
 								</TouchableOpacity>
 							</KeyboardAvoidingView>
@@ -191,26 +190,26 @@ export default class Settings extends React.Component {
 						<View style={styles.container}>
 							<Text style={styles.headerText}>Change Profile Picture</Text>
 							<View style={styles.pictureContainer}>
-							<TouchableOpacity style={[styles.button, {backgroundColor: '#E4645E'}]} onPress={this.changeProfilePictureBall}>
+							<TouchableOpacity style={[styles.button, {backgroundColor: '#2C5461'}]} onPress={this.changeProfilePictureBall}>
 								<Text style={[styles.buttonText, {color: '#fff'}]}>Beach Ball</Text>
 							</TouchableOpacity>
-							<TouchableOpacity style={[styles.button, {backgroundColor: '#E4645E'}]} onPress={this.changeProfilePictureCrab}>
+							<TouchableOpacity style={[styles.button, {backgroundColor: '#2C5461'}]} onPress={this.changeProfilePictureCrab}>
 								<Text style={[styles.buttonText, {color: '#fff'}]}>Crab</Text>
 							</TouchableOpacity>
-							<TouchableOpacity style={[styles.button, {backgroundColor: '#E4645E'}]} onPress={this.changeProfilePictureFrog}>
+							<TouchableOpacity style={[styles.button, {backgroundColor: '#2C5461'}]} onPress={this.changeProfilePictureFrog}>
 								<Text style={[styles.buttonText, {color: '#fff'}]}>Frog</Text>
 							</TouchableOpacity>
 
-							<TouchableOpacity style={[styles.button, {backgroundColor: '#E4645E'}]} onPress={this.changeProfilePictureMermaid}>
+							<TouchableOpacity style={[styles.button, {backgroundColor: '#2C5461'}]} onPress={this.changeProfilePictureMermaid}>
 								<Text style={[styles.buttonText, {color: '#fff'}]}>Mermaid</Text>
 							</TouchableOpacity>
-							<TouchableOpacity style={[styles.button, {backgroundColor: '#E4645E'}]} onPress={this.changeProfilePicturePelican}>
+							<TouchableOpacity style={[styles.button, {backgroundColor: '#2C5461'}]} onPress={this.changeProfilePicturePelican}>
 								<Text style={[styles.buttonText, {color: '#fff'}]}>Pelican</Text>
 							</TouchableOpacity>
-							<TouchableOpacity style={[styles.button, {backgroundColor: '#E4645E'}]} onPress={this.changeProfilePictureShark}>
+							<TouchableOpacity style={[styles.button, {backgroundColor: '#2C5461'}]} onPress={this.changeProfilePictureShark}>
 								<Text style={[styles.buttonText, {color: '#fff'}]}>Shark</Text>
 							</TouchableOpacity>
-							<TouchableOpacity style={[styles.button, {backgroundColor: '#E4645E'}]} onPress={this.changeProfilePictureTreasure}>
+							<TouchableOpacity style={[styles.button, {backgroundColor: '#2C5461'}]} onPress={this.changeProfilePictureTreasure}>
 								<Text style={[styles.buttonText, {color: '#fff'}]}>Treasure</Text>
 							</TouchableOpacity>
 							</View>
@@ -221,17 +220,17 @@ export default class Settings extends React.Component {
                     <View style={styles.container}>
                         <Text style={styles.headerText}>Change Preferences</Text>
 												<View style={styles.preferencesContainer}>
-                        <TouchableOpacity style={[styles.button, {backgroundColor: '#E4645E'}]} onPress={this.changeThankful}>
+                        <TouchableOpacity style={[styles.button, {backgroundColor: '#2C5461'}]} onPress={this.changeThankful}>
                             <Text style={[styles.buttonText, {color: '#fff'}]}>Thankful</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={[styles.button, {backgroundColor: '#E4645E'}]} onPress={this.changeInspirational}>
+                        <TouchableOpacity style={[styles.button, {backgroundColor: '#2C5461'}]} onPress={this.changeInspirational}>
                             <Text style={[styles.buttonText, {color: '#fff'}]}>Inspirational</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={[styles.button, {backgroundColor: '#E4645E'}]} onPress={this.changeComical}>
+                        <TouchableOpacity style={[styles.button, {backgroundColor: '#2C5461'}]} onPress={this.changeComical}>
                             <Text style={[styles.buttonText, {color: '#fff'}]}>Comical</Text>
                         </TouchableOpacity>
 
-                        <TouchableOpacity style={[styles.button, {backgroundColor: '#E4645E'}]} onPress={this.changeMeme}>
+                        <TouchableOpacity style={[styles.button, {backgroundColor: '#2C5461'}]} onPress={this.changeMeme}>
                             <Text style={[styles.buttonText, {color: '#fff'}]}>Meme</Text>
                         </TouchableOpacity>
 												</View>
@@ -272,11 +271,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         paddingTop: 20,
-				backgroundColor: '#FE6F69',
+				backgroundColor: '#ADD8E6',
     },
 	avatarContainer: {
 		flex: 1,
-		backgroundColor: '#FE6F69',
+		backgroundColor: '#ADD8E6',
 		width: Dimensions.get('window').width,
 		justifyContent: 'center',
 		alignItems: 'center',
@@ -290,9 +289,10 @@ const styles = StyleSheet.create({
 		width: Dimensions.get('window').width,
 		justifyContent: 'center',
 		alignItems: 'center',
+		backgroundColor: 'rgb(252, 215, 178)'
 	},
 	button: {
-		backgroundColor: '#E4645E',
+		backgroundColor: '#DBBB9B',
 		paddingVertical: 15,
 		marginBottom: 20,
 		width: 250,
