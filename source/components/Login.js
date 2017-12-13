@@ -9,9 +9,27 @@ export default class Login extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-
+			username = '',
+			password = '',
 		}
 	}
+	logIn = () => {
+		let hostname = "10.193.3.50"; //Alec's IP
+		let bottleEndpt = "http://" + hostname + ":3000/api/login";
+		body = {
+			"username": this.state.username,
+			"password": this.state.password
+		}
+		axios.post(bottleEndpt, body)
+		.then((response) => {
+
+
+		})
+		.catch((error) => {
+				console.log('Error', JSON.stringify(error));
+				//error message, dont log them in
+		});
+	};
 	render() {
 		const { navigate } = this.props.navigation;
 		return (
@@ -27,10 +45,10 @@ export default class Login extends React.Component {
 				<KeyboardAvoidingView behavior="padding">
 					<View style={styles.formContainer}>
 						<TextInput style={styles.input}
-							placeholder="Email"
+							placeholder="Username"
 							returnKeyType="next"
 							onSubmitEditing={() => this.passwordInput.focus()}
-							autoCapitalize="none"
+							onChangeText={(text)=>this.setState({username: text})}
 							autoCorrect={false}
 						/>
 						<TextInput style={styles.input}
@@ -38,9 +56,10 @@ export default class Login extends React.Component {
 							secureTextEntry
 							returnKeyType="done"
 							ref={(input) => this.passwordInput = input}
+							onChangeText={(text)=>this.setState({password: text})}
 						/>
 					</View>
-					<TouchableOpacity style={styles.loginButtonContainer} onPress={() => navigate('Home')}>
+					<TouchableOpacity style={styles.loginButtonContainer} onPress={this.logIn}>
 						<Text style={styles.buttonText}>Login</Text>
 					</TouchableOpacity>
 					<View style={styles.signUpWrapper}>
