@@ -95,7 +95,7 @@ export default class Settings extends React.Component {
             //TODO: Personal Bottle Type Add to Schema
         }
 
-        this.setState({pref: pref});
+        this.setState({pref: pref}, this.forceUpdate());
     };
 
 	updateProfilePath = () => {
@@ -124,7 +124,7 @@ export default class Settings extends React.Component {
                 break;
         }
 
-        this.setState({uri: imgPath});
+        this.setState({uri: imgPath}, this.forceUpdate());
 	};
 
 	toggleUserName = () => {
@@ -148,45 +148,40 @@ export default class Settings extends React.Component {
     };
 
     changeProfilePictureBall = () => {
-    	this.setState({profilePicture:0});
+    	this.setState({profilePicture:0}, this.updateProfilePath());
         this.setState({showProfilePicture:false});
-        this.updateProfilePath();
     };
 
     changeProfilePictureCrab = () => {
-        this.setState({profilePicture:1});
+        this.setState({profilePicture:1}, this.updateProfilePath());
         this.setState({showProfilePicture:false});
-        this.updateProfilePath();
+
     };
 
     changeProfilePictureFrog = () => {
-        this.setState({profilePicture:2});
+        this.setState({profilePicture:2}, this.updateProfilePath());
         this.setState({showProfilePicture:false});
-        this.updateProfilePath();
     };
 
     changeProfilePictureMermaid = () => {
-        this.setState({profilePicture:3});
+        this.setState({profilePicture:3}, this.updateProfilePath());
         this.setState({showProfilePicture:false});
-        this.updateProfilePath();
     };
 
     changeProfilePicturePelican = () => {
-        this.setState({profilePicture:4});
+        this.setState({profilePicture:4}, this.updateProfilePath());
         this.setState({showProfilePicture:false});
-        this.updateProfilePath();
     };
 
     changeProfilePictureShark = () => {
-        this.setState({profilePicture:5});
+        this.setState({profilePicture:5},this.updateProfilePath());
         this.setState({showProfilePicture:false});
-        this.updateProfilePath();
     };
 
     changeProfilePictureTreasure = () => {
-        this.setState({profilePicture:6});
+        this.setState({profilePicture:6}, this.updateProfilePath());
         this.setState({showProfilePicture:false});
-        this.updateProfilePath();
+
     };
 
     changeThankful = () => {

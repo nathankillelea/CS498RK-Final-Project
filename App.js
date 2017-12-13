@@ -55,7 +55,7 @@ export const Tabs = TabNavigator({
 export const Navigation = StackNavigator({
 	Login: { screen: Login },
 	SignUp: { screen: SignUp },
-	Home: { screen: Tabs },
+	Tabs: { screen: Tabs },
 	Bottle: { screen: Bottle },
 	}, {
     	headerMode: 'screen',
