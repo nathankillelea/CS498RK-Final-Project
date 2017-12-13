@@ -17,29 +17,17 @@ export default class Login extends React.Component {
 	}
 	logIn = () => {
 		this.setState({errorMessage: false})
-		let hostname = "10.193.238.104"; //Alec's IP
-		let bottleEndpt = "http://" + hostname + ":3000/api/login";
+		let hostname = "messageinarawr498.herokuapp.com"; //Alec's IP
+		let bottleEndpt = "https://" + hostname + "/api/login";
 		body = {
 			"username": this.state.username,
 			"password": this.state.password,
 		}
 		axios.post(bottleEndpt, body)
 		.then((response) => {
-      let owned = response.data.owned;
-      let _id = response.data._id;
-      let completedTasks = response.data.completedTasks;
-      let owned_bottles = response.data.owned.length;
-      let profilePicture = response.data.profilePicture;
-      let tasks = response.data.tasks;
-			this.props.navigation.navigate('Home',
-      {
-        _id: _id,
-        completedTasks: completedTasks,
-        tasks: tasks
-        owned_bottles: owned_bottles,
-        owned: owned,
-        profilePicture: profilePicture,
-      });
+			console.log(response);
+			console.log("good job bud");
+			this.props.navigation.navigate('Home')
 		})
 		.catch((error) => {
 				console.log('Error', JSON.stringify(error));
