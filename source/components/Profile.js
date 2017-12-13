@@ -7,21 +7,24 @@ export default class Settings extends React.Component {
         title: 'Settings',
         header: null,
     };
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 				// CHANGE THIS TO B E THE REAL USERNAME LOL
         this.state = {
-            username: "John",
-            profilePicture: 0,
+            username: this.props.navigation.state.params.user_data.username,
+            profilePicture: this.props.navigation.state.params.user_data.profilePicture,
             password: "",
-            preference: 0,
+            preference: this.props.navigation.state.params.user_data.quoteType,
 						uri: require('../assets/avatars/beachball.jpg'),
 						pref: '',
 						showUsername: false,
 						showPassword: false,
 						showProfilePicture: false,
 						showPreferences: false,
-						textField: ''
+						textField: '',
+						user_data: this.props.navigation.state.params.user_data,
+						available_list: this.props.navigation.state.params.available_list,
+						owned_list_bottles: this.props.navigation.state.params.owned_list_bottles,
         }
     }
 
@@ -280,7 +283,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center',
 		paddingVertical: 10,
-		marginTop: 30,
+		paddingTop: 30,
 		marginBottom: 20,
 	},
 	buttonContainer: {
