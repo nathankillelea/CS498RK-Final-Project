@@ -226,6 +226,9 @@ export default class Settings extends React.Component {
 								<TouchableOpacity style={[styles.button, {backgroundColor: '#2C5461'}]} onPress={this.changeUsername}>
 									<Text style={[styles.buttonText, {color: '#fff'}]}>Save Username</Text>
 								</TouchableOpacity>
+								<TouchableOpacity style={[styles.button, {backgroundColor: '#2C5461'}]} onPress={ () => {this.setState({showUsername: false});}}>
+									<Text style={[styles.buttonText, {color: '#fff'}]}>Cancel</Text>
+								</TouchableOpacity>
 							</KeyboardAvoidingView>
 						</View>
 					</Modal>
