@@ -25,8 +25,8 @@ export default class Login extends React.Component {
         }
         axios.post(bottleEndpt, body)
         .then((response) => {
-					console.log(response.data);
-      this.props.navigation.navigate('Home', {data: response.data});
+					console.log(response.data.data);
+      this.props.navigation.navigate('Home', {user_data: response.data.data, owned_list_id: response.data.data.owned, beach_tier: response.data.data.completedTasks});
         })
         .catch((error) => {
                 console.log('Error', JSON.stringify(error));

@@ -14,13 +14,13 @@ export default class Home extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			user_data: this.props.navigation.state.params.data,
+			user_data: this.props.navigation.state.params.user_data,
 			available_list: [],
-			owned_list_id: this.props.navigation.state.params.data.owned,
+			owned_list_id: this.props.navigation.state.params.owned_list_id,
 			owned_list_bottles: [],
 			pending_bottles: 0,
 			available_bottles: 100,
-			beach_tier: this.props.navigation.state.params.data.completedTasks,
+			beach_tier: this.props.navigation.state.params.beach_tier,
 			showbottle1: false,
 			showbottle2: false,
 			showbottle3: false,
@@ -32,6 +32,8 @@ export default class Home extends React.Component {
 
 	//Adds a bottle if there aren't already 3 on the beach and the user has available bottles
 	addBottle = () => {
+		console.log(this.state.user_data);
+		console.log(this.state.user_data.completedTasks);
 		if(this.state.pending_bottles < 3 && this.state.available_bottles > 0){
 			this.state.pending_bottles = this.state.pending_bottles + 1;
 			this.state.available_bottles = this.state.available_bottles - 1;
@@ -192,7 +194,7 @@ export default class Home extends React.Component {
 	//Currently have to put a render for each possible image which is awful because require() needs a string literal
 	render() {
 		const { navigate } = this.props.navigation;
-		//if(this.state.beach_tier == 0) {
+		if(this.state.beach_tier == 0) {
 			return (
 				<ImageBackground source={require('../assets/beachtier0.png')} style={styles.background}>
 					<Modal visible={this.state.showModal}>
@@ -231,7 +233,7 @@ export default class Home extends React.Component {
 				</ImageBackground>
 		    );
 		}
-	//}
+	}
 }
 
 const styles = StyleSheet.create({
