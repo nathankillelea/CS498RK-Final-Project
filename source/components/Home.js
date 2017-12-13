@@ -8,9 +8,6 @@ export default class Home extends React.Component {
 		title: 'Home',
 		header: null,
 	};
-	//TO-DO:
-	//Style a "get bottle" button and display # of available bottles to user
-	//Add # to available bottles each day @ midnight
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -52,9 +49,7 @@ export default class Home extends React.Component {
 			this.state.pending_bottles = this.state.pending_bottles - 1;
 
 			//Decide what bottle they get
-			//var bottle_id = Math.floor(Math.random()*this.state.available_list.length);
-			var bottle_id = 0;
-			let strIn = '';
+			var bottle_id = Math.floor(Math.random()*this.state.available_list.length);
 
 			//Set states with info
 			this.setState({modalMessage: this.state.available_list[bottle_id].content});
@@ -65,6 +60,7 @@ export default class Home extends React.Component {
 			this.state.user_data.owned.push(this.state.available_list[bottle_id]._id);
 
 			//Aka if all bottles were deleted making the array = ["", ""]
+			let strIn = '';
 			if(this.state.user_data.owned.length == 2 && this.state.user_data.owned[0] === "" && this.state.user_data.owned[1] === ""){
 				strIn = this.state.available_list[bottle_id]._id;
 			}
@@ -107,9 +103,7 @@ export default class Home extends React.Component {
 			this.state.pending_bottles = this.state.pending_bottles - 1;
 
 			//Decide what bottle they get
-			//var bottle_id = Math.floor(Math.random()*this.state.available_list.length);
-			var bottle_id = 0;
-			let strIn = '';
+			var bottle_id = Math.floor(Math.random()*this.state.available_list.length);
 
 			//Set states with info
 			this.setState({modalMessage: this.state.available_list[bottle_id].content});
@@ -120,6 +114,7 @@ export default class Home extends React.Component {
 			this.state.user_data.owned.push(this.state.available_list[bottle_id]._id);
 
 			//Aka if all bottles were deleted making the array = ["", ""]
+			let strIn = '';
 			if(this.state.user_data.owned.length == 2 && this.state.user_data.owned[0] === "" && this.state.user_data.owned[1] === ""){
 				strIn = this.state.available_list[bottle_id]._id;
 			}
@@ -162,9 +157,7 @@ export default class Home extends React.Component {
 			this.state.pending_bottles = this.state.pending_bottles - 1;
 
 			//Decide what bottle they get
-			//var bottle_id = Math.floor(Math.random()*this.state.available_list.length);
-			var bottle_id = 0;
-			let strIn = '';
+			var bottle_id = Math.floor(Math.random()*this.state.available_list.length);
 
 			//Set states with info
 			this.setState({modalMessage: this.state.available_list[bottle_id].content});
@@ -175,10 +168,11 @@ export default class Home extends React.Component {
 			this.state.user_data.owned.push(this.state.available_list[bottle_id]._id);
 
 			//Aka if all bottles were deleted making the array = ["", ""]
+			let strIn = '';
 			if(this.state.user_data.owned.length == 2 && this.state.user_data.owned[0] === "" && this.state.user_data.owned[1] === ""){
 				strIn = this.state.available_list[bottle_id]._id;
 			}
-			//its legit just a new user
+			//It's a real new user with no
 			else if(this.state.user_data.owned.length == 0){
 				strIn = this.state.available_list[bottle_id]._id;
 			}
@@ -196,7 +190,6 @@ export default class Home extends React.Component {
 			this.state.available_list.splice(bottle_id, 1);
 
 			//update the data for user PUT
-			this.state.user_data.owned = this.state.user_data.owned;
 			let hostname = "messageinarawr498.herokuapp.com";
 			let bottleEndpt = "https://" + hostname + "/api/users/" + this.state.user_data._id;
 			body = {
@@ -215,54 +208,6 @@ export default class Home extends React.Component {
 	closeModal = () => {
 		this.setState({showModal: false});
 	}
-	//Get all the bottles into an array
-	/*componentWillMount() {
-		let hostname = "messageinarawr498.herokuapp.com";
-		let bottleEndpt = "https://" + hostname + "/api/bottles";
-		axios.get(bottleEndpt)
-            .then((response) => {
-							let available_list = [];
-							let total_list = response.data.data;
-							let owned_list = this.state.user_data.owned;
-							let owned_list_bottles = [];
-							let found = 0;
-							let j = 0;
-							let i = 0;
-							//console.log("I'm bouta start checkin my list");
-							//console.log(total_list.length);
-							for(i=0;i<total_list.length;i++){
-								//console.log("outer loop iteration");
-								current_bottle_id = total_list[i]._id;
-								found = 0;
-								//console.log(owned_list.)
-								for(j=0;j<owned_list.length;j++){
-									//console.log("inner loop iteration");
-									if(current_bottle_id===owned_list[j]){
-										//console.log("I found a bottle I own:");
-										//console.log(total_list[i]);
-										owned_list_bottles.push(total_list[i]);
-										found = 1;
-										break;
-									}
-								}
-								//console.log("done with inner loop, lets see what found equals");
-								//console.log(found);
-								if(found == 0){
-									available_list.push(total_list[i]);
-									//console.log("Ive added a bottle to my available list");
-								}
-							}
-							this.setState({available_list: available_list});
-							this.setState({owned_list_bottles: owned_list_bottles});
-							//console.log("available list");
-							//console.log(available_list);
-
-            })
-            .catch((error) => {
-                console.log('Error with bottle get', JSON.stringify(error));
-            });
-
-	}*/
 	//Currently have to put a render for each possible image which is awful because require() needs a string literal
 	render() {
 		const { navigate } = this.props.navigation;
