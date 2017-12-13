@@ -15,6 +15,7 @@ export default class BottleList extends React.Component {
             refreshing: false,
             data: [],
             showModal: false,
+            search: '',
         };
     };
 
@@ -45,15 +46,16 @@ export default class BottleList extends React.Component {
     renderHeader = () => {
         return(
 			<View style={{backgroundColor: '#FAFAFA'}}>
-				<View style={{paddingHorizontal: 7.5}}>
-					<Text style={{fontWeight: "bold", fontSize: 48, }}>Bottles</Text>
-				</View>
-				<SearchBar
+				{/*<View style={{paddingHorizontal: 7.5}}>
+					<Text style={{fontWeight: "bold", fontSize: 48, marginBottom: 30,}}>Bottles</Text>
+				</View>*/}
+				{/*<SearchBar
 					containerStyle={{backgroundColor: '#FAFAFA', borderTopWidth: 0, borderColor: '#CED0CE'}}
 					inputStyle={{backgroundColor: '#E6E6E6', color: 'black'}}
 					placeholder="Search"
 					lightTheme
-				/>
+          onChangeText={this.updateText}
+				/>*/}
 			</View>
         );
     };
@@ -62,6 +64,9 @@ export default class BottleList extends React.Component {
     };
     showModal = () => {
       this.setState({showModal: true});
+    };
+    updateText = (text) => {
+        this.setState({textField: text})
     };
     render() {
         const { navigate } = this.props.navigation;
