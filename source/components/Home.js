@@ -12,20 +12,23 @@ export default class Home extends React.Component {
 	//Style a "get bottle" button and display # of available bottles to user
 	//Add # to available bottles each day @ midnight
 	constructor() {
-		super();
+		super(props);
 		this.state = {
 			available_list: [],
-			owned_list: [],
+			owned_list_id: this.props.navigation.state.params.owned,
+			owned_list_bottles: [],
 			pending_bottles: 0,
-			available_bottles: 10,
-			owned_bottles: 0,
-			beach_tier: 0,
+			available_bottles: 100,
+			owned_bottles: this.props.navigation.state.params.owned_bottles,
+			beach_tier: this.props.navigation.state.params.completedTasks,
 			showbottle1: false,
 			showbottle2: false,
 			showbottle3: false,
 			showModal: false,
 			modalMessage: '',
 			modalAuthor: '',
+			profilePicture: this.props.navigation.state.params.profilepicture,
+			tasks: this.props.navigation.state.params.tasks,
 		}
 	}
 
@@ -53,9 +56,10 @@ export default class Home extends React.Component {
 			var bottle_id = 0;
 			this.setState({modalMessage: this.state.available_list[bottle_id].content});
 			this.setState({modalAuthor: this.state.available_list[bottle_id].author});
-			this.state.owned_list.push(this.state.available_list[bottle_id]);
+			this.state.owned_list_bottles.push(this.state.available_list[bottle_id]);
+			//axios.push this new owned_list
 			this.state.available_list.splice(bottle_id, 1);
-			this.state.owned_bottles = this.state.owned_list.length;
+			this.state.owned_bottles = this.state.owned_list_bottles.length;
 			this.setState({showModal: true});
 		}
 	}
@@ -67,9 +71,10 @@ export default class Home extends React.Component {
 			var bottle_id = 0;
 			this.setState({modalMessage: this.state.available_list[bottle_id].content});
 			this.setState({modalAuthor: this.state.available_list[bottle_id].author});
-			this.state.owned_list.push(this.state.available_list[bottle_id]);
+			this.state.owned_list_bottles.push(this.state.available_list[bottle_id]);
+			//axios.push this new owned_list
 			this.state.available_list.splice(bottle_id, 1);
-			this.state.owned_bottles = this.state.owned_list.length;
+			this.state.owned_bottles = this.state.owned_list_bottles.length;
 			this.setState({showModal: true});
 		}
 	}
@@ -81,9 +86,10 @@ export default class Home extends React.Component {
 			var bottle_id = 0;
 			this.setState({modalMessage: this.state.available_list[bottle_id].content});
 			this.setState({modalAuthor: this.state.available_list[bottle_id].author});
-			this.state.owned_list.push(this.state.available_list[bottle_id]);
+			this.state.owned_list_bottles.push(this.state.available_list[bottle_id]);
+			//axios.push this new owned_list
 			this.state.available_list.splice(bottle_id, 1);
-			this.state.owned_bottles = this.state.owned_list.length;
+			this.state.owned_bottles = this.state.owned_list_bottles.length;
 			this.setState({showModal: true});
 		}
 	}
@@ -92,18 +98,38 @@ export default class Home extends React.Component {
 	};
 	//Get all the bottles into an array
 	componentWillMount() {
-		let hostname = "10.193.238.104"; //Alec's IP
+		let hostname = "10.193.3.50"; //Alec's IP
 		let bottleEndpt = "http://" + hostname + ":3000/api/bottles";
 		axios.get(bottleEndpt)
             .then((response) => {
-				this.setState({available_list: response.data.data});
-				console.log("Filled avaiable bottle array");
-				console.log(this.state.available_list.length);
-				console.log(this.state.available_list);
+							let available_list = reponse.data.data;
+							let owned_list_id = this.state.owned_list;
+							let owned_list_bottles = [];
+							let found = 0;
+							for(i=0;i<available_list.length;i++){
+								current_bottle_id = available_list[i]._id
+								found = 0;
+								for(j=0;j<owned_list_id.length;j++){
+									if(current_bottle_id===owned_list_id[j]){
+										owned_list_bottles.push(available_list[i]);
+										available_list.splice(i,1);
+										found = 1;
+									}
+									if(found == 1){
+										break;
+									}
+								}
+								this.setState(available_list: available_list);
+								this.setState(owned_list_bottles: owned_list_bottles);
+							}
+								//loop thru available_list nested loop for each item that looks thru owned_list, remove current element from available_list if it is owned_list
+								//this.setState({available_list: available_list});
+
             })
             .catch((error) => {
                 console.log('Error', JSON.stringify(error));
             });
+
 	}
 	//Currently have to put a render for each possible image which is awful because require() needs a string literal
 	render() {

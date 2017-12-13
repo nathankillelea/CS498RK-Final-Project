@@ -25,9 +25,21 @@ export default class Login extends React.Component {
 		}
 		axios.post(bottleEndpt, body)
 		.then((response) => {
-			console.log(response);
-			console.log("good job bud");
-			this.props.navigation.navigate('Home')
+      let owned = response.data.owned;
+      let _id = response.data._id;
+      let completedTasks = response.data.completedTasks;
+      let owned_bottles = response.data.owned.length;
+      let profilePicture = response.data.profilePicture;
+      let tasks = response.data.tasks;
+			this.props.navigation.navigate('Home',
+      {
+        _id: _id,
+        completedTasks: completedTasks,
+        tasks: tasks
+        owned_bottles: owned_bottles,
+        owned: owned,
+        profilePicture: profilePicture,
+      });
 		})
 		.catch((error) => {
 				console.log('Error', JSON.stringify(error));
