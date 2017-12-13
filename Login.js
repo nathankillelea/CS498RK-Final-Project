@@ -7,8 +7,8 @@ export default class Login extends React.Component {
         title: 'Login',
         header: null,
     };
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
         this.state = {
             username: '',
             password: '',
@@ -17,21 +17,51 @@ export default class Login extends React.Component {
     }
     logIn = () => {
         this.setState({errorMessage: false})
-        let hostname = "messageinarawr498.herokuapp.com"; //Alec's IP
+        let hostname = "messageinarawr498.herokuapp.com";
         let bottleEndpt = "https://" + hostname + "/api/login";
         body = {
             "username": this.state.username,
             "password": this.state.password,
         }
         axios.post(bottleEndpt, body)
-        .then((response) => {
-					console.log(response.data.data);
-      		this.props.navigation.navigate('Tabs', {user_data: response.data.data, owned_list_id: response.data.data.owned, beach_tier: response.data.data.completedTasks});
-        })
-        .catch((error) => {
-                console.log('Error', JSON.stringify(error));
-                this.setState({errorMessage: true})
-        });
+          .then((response) => {
+            userData = response.data.data;
+            //get all bottles once
+            let hostname = "messageinarawr498.herokuapp.com";
+        		let bottleEndpt = "https://" + hostname + "/api/bottles";
+            axios.get(bottleEndpt)
+              .then((response) => {
+                //create bottle arrays for what the user has and doesnt have. both will be sent as props
+                let availableList = [];
+  							let total_list = response.data.data;
+  							let ownedListBottles = [];
+  							let found = 0;
+  							for(i=0;i<total_list.length;i++){
+  								current_bottle_id = total_list[i]._id;
+  								found = 0;
+  								for(j=0;j<userData.owned.length;j++){
+                    if(current_bottle_id === userData.owned[j]){
+                      ownedListBottles.push(total_list[i]);
+  										found = 1;
+  										break;
+                    }
+  								}
+    							if(found == 0){
+    									availableList.push(total_list[i]);
+    							}
+                }
+                this.props.navigation.navigate('Tabs', {user_data: userData, available_list: availableList, owned_list_bottles: ownedListBottles});
+              })
+              .catch((error) => {
+                      console.log('Error', JSON.stringify(error));
+                      this.setState({errorMessage: true})
+              })
+          })
+          .catch((error) => {
+                  console.log('Error', JSON.stringify(error));
+                  this.setState({errorMessage: true})
+          })
+
     };
     render() {
         const { navigate } = this.props.navigation;
