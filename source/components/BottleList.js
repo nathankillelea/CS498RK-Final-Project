@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, AppRegistry, TouchableOpacity, TextInput, Image, StatusBar, FlatList, ActivityIndicator, Alert } from 'react-native';
+import { StyleSheet, Text, View, AppRegistry, TouchableOpacity, TextInput, Image, StatusBar, FlatList, ActivityIndicator, Alert, Modal, ImageBackground } from 'react-native';
 import { List, ListItem, SearchBar } from 'react-native-elements';
 import axios from 'axios';
 
@@ -20,8 +20,8 @@ export default class BottleList extends React.Component {
 
 
 	componentWillMount(){
-		let hostname = "10.193.3.50"; //NATHAN's computer
-		let bottleEndpt = "http://" + hostname + ":3000/api/bottles";
+		let hostname = "messageinarawr498.herokuapp.com"; //NATHAN's computer
+		let bottleEndpt = "https://" + hostname + "/api/bottles";
 		 axios.get(bottleEndpt)
             .then((response) => {
                 this.setState({data: response.data.data});

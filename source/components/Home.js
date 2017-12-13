@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, AppRegistry, TouchableOpacity, Alert, TextInput, KeyboardAvoidingView, Image, ImageBackground , Modal} from 'react-native';
+import { StyleSheet, Text, View, AppRegistry, TouchableOpacity, Alert, TextInput, KeyboardAvoidingView, Image, ImageBackground , Modal } from 'react-native';
 import axios from 'axios';
 import { AppLoading, Asset, Font } from 'expo';
 
@@ -11,24 +11,22 @@ export default class Home extends React.Component {
 	//TO-DO:
 	//Style a "get bottle" button and display # of available bottles to user
 	//Add # to available bottles each day @ midnight
-	constructor() {
+	constructor(props) {
 		super(props);
 		this.state = {
+			user_data: this.props.navigation.state.params.data,
 			available_list: [],
-			owned_list_id: this.props.navigation.state.params.owned,
+			owned_list_id: this.props.navigation.state.params.data.owned,
 			owned_list_bottles: [],
 			pending_bottles: 0,
 			available_bottles: 100,
-			owned_bottles: this.props.navigation.state.params.owned_bottles,
-			beach_tier: this.props.navigation.state.params.completedTasks,
+			beach_tier: this.props.navigation.state.params.data.completedTasks,
 			showbottle1: false,
 			showbottle2: false,
 			showbottle3: false,
 			showModal: false,
 			modalMessage: '',
 			modalAuthor: '',
-			profilePicture: this.props.navigation.state.params.profilepicture,
-			tasks: this.props.navigation.state.params.tasks,
 		}
 	}
 
@@ -50,46 +48,106 @@ export default class Home extends React.Component {
 	}
 	clickedBottle1 = () => {
 		if(this.state.showbottle1){
+
+			//Show The Bottle & Update Counter
 			this.setState({showbottle1: false});
 			this.state.pending_bottles = this.state.pending_bottles - 1;
+
+			//Decide what bottle they get
 			//var bottle_id = Math.floor(Math.random()*this.state.available_list.length);
 			var bottle_id = 0;
+
+			//Set states with info
 			this.setState({modalMessage: this.state.available_list[bottle_id].content});
 			this.setState({modalAuthor: this.state.available_list[bottle_id].author});
+
+			//update local info
 			this.state.owned_list_bottles.push(this.state.available_list[bottle_id]);
-			//axios.push this new owned_list
+			this.state.owned_list_id.push(this.state.available_list[bottle_id]._id);
 			this.state.available_list.splice(bottle_id, 1);
 			this.state.owned_bottles = this.state.owned_list_bottles.length;
+
+			//update the data for user PUT
+			this.state.user_data.owned = this.state.owned_list_id;
+			let hostname = "messageinarawr498.herokuapp.com";
+			let bottleEndpt = "https://" + hostname + "/api/bottles/" + this.state.user_data._id;
+			axios.put(bottleEndpt)
+								.then((response) => {
+
+								})
+								.catch((error) => {
+									console.log('Error', JSON.stringify(error));
+								})
 			this.setState({showModal: true});
 		}
 	}
 	clickedBottle2 = () => {
 		if(this.state.showbottle2){
+
+			//Show The Bottle & Update Counter
 			this.setState({showbottle2: false});
 			this.state.pending_bottles = this.state.pending_bottles - 1;
+
+			//Decide what bottle they get
 			//var bottle_id = Math.floor(Math.random()*this.state.available_list.length);
 			var bottle_id = 0;
+
+			//Set states with info
 			this.setState({modalMessage: this.state.available_list[bottle_id].content});
 			this.setState({modalAuthor: this.state.available_list[bottle_id].author});
+
+			//update local info
 			this.state.owned_list_bottles.push(this.state.available_list[bottle_id]);
-			//axios.push this new owned_list
+			this.state.owned_list_id.push(this.state.available_list[bottle_id]._id);
 			this.state.available_list.splice(bottle_id, 1);
 			this.state.owned_bottles = this.state.owned_list_bottles.length;
+
+			//update the data for user PUT
+			this.state.user_data.owned = this.state.owned_list_id;
+			let hostname = "messageinarawr498.herokuapp.com";
+			let bottleEndpt = "https://" + hostname + "/api/bottles/" + this.state.user_data._id;
+			axios.put(bottleEndpt)
+								.then((response) => {
+
+								})
+								.catch((error) => {
+									console.log('Error', JSON.stringify(error));
+								})
 			this.setState({showModal: true});
 		}
 	}
 	clickedBottle3 = () => {
 		if(this.state.showbottle3){
+
+			//Show The Bottle & Update Counter
 			this.setState({showbottle3: false});
 			this.state.pending_bottles = this.state.pending_bottles - 1;
+
+			//Decide what bottle they get
 			//var bottle_id = Math.floor(Math.random()*this.state.available_list.length);
 			var bottle_id = 0;
+
+			//Set states with info
 			this.setState({modalMessage: this.state.available_list[bottle_id].content});
 			this.setState({modalAuthor: this.state.available_list[bottle_id].author});
+
+			//update local info
 			this.state.owned_list_bottles.push(this.state.available_list[bottle_id]);
-			//axios.push this new owned_list
+			this.state.owned_list_id.push(this.state.available_list[bottle_id]._id);
 			this.state.available_list.splice(bottle_id, 1);
 			this.state.owned_bottles = this.state.owned_list_bottles.length;
+
+			//update the data for user PUT
+			this.state.user_data.owned = this.state.owned_list_id;
+			let hostname = "messageinarawr498.herokuapp.com";
+			let bottleEndpt = "https://" + hostname + "/api/bottles/" + this.state.user_data._id;
+			axios.put(bottleEndpt, this.state.user_data)
+								.then((response) => {
+
+								})
+								.catch((error) => {
+									console.log('Error', JSON.stringify(error));
+								})
 			this.setState({showModal: true});
 		}
 	}
@@ -98,7 +156,7 @@ export default class Home extends React.Component {
 	};
 	//Get all the bottles into an array
 	componentWillMount() {
-		let hostname = "messageinarawr498.herokuapp.com"; //Alec's IP
+		let hostname = "messageinarawr498.herokuapp.com";
 		let bottleEndpt = "https://" + hostname + "/api/bottles";
 		axios.get(bottleEndpt)
             .then((response) => {
@@ -134,7 +192,7 @@ export default class Home extends React.Component {
 	//Currently have to put a render for each possible image which is awful because require() needs a string literal
 	render() {
 		const { navigate } = this.props.navigation;
-		if(this.state.beach_tier == 0) {
+		//if(this.state.beach_tier == 0) {
 			return (
 				<ImageBackground source={require('../assets/beachtier0.png')} style={styles.background}>
 					<Modal visible={this.state.showModal}>
@@ -173,7 +231,7 @@ export default class Home extends React.Component {
 				</ImageBackground>
 		    );
 		}
-	}
+	//}
 }
 
 const styles = StyleSheet.create({
