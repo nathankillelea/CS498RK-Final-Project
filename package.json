@@ -29,9 +29,9 @@
     "react-navigation": "^1.0.0-beta.21",
     "xdate": "^0.8.2"
   },
-	"rnpm": {
-	    "assets": [
-			"./source/assets/fonts/"
-	    ]
-	}
+  "rnpm": {
+    "assets": [
+      "./source/assets/fonts/"
+    ]
+  }
 }

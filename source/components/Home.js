@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, AppRegistry, TouchableOpacity, Alert, TextInput, KeyboardAvoidingView, Image, ImageBackground , Modal} from 'react-native';
+import { StyleSheet, Text, View, AppRegistry, TouchableOpacity, Alert, TextInput, KeyboardAvoidingView, Image, ImageBackground , Modal } from 'react-native';
 import axios from 'axios';
 import { AppLoading, Asset, Font } from 'expo';
 
@@ -11,24 +11,20 @@ export default class Home extends React.Component {
 	//TO-DO:
 	//Style a "get bottle" button and display # of available bottles to user
 	//Add # to available bottles each day @ midnight
-	constructor() {
+	constructor(props) {
 		super(props);
 		this.state = {
-			available_list: [],
-			owned_list_id: this.props.navigation.state.params.owned,
-			owned_list_bottles: [],
+			user_data: this.props.navigation.state.params.user_data,
+			available_list: this.props.navigation.state.params.available_list,
+			owned_list_bottles: this.props.navigation.state.params.owned_list_bottles,
 			pending_bottles: 0,
-			available_bottles: 100,
-			owned_bottles: this.props.navigation.state.params.owned_bottles,
-			beach_tier: this.props.navigation.state.params.completedTasks,
+			available_bottles: 50,
 			showbottle1: false,
 			showbottle2: false,
 			showbottle3: false,
 			showModal: false,
 			modalMessage: '',
 			modalAuthor: '',
-			profilePicture: this.props.navigation.state.params.profilepicture,
-			tasks: this.props.navigation.state.params.tasks,
 		}
 	}
 
@@ -50,93 +46,274 @@ export default class Home extends React.Component {
 	}
 	clickedBottle1 = () => {
 		if(this.state.showbottle1){
+
+			//Show The Bottle & Update Counter
 			this.setState({showbottle1: false});
 			this.state.pending_bottles = this.state.pending_bottles - 1;
+
+			//Decide what bottle they get
 			//var bottle_id = Math.floor(Math.random()*this.state.available_list.length);
 			var bottle_id = 0;
+			let strIn = '';
+
+			//Set states with info
 			this.setState({modalMessage: this.state.available_list[bottle_id].content});
 			this.setState({modalAuthor: this.state.available_list[bottle_id].author});
+
+			//update local info
 			this.state.owned_list_bottles.push(this.state.available_list[bottle_id]);
-			//axios.push this new owned_list
+			this.state.user_data.owned.push(this.state.available_list[bottle_id]._id);
+
+			//Aka if all bottles were deleted making the array = ["", ""]
+			if(this.state.user_data.owned.length == 2 && this.state.user_data.owned[0] === "" && this.state.user_data.owned[1] === ""){
+				strIn = this.state.available_list[bottle_id]._id;
+			}
+			else{
+				for(i=0;i<this.state.user_data.owned.length;i++){
+					if(i == 0){
+						strIn = this.state.user_data.owned[0];
+					}
+					else{
+						strIn = strIn + " " + this.state.user_data.owned[i];
+					}
+				}
+				strIn = strIn + this.state.available_list[bottle_id]._id;
+			}
+
 			this.state.available_list.splice(bottle_id, 1);
-			this.state.owned_bottles = this.state.owned_list_bottles.length;
+
+			//update the data for user PUT
+			this.state.user_data.owned = this.state.user_data.owned;
+			let hostname = "messageinarawr498.herokuapp.com";
+			let bottleEndpt = "https://" + hostname + "/api/users/" + this.state.user_data._id;
+			body = {
+				owned: strIn,
+			}
+			axios.put(bottleEndpt, body)
+								.then((response) => {
+
+								})
+								.catch((error) => {
+									console.log('Error With Put', JSON.stringify(error));
+								})
 			this.setState({showModal: true});
 		}
 	}
 	clickedBottle2 = () => {
 		if(this.state.showbottle2){
+
+			//Show The Bottle & Update Counter
 			this.setState({showbottle2: false});
 			this.state.pending_bottles = this.state.pending_bottles - 1;
+
+			//Decide what bottle they get
 			//var bottle_id = Math.floor(Math.random()*this.state.available_list.length);
 			var bottle_id = 0;
+			let strIn = '';
+
+			//Set states with info
 			this.setState({modalMessage: this.state.available_list[bottle_id].content});
 			this.setState({modalAuthor: this.state.available_list[bottle_id].author});
+
+			//update local info
 			this.state.owned_list_bottles.push(this.state.available_list[bottle_id]);
-			//axios.push this new owned_list
+			this.state.user_data.owned.push(this.state.available_list[bottle_id]._id);
+
+			//Aka if all bottles were deleted making the array = ["", ""]
+			if(this.state.user_data.owned.length == 2 && this.state.user_data.owned[0] === "" && this.state.user_data.owned[1] === ""){
+				strIn = this.state.available_list[bottle_id]._id;
+			}
+			else{
+				for(i=0;i<this.state.user_data.owned.length;i++){
+					if(i == 0){
+						strIn = this.state.user_data.owned[0];
+					}
+					else{
+						strIn = strIn + " " + this.state.user_data.owned[i];
+					}
+				}
+				strIn = strIn + this.state.available_list[bottle_id]._id;
+			}
+
 			this.state.available_list.splice(bottle_id, 1);
-			this.state.owned_bottles = this.state.owned_list_bottles.length;
+
+			//update the data for user PUT
+			this.state.user_data.owned = this.state.user_data.owned;
+			let hostname = "messageinarawr498.herokuapp.com";
+			let bottleEndpt = "https://" + hostname + "/api/users/" + this.state.user_data._id;
+			body = {
+				owned: strIn,
+			}
+			axios.put(bottleEndpt, body)
+								.then((response) => {
+
+								})
+								.catch((error) => {
+									console.log('Error With Put', JSON.stringify(error));
+								})
 			this.setState({showModal: true});
 		}
 	}
 	clickedBottle3 = () => {
 		if(this.state.showbottle3){
+
+			//Show The Bottle & Update Counter
 			this.setState({showbottle3: false});
 			this.state.pending_bottles = this.state.pending_bottles - 1;
+
+			//Decide what bottle they get
 			//var bottle_id = Math.floor(Math.random()*this.state.available_list.length);
 			var bottle_id = 0;
+			let strIn = '';
+
+			//Set states with info
 			this.setState({modalMessage: this.state.available_list[bottle_id].content});
 			this.setState({modalAuthor: this.state.available_list[bottle_id].author});
+
+			//update local info
 			this.state.owned_list_bottles.push(this.state.available_list[bottle_id]);
-			//axios.push this new owned_list
+			this.state.user_data.owned.push(this.state.available_list[bottle_id]._id);
+
+			//Aka if all bottles were deleted making the array = ["", ""]
+			if(this.state.user_data.owned.length == 2 && this.state.user_data.owned[0] === "" && this.state.user_data.owned[1] === ""){
+				strIn = this.state.available_list[bottle_id]._id;
+			}
+			//its legit just a new user
+			else if(this.state.user_data.owned.length == 0){
+				strIn = this.state.available_list[bottle_id]._id;
+			}
+			else{
+				for(i=0;i<this.state.user_data.owned.length;i++){
+					if(i == 0){
+						strIn = this.state.user_data.owned[0];
+					}
+					else{
+						strIn = strIn + " " + this.state.user_data.owned[i];
+					}
+				}
+				strIn = strIn + this.state.available_list[bottle_id]._id;
+			}
 			this.state.available_list.splice(bottle_id, 1);
-			this.state.owned_bottles = this.state.owned_list_bottles.length;
+
+			//update the data for user PUT
+			this.state.user_data.owned = this.state.user_data.owned;
+			let hostname = "messageinarawr498.herokuapp.com";
+			let bottleEndpt = "https://" + hostname + "/api/users/" + this.state.user_data._id;
+			body = {
+				"owned": strIn,
+			}
+			axios.put(bottleEndpt, body)
+								.then((response) => {
+
+								})
+								.catch((error) => {
+									console.log('Error With Put', JSON.stringify(error));
+								})
 			this.setState({showModal: true});
 		}
 	}
 	closeModal = () => {
 		this.setState({showModal: false});
-	};
+	}
 	//Get all the bottles into an array
-	componentWillMount() {
-		let hostname = "10.193.3.50"; //Alec's IP
-		let bottleEndpt = "http://" + hostname + ":3000/api/bottles";
+	/*componentWillMount() {
+		let hostname = "messageinarawr498.herokuapp.com";
+		let bottleEndpt = "https://" + hostname + "/api/bottles";
 		axios.get(bottleEndpt)
             .then((response) => {
-							let available_list = reponse.data.data;
-							let owned_list_id = this.state.owned_list;
+							let available_list = [];
+							let total_list = response.data.data;
+							let owned_list = this.state.user_data.owned;
 							let owned_list_bottles = [];
 							let found = 0;
-							for(i=0;i<available_list.length;i++){
-								current_bottle_id = available_list[i]._id
+							let j = 0;
+							let i = 0;
+							//console.log("I'm bouta start checkin my list");
+							//console.log(total_list.length);
+							for(i=0;i<total_list.length;i++){
+								//console.log("outer loop iteration");
+								current_bottle_id = total_list[i]._id;
 								found = 0;
-								for(j=0;j<owned_list_id.length;j++){
-									if(current_bottle_id===owned_list_id[j]){
-										owned_list_bottles.push(available_list[i]);
-										available_list.splice(i,1);
+								//console.log(owned_list.)
+								for(j=0;j<owned_list.length;j++){
+									//console.log("inner loop iteration");
+									if(current_bottle_id===owned_list[j]){
+										//console.log("I found a bottle I own:");
+										//console.log(total_list[i]);
+										owned_list_bottles.push(total_list[i]);
 										found = 1;
-									}
-									if(found == 1){
 										break;
 									}
 								}
-								this.setState(available_list: available_list);
-								this.setState(owned_list_bottles: owned_list_bottles);
+								//console.log("done with inner loop, lets see what found equals");
+								//console.log(found);
+								if(found == 0){
+									available_list.push(total_list[i]);
+									//console.log("Ive added a bottle to my available list");
+								}
 							}
-								//loop thru available_list nested loop for each item that looks thru owned_list, remove current element from available_list if it is owned_list
-								//this.setState({available_list: available_list});
+							this.setState({available_list: available_list});
+							this.setState({owned_list_bottles: owned_list_bottles});
+							//console.log("available list");
+							//console.log(available_list);
 
             })
             .catch((error) => {
-                console.log('Error', JSON.stringify(error));
+                console.log('Error with bottle get', JSON.stringify(error));
             });
 
-	}
+	}*/
 	//Currently have to put a render for each possible image which is awful because require() needs a string literal
 	render() {
 		const { navigate } = this.props.navigation;
-		if(this.state.beach_tier == 0) {
+		if(this.state.user_data.completedTasks == 0) {
 			return (
 				<ImageBackground source={require('../assets/beachtier0.png')} style={styles.background}>
+					<Modal visible={this.state.showModal}>
+						<View style={[styles.container]}>
+							<ImageBackground style={{flex: 1, justifyContent: 'center', alignSelf: 'center', width: '100%', height: '100%', marginTop: 30,}} source={require('../assets/lower-res-scroll2.png')}>
+								<Text style={styles.content}>{this.state.modalMessage}</Text>
+								<Text style={styles.author}>-{this.state.modalAuthor}</Text>
+							</ImageBackground>
+							<View style={styles.modalButtonContainer}>
+								<TouchableOpacity style={[styles.modalButton, {backgroundColor: '#17c11a'}]}
+
+								  onPress={() => {
+	                  this.setState({showModal: false});
+	                  this.props.navigation.navigate('BottleList', {user_data: this.state.user_data, available_list: this.state.available_list, owned_list_bottles: this.state.owned_list_bottles})
+                	}}>
+
+									<Text style={[styles.buttonText, {color: '#fff'}]}>SEE BOTTLE LIST</Text>
+								</TouchableOpacity>
+							</View>
+						</View>
+					</Modal>
+					{this.state.showbottle1 &&
+						<TouchableOpacity style={styles.bottles} onPress={this.clickedBottle1} id = 'bottle1'>
+							<Image source = {require('../assets/bottle1.png')} style={[styles.bottles,styles.bottle1]}/>
+						</TouchableOpacity>
+					}
+					{this.state.showbottle2 &&
+						<TouchableOpacity style={styles.bottles} onPress={this.clickedBottle2} id = 'bottle2'>
+							<Image source = {require('../assets/bottle2.png')} style={[styles.bottles,styles.bottle2]}/>
+						</TouchableOpacity>
+					}
+					{this.state.showbottle3 &&
+						<TouchableOpacity style={styles.bottles} onPress={this.clickedBottle3} id = 'bottle3'>
+							<Image source = {require('../assets/bottle3.png')} style={[styles.bottles,styles.bottle3]}/>
+						</TouchableOpacity>
+					}
+					<View style={styles.buttonContainer}>
+						<TouchableOpacity style={styles.button} onPress={this.addBottle}>
+							<Text style={styles.buttonText}>Get New Bottle</Text>
+						</TouchableOpacity>
+					</View>
+				</ImageBackground>
+		  );
+		}
+		else if(this.state.user_data.completedTasks == 1) {
+			return (
+				<ImageBackground source={require('../assets/beachtier1.png')} style={styles.background}>
 					<Modal visible={this.state.showModal}>
 						<View style={[styles.container]}>
 							<ImageBackground style={{flex: 1, justifyContent: 'center', alignSelf: 'center', width: '100%', height: '100%', marginTop: 30,}} source={require('../assets/lower-res-scroll2.png')}>
@@ -171,9 +348,204 @@ export default class Home extends React.Component {
 						</TouchableOpacity>
 					</View>
 				</ImageBackground>
-		    );
+		  );
 		}
-	}
+		else if(this.state.user_data.completedTasks == 2) {
+			return (
+				<ImageBackground source={require('../assets/beachtier2.png')} style={styles.background}>
+					<Modal visible={this.state.showModal}>
+						<View style={[styles.container]}>
+							<ImageBackground style={{flex: 1, justifyContent: 'center', alignSelf: 'center', width: '100%', height: '100%', marginTop: 30,}} source={require('../assets/lower-res-scroll2.png')}>
+								<Text style={styles.content}>{this.state.modalMessage}</Text>
+								<Text style={styles.author}>-{this.state.modalAuthor}</Text>
+							</ImageBackground>
+							<View style={styles.modalButtonContainer}>
+								<TouchableOpacity style={[styles.modalButton, {backgroundColor: '#17c11a'}]} onPress={this.closeModal}>
+									<Text style={[styles.buttonText, {color: '#fff'}]}>OK</Text>
+								</TouchableOpacity>
+							</View>
+						</View>
+					</Modal>
+					{this.state.showbottle1 &&
+						<TouchableOpacity style={styles.bottles} onPress={this.clickedBottle1} id = 'bottle1'>
+							<Image source = {require('../assets/bottle1.png')} style={[styles.bottles,styles.bottle1]}/>
+						</TouchableOpacity>
+					}
+					{this.state.showbottle2 &&
+						<TouchableOpacity style={styles.bottles} onPress={this.clickedBottle2} id = 'bottle2'>
+							<Image source = {require('../assets/bottle2.png')} style={[styles.bottles,styles.bottle2]}/>
+						</TouchableOpacity>
+					}
+					{this.state.showbottle3 &&
+						<TouchableOpacity style={styles.bottles} onPress={this.clickedBottle3} id = 'bottle3'>
+							<Image source = {require('../assets/bottle3.png')} style={[styles.bottles,styles.bottle3]}/>
+						</TouchableOpacity>
+					}
+					<View style={styles.buttonContainer}>
+						<TouchableOpacity style={styles.button} onPress={this.addBottle}>
+							<Text style={styles.buttonText}>Get New Bottle</Text>
+						</TouchableOpacity>
+					</View>
+				</ImageBackground>
+		  );
+		}
+		else if(this.state.user_data.completedTasks == 3) {
+			return (
+				<ImageBackground source={require('../assets/beachtier3.png')} style={styles.background}>
+					<Modal visible={this.state.showModal}>
+						<View style={[styles.container]}>
+							<ImageBackground style={{flex: 1, justifyContent: 'center', alignSelf: 'center', width: '100%', height: '100%', marginTop: 30,}} source={require('../assets/lower-res-scroll2.png')}>
+								<Text style={styles.content}>{this.state.modalMessage}</Text>
+								<Text style={styles.author}>-{this.state.modalAuthor}</Text>
+							</ImageBackground>
+							<View style={styles.modalButtonContainer}>
+								<TouchableOpacity style={[styles.modalButton, {backgroundColor: '#17c11a'}]} onPress={this.closeModal}>
+									<Text style={[styles.buttonText, {color: '#fff'}]}>OK</Text>
+								</TouchableOpacity>
+							</View>
+						</View>
+					</Modal>
+					{this.state.showbottle1 &&
+						<TouchableOpacity style={styles.bottles} onPress={this.clickedBottle1} id = 'bottle1'>
+							<Image source = {require('../assets/bottle1.png')} style={[styles.bottles,styles.bottle1]}/>
+						</TouchableOpacity>
+					}
+					{this.state.showbottle2 &&
+						<TouchableOpacity style={styles.bottles} onPress={this.clickedBottle2} id = 'bottle2'>
+							<Image source = {require('../assets/bottle2.png')} style={[styles.bottles,styles.bottle2]}/>
+						</TouchableOpacity>
+					}
+					{this.state.showbottle3 &&
+						<TouchableOpacity style={styles.bottles} onPress={this.clickedBottle3} id = 'bottle3'>
+							<Image source = {require('../assets/bottle3.png')} style={[styles.bottles,styles.bottle3]}/>
+						</TouchableOpacity>
+					}
+					<View style={styles.buttonContainer}>
+						<TouchableOpacity style={styles.button} onPress={this.addBottle}>
+							<Text style={styles.buttonText}>Get New Bottle</Text>
+						</TouchableOpacity>
+					</View>
+				</ImageBackground>
+		  );
+		}
+		else if(this.state.user_data.completedTasks == 4) {
+			return (
+				<ImageBackground source={require('../assets/beachtier4.png')} style={styles.background}>
+					<Modal visible={this.state.showModal}>
+						<View style={[styles.container]}>
+							<ImageBackground style={{flex: 1, justifyContent: 'center', alignSelf: 'center', width: '100%', height: '100%', marginTop: 30,}} source={require('../assets/lower-res-scroll2.png')}>
+								<Text style={styles.content}>{this.state.modalMessage}</Text>
+								<Text style={styles.author}>-{this.state.modalAuthor}</Text>
+							</ImageBackground>
+							<View style={styles.modalButtonContainer}>
+								<TouchableOpacity style={[styles.modalButton, {backgroundColor: '#17c11a'}]} onPress={this.closeModal}>
+									<Text style={[styles.buttonText, {color: '#fff'}]}>OK</Text>
+								</TouchableOpacity>
+							</View>
+						</View>
+					</Modal>
+					{this.state.showbottle1 &&
+						<TouchableOpacity style={styles.bottles} onPress={this.clickedBottle1} id = 'bottle1'>
+							<Image source = {require('../assets/bottle1.png')} style={[styles.bottles,styles.bottle1]}/>
+						</TouchableOpacity>
+					}
+					{this.state.showbottle2 &&
+						<TouchableOpacity style={styles.bottles} onPress={this.clickedBottle2} id = 'bottle2'>
+							<Image source = {require('../assets/bottle2.png')} style={[styles.bottles,styles.bottle2]}/>
+						</TouchableOpacity>
+					}
+					{this.state.showbottle3 &&
+						<TouchableOpacity style={styles.bottles} onPress={this.clickedBottle3} id = 'bottle3'>
+							<Image source = {require('../assets/bottle3.png')} style={[styles.bottles,styles.bottle3]}/>
+						</TouchableOpacity>
+					}
+					<View style={styles.buttonContainer}>
+						<TouchableOpacity style={styles.button} onPress={this.addBottle}>
+							<Text style={styles.buttonText}>Get New Bottle</Text>
+						</TouchableOpacity>
+					</View>
+				</ImageBackground>
+		  );
+		}
+		else if(this.state.user_data.completedTasks == 5) {
+			return (
+				<ImageBackground source={require('../assets/beachtier5.png')} style={styles.background}>
+					<Modal visible={this.state.showModal}>
+						<View style={[styles.container]}>
+							<ImageBackground style={{flex: 1, justifyContent: 'center', alignSelf: 'center', width: '100%', height: '100%', marginTop: 30,}} source={require('../assets/lower-res-scroll2.png')}>
+								<Text style={styles.content}>{this.state.modalMessage}</Text>
+								<Text style={styles.author}>-{this.state.modalAuthor}</Text>
+							</ImageBackground>
+							<View style={styles.modalButtonContainer}>
+								<TouchableOpacity style={[styles.modalButton, {backgroundColor: '#17c11a'}]} onPress={this.closeModal}>
+									<Text style={[styles.buttonText, {color: '#fff'}]}>OK</Text>
+								</TouchableOpacity>
+							</View>
+						</View>
+					</Modal>
+					{this.state.showbottle1 &&
+						<TouchableOpacity style={styles.bottles} onPress={this.clickedBottle1} id = 'bottle1'>
+							<Image source = {require('../assets/bottle1.png')} style={[styles.bottles,styles.bottle1]}/>
+						</TouchableOpacity>
+					}
+					{this.state.showbottle2 &&
+						<TouchableOpacity style={styles.bottles} onPress={this.clickedBottle2} id = 'bottle2'>
+							<Image source = {require('../assets/bottle2.png')} style={[styles.bottles,styles.bottle2]}/>
+						</TouchableOpacity>
+					}
+					{this.state.showbottle3 &&
+						<TouchableOpacity style={styles.bottles} onPress={this.clickedBottle3} id = 'bottle3'>
+							<Image source = {require('../assets/bottle3.png')} style={[styles.bottles,styles.bottle3]}/>
+						</TouchableOpacity>
+					}
+					<View style={styles.buttonContainer}>
+						<TouchableOpacity style={styles.button} onPress={this.addBottle}>
+							<Text style={styles.buttonText}>Get New Bottle</Text>
+						</TouchableOpacity>
+					</View>
+				</ImageBackground>
+		  );
+		}
+		else if(this.state.user_data.completedTasks == 6) {
+			return (
+				<ImageBackground source={require('../assets/beachtier6.png')} style={styles.background}>
+					<Modal visible={this.state.showModal}>
+						<View style={[styles.container]}>
+							<ImageBackground style={{flex: 1, justifyContent: 'center', alignSelf: 'center', width: '100%', height: '100%', marginTop: 30,}} source={require('../assets/lower-res-scroll2.png')}>
+								<Text style={styles.content}>{this.state.modalMessage}</Text>
+								<Text style={styles.author}>-{this.state.modalAuthor}</Text>
+							</ImageBackground>
+							<View style={styles.modalButtonContainer}>
+								<TouchableOpacity style={[styles.modalButton, {backgroundColor: '#17c11a'}]} onPress={this.closeModal}>
+									<Text style={[styles.buttonText, {color: '#fff'}]}>OK</Text>
+								</TouchableOpacity>
+							</View>
+						</View>
+					</Modal>
+					{this.state.showbottle1 &&
+						<TouchableOpacity style={styles.bottles} onPress={this.clickedBottle1} id = 'bottle1'>
+							<Image source = {require('../assets/bottle1.png')} style={[styles.bottles,styles.bottle1]}/>
+						</TouchableOpacity>
+					}
+					{this.state.showbottle2 &&
+						<TouchableOpacity style={styles.bottles} onPress={this.clickedBottle2} id = 'bottle2'>
+							<Image source = {require('../assets/bottle2.png')} style={[styles.bottles,styles.bottle2]}/>
+						</TouchableOpacity>
+					}
+					{this.state.showbottle3 &&
+						<TouchableOpacity style={styles.bottles} onPress={this.clickedBottle3} id = 'bottle3'>
+							<Image source = {require('../assets/bottle3.png')} style={[styles.bottles,styles.bottle3]}/>
+						</TouchableOpacity>
+					}
+					<View style={styles.buttonContainer}>
+						<TouchableOpacity style={styles.button} onPress={this.addBottle}>
+							<Text style={styles.buttonText}>Get New Bottle</Text>
+						</TouchableOpacity>
+					</View>
+				</ImageBackground>
+		  );
+		}
+  }
 }
 
 const styles = StyleSheet.create({

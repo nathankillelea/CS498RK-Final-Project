@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, AppRegistry } from 'react-native';
-import { TabNavigator, StackNavigator } from 'react-navigation';
+import { TabNavigator, StackNavigator, TabBarBottom } from 'react-navigation';
 import { FontAwesome } from '@expo/vector-icons';
 import { AppLoading, Asset, Font } from 'expo';
 
@@ -50,7 +50,12 @@ export const Tabs = TabNavigator({
 			tabBarIcon: (({ tintColor }) => <FontAwesome name="user" size={32} color={tintColor} />),
 		},
 	},
-});
+},
+{
+	tabBarComponent: TabBarBottom,
+	tabBarPosition: 'bottom',
+}
+);
 
 export const Navigation = StackNavigator({
 	Login: { screen: Login },

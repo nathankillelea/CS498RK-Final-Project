@@ -8,11 +8,14 @@ export default class BlackBay extends React.Component {
 		title: 'BlackBay',
 		header: null,
 	};
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 		this.state = {
 			showModal: false,
 			newBottleText: "",
+			user_data: this.props.navigation.state.params.user_data,
+			available_list: this.props.navigation.state.params.available_list,
+			owned_list_bottles: this.props.navigation.state.params.owned_list_bottles,
 		}
 	}
 
@@ -37,14 +40,17 @@ export default class BlackBay extends React.Component {
 
 	sendBottle = () => {
 		console.log(this.state.newBottleText);
+		console.log(this.state.user_data.username);
 		body = {
+			//"content": this.state.newBottleText,
+			//"author": this.state.user_data.username,
 			"content": this.state.newBottleText,
-			"userID": "123",
+			"author": this.state.user_data.username,
 			"genre": 0,
 			"isPublic": true
 		}
-		let hostname = "10.193.238.104"; //NATHAN's computer
-		let bottleEndpt = "http://" + hostname + ":3000/api/bottles";
+		let hostname = "messageinarawr498.herokuapp.com";
+		let bottleEndpt = "https://" + hostname + "/api/bottles";
 		axios.post(bottleEndpt, body)
 			.then((response) => {
 				console.log("Response went through.");
@@ -65,7 +71,7 @@ export default class BlackBay extends React.Component {
 					<View style={[styles.container]}>
 						<ImageBackground style={{flex:1, justifyContent: 'center', alignSelf: 'center', width: '100%', height: '100%', marginTop: 30,}} source={require('../assets/lower-res-scroll2.png')}>
 						<TextInput style={styles.input}
-							placeholder='Rant Here...'
+							placeholder='Vent Here...'
 							autoCorrect={true}
 							multiline={true}
 							numberOfLines={10}
@@ -75,7 +81,7 @@ export default class BlackBay extends React.Component {
 						</ImageBackground>
 						<View style={styles.modalButtonContainer}>
 							<TouchableOpacity style={[styles.modalButton, {backgroundColor: '#17c11a'}]} onPress={this.sendBottle}>
-								<Text style={[styles.buttonText, {color: '#fff'}]} >Keep Bottle</Text>
+								<Text style={[styles.buttonText, {color: '#fff'}]} >Send To Sea</Text>
 							</TouchableOpacity>
 							<TouchableOpacity style={[styles.modalButton, {backgroundColor: '#c4301d'}]} onPress={this.closeModal}>
 								<Text style={[styles.buttonText, {color: '#fff'}]}>Throw Away</Text>
