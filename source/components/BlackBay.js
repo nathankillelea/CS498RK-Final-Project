@@ -8,11 +8,14 @@ export default class BlackBay extends React.Component {
 		title: 'BlackBay',
 		header: null,
 	};
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 		this.state = {
 			showModal: false,
 			newBottleText: "",
+			user_data: this.props.navigation.state.params.user_data,
+			available_list: this.props.navigation.state.params.available_list,
+			owned_list_bottles: this.props.navigation.state.params.owned_list_bottles,
 		}
 	}
 
@@ -37,9 +40,12 @@ export default class BlackBay extends React.Component {
 
 	sendBottle = () => {
 		console.log(this.state.newBottleText);
+		console.log(this.state.user_data.username);
 		body = {
+			//"content": this.state.newBottleText,
+			//"author": this.state.user_data.username,
 			"content": this.state.newBottleText,
-			"userID": "123",
+			"author": this.state.user_data.username,
 			"genre": 0,
 			"isPublic": true
 		}
