@@ -1,10 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, View, AppRegistry, TouchableOpacity, Alert, TextInput, KeyboardAvoidingView, Image } from 'react-native';
+import { StyleSheet, Text, View, AppRegistry, TouchableOpacity, Alert, TextInput, KeyboardAvoidingView, Image, Modal, Keyboard } from 'react-native';
 import axios from 'axios';
 
 export default class SignUp extends React.Component {
 	static navigationOptions = {
 		title: 'Sign Up',
+		header: null,
 	};
 	constructor() {
 		super();
@@ -13,9 +14,15 @@ export default class SignUp extends React.Component {
 				username: '',
 				email: '',
 				password: '',
+				errorMessage: false,
+				createMessage: false,
 		}
 	}
 	createAccount = () => {
+		Keyboard.dismiss();
+		this.setState({errorMessage: false})
+		this.setState({createMessage: false})
+		console.log(this.state.beach_tier)
 		body = {
 			"username": this.state.username,
 			"email": this.state.email,
@@ -29,15 +36,22 @@ export default class SignUp extends React.Component {
 				console.log("Response went through.");
 				console.log(response);
 				console.log("Is your response.");
+				this.setState({createMessage: true})
 			})
 			.catch((error) => {
 				console.log('Error', JSON.stringify(error));
+				this.setState({errorMessage: true})
 			});
 	}
 	render() {
 		const { navigate } = this.props.navigation;
 		return (
     		<View style={styles.container}>
+				<View style={styles.logoContainer}>
+					<Image style={styles.logo}
+						source={require('../assets/paper.png')}
+					/>
+				</View>
 				<KeyboardAvoidingView behavior="padding">
 					<View style={styles.formContainer}>
 						<TextInput style={styles.input}
@@ -69,6 +83,15 @@ export default class SignUp extends React.Component {
 					<TouchableOpacity style={styles.createButtonContainer} onPress={this.createAccount}>
 						<Text style={styles.buttonText}>Create My Account</Text>
 					</TouchableOpacity>
+					<TouchableOpacity style={styles.createButtonContainer} onPress={() => navigate('Login')}>
+						<Text style={styles.buttonText}>Cancel</Text>
+					</TouchableOpacity>
+					{this.state.errorMessage &&
+				  	<Text style={{color: 'red'}}>Error Creating Account!</Text>
+					}
+					{this.state.createMessage &&
+						<Text style={{color: 'green'}}>Account Created!</Text>
+					}
 				</KeyboardAvoidingView>
     		</View>
     	);
@@ -80,6 +103,15 @@ const styles = StyleSheet.create({
 		flex: 1,
 		backgroundColor: '#96ceb4',
 		padding: 20,
+	},
+	logoContainer: {
+		alignItems: 'center',
+		flexGrow: 1,
+		justifyContent: 'center',
+	},
+	logo: {
+		width: 150,
+		height: 150,
 	},
 	createButtonContainer: {
 		backgroundColor: '#74BE9B',
@@ -97,6 +129,21 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 10,
 		marginBottom: 10,
 	},
+	button: {
+		backgroundColor: '#E4645E',
+		paddingVertical: 15,
+		marginBottom: 20,
+		width: 250,
+		borderRadius: 10,
+	},
+	buttonText: {
+		textAlign: 'center',
+		color: '#fff',
+		fontWeight: '700',
+	},
+	formContainer: {
+
+	}
 });
 
 AppRegistry.registerComponent('SignUp', () => SignUp);
