@@ -43,7 +43,7 @@ export default class BlackBay extends React.Component {
 			"genre": 0,
 			"isPublic": true
 		}
-		let hostname = "Nathan-PC"; //NATHAN's computer
+		let hostname = "10.193.238.104"; //NATHAN's computer
 		let bottleEndpt = "http://" + hostname + ":3000/api/bottles";
 		axios.post(bottleEndpt, body)
 			.then((response) => {

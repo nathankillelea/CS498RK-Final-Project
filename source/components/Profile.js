@@ -221,10 +221,6 @@ export default class Settings extends React.Component {
         this.setState({showPreferences:true});
     };
 
-    logOut = () => {
-				navigate('Login')
-    };
-
     updateText = (text) => {
         this.setState({textField: text})
     };
@@ -323,7 +319,7 @@ export default class Settings extends React.Component {
 					<TouchableOpacity style={styles.button} onPress={this.togglePreference}>
 						<Text style={styles.buttonText}>Change Quote Preference</Text>
 					</TouchableOpacity>
-					<TouchableOpacity style={styles.button} onPress={this.logOut}>
+					<TouchableOpacity style={styles.button} onPress={() => navigate('Login')}>
 						<Text style={styles.buttonText}>Logout</Text>
 					</TouchableOpacity>
 				</View>

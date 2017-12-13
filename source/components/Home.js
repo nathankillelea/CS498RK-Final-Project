@@ -92,7 +92,7 @@ export default class Home extends React.Component {
 	};
 	//Get all the bottles into an array
 	componentWillMount() {
-		let hostname = "Nathan-PC"; //Alec's IP
+		let hostname = "10.193.238.104"; //Alec's IP
 		let bottleEndpt = "http://" + hostname + ":3000/api/bottles";
 		axios.get(bottleEndpt)
             .then((response) => {
