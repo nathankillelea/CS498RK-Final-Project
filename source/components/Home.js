@@ -200,7 +200,7 @@ export default class Home extends React.Component {
 			let hostname = "messageinarawr498.herokuapp.com";
 			let bottleEndpt = "https://" + hostname + "/api/users/" + this.state.user_data._id;
 			body = {
-				owned: strIn,
+				"owned": strIn,
 			}
 			axios.put(bottleEndpt, body)
 								.then((response) => {

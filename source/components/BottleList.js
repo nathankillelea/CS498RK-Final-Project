@@ -32,22 +32,22 @@ export default class BottleList extends React.Component {
 			/>
         );
     };
-    renderHeader = () => {
+    /*renderHeader = () => {
         return(
 			<View style={{backgroundColor: '#FAFAFA'}}>
 			</View>
         );
-    };
+    };*/
     closeModal = () => {
       this.setState({showModal: false});
     };
     componentWillMount = () => {
-
+      this.forceUpdate()
     }
     render() {
         const { navigate } = this.props.navigation;
         return (
-			<View style={{backgroundColor: '#FAFAFA'}}>
+			<View style={{backgroundColor: '#FFFFFF'}}>
         <Modal visible={this.state.showModal}>
           <View style={styles.container}>
             <ImageBackground style={{flex:1, justifyContent: 'center', alignSelf: 'center', width: '100%', height: '100%', marginTop: 30,}} source={require('../assets/lower-res-scroll2.png')}>
@@ -61,7 +61,7 @@ export default class BottleList extends React.Component {
             </View>
           </View>
         </Modal>
-				<List containerStyle={{borderTopWidth: 0, borderBottomWidth: 0, marginTop: 20, backgroundColor: '#FAFAFA'}}>
+				<List containerStyle={{borderTopWidth: 0, borderBottomWidth: 0, marginTop: 20, backgroundColor: '#FFFFFF'}}>
 					<FlatList
 						data={this.state.owned_list_bottles}
 						renderItem={({ item }) => (

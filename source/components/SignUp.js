@@ -36,7 +36,7 @@ export default class SignUp extends React.Component {
 				console.log(response);
 				console.log("Is your response.");
 				this.setState({createMessage: true});
-				//navigate('Login');
+				this.props.navigation.navigate('Login');
 			})
 			.catch((error) => {
 				console.log('Error', JSON.stringify(error));

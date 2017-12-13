@@ -53,7 +53,7 @@ export default class Login extends React.Component {
                 //userData is all user data received from the api call
                 //availableList now is an array of bottles user doesnt own
                 //ownedListBottles is now an array of bottles user owns
-                this.props.navigation.navigate('Tabs', {user_data: userData, available_list: availableList, owned_list_bottles: ownedListBottles});
+                this.props.navigation.navigate('Tabs', {user_data: userData, available_list: availableList, owned_list_bottles: ownedListBottles,});
               })
               .catch((error) => {
                       console.log('Error', JSON.stringify(error));

@@ -49,7 +49,7 @@ export default class BlackBay extends React.Component {
 			"genre": 0,
 			"isPublic": true
 		}
-		let hostname = "messageinarawr498.herokuapp.com"; //NATHAN's computer
+		let hostname = "messageinarawr498.herokuapp.com";
 		let bottleEndpt = "https://" + hostname + "/api/bottles";
 		axios.post(bottleEndpt, body)
 			.then((response) => {
@@ -71,7 +71,7 @@ export default class BlackBay extends React.Component {
 					<View style={[styles.container]}>
 						<ImageBackground style={{flex:1, justifyContent: 'center', alignSelf: 'center', width: '100%', height: '100%', marginTop: 30,}} source={require('../assets/lower-res-scroll2.png')}>
 						<TextInput style={styles.input}
-							placeholder='Rant Here...'
+							placeholder='Vent Here...'
 							autoCorrect={true}
 							multiline={true}
 							numberOfLines={10}
@@ -81,7 +81,7 @@ export default class BlackBay extends React.Component {
 						</ImageBackground>
 						<View style={styles.modalButtonContainer}>
 							<TouchableOpacity style={[styles.modalButton, {backgroundColor: '#17c11a'}]} onPress={this.sendBottle}>
-								<Text style={[styles.buttonText, {color: '#fff'}]} >Keep Bottle</Text>
+								<Text style={[styles.buttonText, {color: '#fff'}]} >Send To Sea</Text>
 							</TouchableOpacity>
 							<TouchableOpacity style={[styles.modalButton, {backgroundColor: '#c4301d'}]} onPress={this.closeModal}>
 								<Text style={[styles.buttonText, {color: '#fff'}]}>Throw Away</Text>
