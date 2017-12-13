@@ -21,7 +21,7 @@ export default class BlackBay extends React.Component {
 
 	async componentDidMount() {
     	await Font.loadAsync({
-    		'Allura-Regular': require('../assets/fonts/Allura-Regular.ttf'),
+    		'DancingScript-Bold': require('../assets/fonts/DancingScript-Bold.ttf'),
 		});
 	}
 
@@ -67,7 +67,7 @@ export default class BlackBay extends React.Component {
 		const { navigate } = this.props.navigation;
 		return (
 	        <ImageBackground style={{width: '100%', height: '100%'}} source={require('../assets/blackbay_nathan.jpg')}>
-				<Modal visible={this.state.showModal}>
+				<Modal visible={this.state.showModal} onRequestClose={()=> setState(showModal: false)}>
 					<View style={[styles.container]}>
 						<ImageBackground style={{flex:1, justifyContent: 'center', alignSelf: 'center', width: '100%', height: '100%', marginTop: 30,}} source={require('../assets/lower-res-scroll2.png')}>
 						<TextInput style={styles.input}
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
 		backgroundColor: 'rgba(255, 255, 255, 0)',
 		paddingHorizontal: 10,
 		margin: 20,
-		fontFamily: 'Allura-Regular',
+		fontFamily: 'DancingScript-Bold',
 		fontSize: 24,
 	},
 });

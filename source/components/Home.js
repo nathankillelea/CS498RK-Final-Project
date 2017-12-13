@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, AppRegistry, TouchableOpacity, Alert, TextInput, KeyboardAvoidingView, Image, ImageBackground , Modal } from 'react-native';
+import { StyleSheet, Text, View, AppRegistry, TouchableOpacity, Alert, TextInput, KeyboardAvoidingView, Image, ImageBackground , Modal, Platform } from 'react-native';
 import axios from 'axios';
 import { AppLoading, Asset, Font } from 'expo';
 
@@ -214,7 +214,7 @@ export default class Home extends React.Component {
 		if(this.state.user_data.completedTasks == 0) {
 			return (
 				<ImageBackground source={require('../assets/beachtier0.png')} style={styles.background}>
-					<Modal visible={this.state.showModal}>
+					<Modal visible={this.state.showModal} onRequestClose={()=> setState({showModal: false})}>
 						<View style={[styles.container]}>
 							<ImageBackground style={{flex: 1, justifyContent: 'center', alignSelf: 'center', width: '100%', height: '100%', marginTop: 30,}} source={require('../assets/lower-res-scroll2.png')}>
 								<Text style={styles.content}>{this.state.modalMessage}</Text>
@@ -259,7 +259,7 @@ export default class Home extends React.Component {
 		else if(this.state.user_data.completedTasks == 1) {
 			return (
 				<ImageBackground source={require('../assets/beachtier1.png')} style={styles.background}>
-					<Modal visible={this.state.showModal}>
+					<Modal visible={this.state.showModal} onRequestClose={()=>setState({showModal: false})}>
 						<View style={[styles.container]}>
 							<ImageBackground style={{flex: 1, justifyContent: 'center', alignSelf: 'center', width: '100%', height: '100%', marginTop: 30,}} source={require('../assets/lower-res-scroll2.png')}>
 								<Text style={styles.content}>{this.state.modalMessage}</Text>
@@ -298,7 +298,7 @@ export default class Home extends React.Component {
 		else if(this.state.user_data.completedTasks == 2) {
 			return (
 				<ImageBackground source={require('../assets/beachtier2.png')} style={styles.background}>
-					<Modal visible={this.state.showModal}>
+					<Modal visible={this.state.showModal} onRequestClose={()=> setState({showModal: false})}>
 						<View style={[styles.container]}>
 							<ImageBackground style={{flex: 1, justifyContent: 'center', alignSelf: 'center', width: '100%', height: '100%', marginTop: 30,}} source={require('../assets/lower-res-scroll2.png')}>
 								<Text style={styles.content}>{this.state.modalMessage}</Text>
@@ -337,7 +337,7 @@ export default class Home extends React.Component {
 		else if(this.state.user_data.completedTasks == 3) {
 			return (
 				<ImageBackground source={require('../assets/beachtier3.png')} style={styles.background}>
-					<Modal visible={this.state.showModal}>
+				<Modal visible={this.state.showModal} onRequestClose={()=> setState({showModal: false})}>
 						<View style={[styles.container]}>
 							<ImageBackground style={{flex: 1, justifyContent: 'center', alignSelf: 'center', width: '100%', height: '100%', marginTop: 30,}} source={require('../assets/lower-res-scroll2.png')}>
 								<Text style={styles.content}>{this.state.modalMessage}</Text>
@@ -376,7 +376,7 @@ export default class Home extends React.Component {
 		else if(this.state.user_data.completedTasks == 4) {
 			return (
 				<ImageBackground source={require('../assets/beachtier4.png')} style={styles.background}>
-					<Modal visible={this.state.showModal}>
+				<Modal visible={this.state.showModal} onRequestClose={()=> setState({showModal: false})}>
 						<View style={[styles.container]}>
 							<ImageBackground style={{flex: 1, justifyContent: 'center', alignSelf: 'center', width: '100%', height: '100%', marginTop: 30,}} source={require('../assets/lower-res-scroll2.png')}>
 								<Text style={styles.content}>{this.state.modalMessage}</Text>
@@ -415,7 +415,7 @@ export default class Home extends React.Component {
 		else if(this.state.user_data.completedTasks == 5) {
 			return (
 				<ImageBackground source={require('../assets/beachtier5.png')} style={styles.background}>
-					<Modal visible={this.state.showModal}>
+				<Modal visible={this.state.showModal} onRequestClose={()=> setState({showModal: false})}>
 						<View style={[styles.container]}>
 							<ImageBackground style={{flex: 1, justifyContent: 'center', alignSelf: 'center', width: '100%', height: '100%', marginTop: 30,}} source={require('../assets/lower-res-scroll2.png')}>
 								<Text style={styles.content}>{this.state.modalMessage}</Text>
@@ -454,7 +454,7 @@ export default class Home extends React.Component {
 		else if(this.state.user_data.completedTasks == 6) {
 			return (
 				<ImageBackground source={require('../assets/beachtier6.png')} style={styles.background}>
-					<Modal visible={this.state.showModal}>
+				<Modal visible={this.state.showModal} onRequestClose={()=> setState({showModal: false})}>
 						<View style={[styles.container]}>
 							<ImageBackground style={{flex: 1, justifyContent: 'center', alignSelf: 'center', width: '100%', height: '100%', marginTop: 30,}} source={require('../assets/lower-res-scroll2.png')}>
 								<Text style={styles.content}>{this.state.modalMessage}</Text>
@@ -560,7 +560,7 @@ const styles = StyleSheet.create({
 		backgroundColor: 'rgba(255, 255, 255, 0)',
 		paddingHorizontal: 10,
 		marginLeft: 20,
-		fontFamily: 'Allura-Regular',
+		fontFamily: 'DancingScript-Bold',
 		fontSize: 24,
 		marginBottom: 10,
 	},
@@ -570,7 +570,7 @@ const styles = StyleSheet.create({
 		backgroundColor: 'rgba(255, 255, 255, 0)',
 		paddingHorizontal: 10,
 		marginLeft: 20,
-		fontFamily: 'Allura-Regular',
+		fontFamily: 'DancingScript-Bold',
 		fontSize: 24,
 		marginBottom: 10,
 	},

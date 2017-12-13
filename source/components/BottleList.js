@@ -48,7 +48,7 @@ export default class BottleList extends React.Component {
         const { navigate } = this.props.navigation;
         return (
 			<View style={{backgroundColor: '#FFFFFF'}}>
-        <Modal visible={this.state.showModal}>
+        <Modal visible={this.state.showModal} onRequestClose={()=> setState({showModal: false})}>
           <View style={styles.container}>
             <ImageBackground style={{flex:1, justifyContent: 'center', alignSelf: 'center', width: '100%', height: '100%', marginTop: 30,}} source={require('../assets/lower-res-scroll2.png')}>
               <Text style={styles.content}>{this.state.modalMessage}</Text>
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
 		backgroundColor: 'rgba(255, 255, 255, 0)',
 		paddingHorizontal: 10,
 		marginLeft: 20,
-		fontFamily: 'Allura-Regular',
+		fontFamily: 'DancingScript-Bold',
 		fontSize: 24,
 		marginBottom: 10,
 	},
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
 		backgroundColor: 'rgba(255, 255, 255, 0)',
 		paddingHorizontal: 10,
 		marginLeft: 20,
-		fontFamily: 'Allura-Regular',
+		fontFamily: 'DancingScript-Bold',
 		fontSize: 24,
 		marginBottom: 10,
 	},

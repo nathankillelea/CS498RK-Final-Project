@@ -213,7 +213,8 @@ export default class Settings extends React.Component {
         const { navigate } = this.props.navigation;
         return (
 					<View style={styles.container}>
-					<Modal id='Username' visible={this.state.showUsername}>
+					<Modal id='Username' visible={this.state.showUsername} onRequestClose={()=> setState({showUsername: false})} >
+
 						<View style={styles.container}>
 							<Text style={styles.headerText}>Change Username</Text>
 							<KeyboardAvoidingView behavior="padding">
@@ -233,7 +234,7 @@ export default class Settings extends React.Component {
 						</View>
 					</Modal>
 
-					<Modal id='Username' visible={this.state.showProfilePicture}>
+					<Modal id='Profile' visible={this.state.showProfilePicture} onRequestClose={()=> setState({showProfilePicture: false})}>
 						<View style={styles.container}>
 							<Text style={styles.headerText}>Change Profile Picture</Text>
 							<View style={styles.pictureContainer}>
