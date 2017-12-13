@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, AppRegistry, TouchableOpacity, TextInput, KeyboardAvoidingView, Image, StatusBar } from 'react-native';
+import axios from 'axios';
 
 export default class Login extends React.Component {
 	static navigationOptions = {
@@ -9,34 +10,34 @@ export default class Login extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			username = '',
-			password = '',
+			username: '',
+			password: '',
+			errorMessage: false,
 		}
 	}
 	logIn = () => {
-		let hostname = "10.193.3.50"; //Alec's IP
+		this.setState({errorMessage: false})
+		let hostname = "10.193.238.104"; //Alec's IP
 		let bottleEndpt = "http://" + hostname + ":3000/api/login";
 		body = {
 			"username": this.state.username,
-			"password": this.state.password
+			"password": this.state.password,
 		}
 		axios.post(bottleEndpt, body)
 		.then((response) => {
-
-
+			console.log(response);
+			console.log("good job bud");
+			this.props.navigation.navigate('Home')
 		})
 		.catch((error) => {
 				console.log('Error', JSON.stringify(error));
-				//error message, dont log them in
+				this.setState({errorMessage: true})
 		});
 	};
 	render() {
 		const { navigate } = this.props.navigation;
 		return (
     		<View style={styles.container}>
-				<StatusBar
-
-				/>
 				<View style={styles.logoContainer}>
 					<Image style={styles.logo}
 						source={require('../assets/paper.png')}
@@ -63,6 +64,9 @@ export default class Login extends React.Component {
 						<Text style={styles.buttonText}>Login</Text>
 					</TouchableOpacity>
 					<View style={styles.signUpWrapper}>
+						{this.state.errorMessage &&
+							<Text style={{color: 'red', paddingRight: 100,}}>Error Logging In!</Text>
+						}
 						<Text style={styles.signUpText}>Not a user?</Text>
 						<TouchableOpacity style={styles.signUpButtonContainer} onPress={() => navigate('SignUp')}>
 							<Text style={styles.buttonText}>Sign Up</Text>
