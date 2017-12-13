@@ -262,7 +262,7 @@ export default class CalendarView extends React.Component {
 								<TouchableOpacity style={[styles.button,{marginTop: 20,}]} onPress={this.returnToCalendar}>
 										<Text style={styles.buttonText}>Return to Calendar</Text>
 								</TouchableOpacity>
-								<Modal visible={this.state.showModal}>
+								<Modal visible={this.state.showModal} onRequestClose={()=> setState({showModal: false})}>
 									<View style={[styles.container, {backgroundColor: '#ADD8E6'}]}>
 										<TextInput style={styles.input}
 											placeholder="Title"

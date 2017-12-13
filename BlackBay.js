@@ -8,17 +8,20 @@ export default class BlackBay extends React.Component {
 		title: 'BlackBay',
 		header: null,
 	};
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 		this.state = {
 			showModal: false,
 			newBottleText: "",
+			user_data: this.props.navigation.state.params.user_data,
+			available_list: this.props.navigation.state.params.available_list,
+			owned_list_bottles: this.props.navigation.state.params.owned_list_bottles,
 		}
 	}
 
 	async componentDidMount() {
     	await Font.loadAsync({
-    		'Allura-Regular': require('../assets/fonts/Allura-Regular.ttf'),
+    		'DancingScript-Bold': require('../assets/fonts/DancingScript-Bold.ttf'),
 		});
 	}
 
@@ -37,14 +40,17 @@ export default class BlackBay extends React.Component {
 
 	sendBottle = () => {
 		console.log(this.state.newBottleText);
+		console.log(this.state.user_data.username);
 		body = {
+			//"content": this.state.newBottleText,
+			//"author": this.state.user_data.username,
 			"content": this.state.newBottleText,
-			"userID": "123",
+			"author": this.state.user_data.username,
 			"genre": 0,
 			"isPublic": true
 		}
-		let hostname = "10.193.238.104"; //NATHAN's computer
-		let bottleEndpt = "http://" + hostname + ":3000/api/bottles";
+		let hostname = "messageinarawr498.herokuapp.com";
+		let bottleEndpt = "https://" + hostname + "/api/bottles";
 		axios.post(bottleEndpt, body)
 			.then((response) => {
 				console.log("Response went through.");
@@ -61,11 +67,11 @@ export default class BlackBay extends React.Component {
 		const { navigate } = this.props.navigation;
 		return (
 	        <ImageBackground style={{width: '100%', height: '100%'}} source={require('../assets/blackbay_nathan.jpg')}>
-				<Modal visible={this.state.showModal}>
+				<Modal visible={this.state.showModal} onRequestClose={()=> setState(showModal: false)}>
 					<View style={[styles.container]}>
-						<ImageBackground style={{flex:1, justifyContent: 'center', alignSelf: 'center', width: '100%', height: '100%', marginTop: 30,}} source={require('../assets/scroll2.png')}>
+						<ImageBackground style={{flex:1, justifyContent: 'center', alignSelf: 'center', width: '100%', height: '100%', marginTop: 30,}} source={require('../assets/lower-res-scroll2.png')}>
 						<TextInput style={styles.input}
-							placeholder='Rant Here...'
+							placeholder='Vent Here...'
 							autoCorrect={true}
 							multiline={true}
 							numberOfLines={10}
@@ -75,7 +81,7 @@ export default class BlackBay extends React.Component {
 						</ImageBackground>
 						<View style={styles.modalButtonContainer}>
 							<TouchableOpacity style={[styles.modalButton, {backgroundColor: '#17c11a'}]} onPress={this.sendBottle}>
-								<Text style={[styles.buttonText, {color: '#fff'}]} >Keep Bottle</Text>
+								<Text style={[styles.buttonText, {color: '#fff'}]} >Send To Sea</Text>
 							</TouchableOpacity>
 							<TouchableOpacity style={[styles.modalButton, {backgroundColor: '#c4301d'}]} onPress={this.closeModal}>
 								<Text style={[styles.buttonText, {color: '#fff'}]}>Throw Away</Text>
@@ -96,6 +102,7 @@ export default class BlackBay extends React.Component {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
+		backgroundColor: '#ADD8E6',
 	},
     backgroundImage: {
 		height: '100%',
@@ -104,7 +111,7 @@ const styles = StyleSheet.create({
 	buttonContainer: {
 		justifyContent: 'center',
 		alignItems: 'center',
-		paddingTop: 400,
+		marginTop: 525,
 	},
 	button: {
 		backgroundColor: 'rgba(255, 255, 255, 0.7)',
@@ -132,7 +139,7 @@ const styles = StyleSheet.create({
 		backgroundColor: 'rgba(255, 255, 255, 0)',
 		paddingHorizontal: 10,
 		margin: 20,
-		fontFamily: 'Allura-Regular',
+		fontFamily: 'DancingScript-Bold',
 		fontSize: 24,
 	},
 });
