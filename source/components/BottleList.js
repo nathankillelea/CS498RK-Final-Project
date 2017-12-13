@@ -14,17 +14,16 @@ export default class BottleList extends React.Component {
             loading: false,
             refreshing: false,
             data: [],
+            showModal: false,
         };
     };
 
+
 	componentWillMount(){
-		let hostname = "10.193.238.104"; //NATHAN's computer
+		let hostname = "10.193.3.50"; //NATHAN's computer
 		let bottleEndpt = "http://" + hostname + ":3000/api/bottles";
 		 axios.get(bottleEndpt)
             .then((response) => {
-                /* console.log("Response went through.");
-                console.log(response);
-                console.log("Is your response."); */
                 this.setState({data: response.data.data});
             })
             .catch((error) => {
@@ -58,10 +57,29 @@ export default class BottleList extends React.Component {
 			</View>
         );
     };
+    closeModal = () = > {
+      this.setState({showModal: false});
+    };
+    showModal = () = > {
+      this.setState({showModal: true});
+    };
     render() {
         const { navigate } = this.props.navigation;
         return (
 			<View style={{backgroundColor: '#FAFAFA'}}>
+        <Modal visible={this.state.showModal}>
+          <View style={styles.container}>
+            <ImageBackground style={{flex:1, justifyContent: 'center', alignSelf: 'center', width: '100%', height: '100%', marginTop: 30,}} source={require('../assets/lower-res-scroll2.png')}>
+              <Text style={styles.content}>{this.state.name}</Text>
+              <Text style={styles.author}>-{this.state.author}</Text>
+            </ImageBackground>
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity style={[styles.button, {backgroundColor: '#17c11a'}]} onPress={this.closeModal}>
+                <Text style={[styles.buttonText, {color: '#fff'}]}>BACK</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
 				<List containerStyle={{borderTopWidth: 0, borderBottomWidth: 0, marginTop: 20, backgroundColor: '#FAFAFA'}}>
 					<FlatList
 						data={this.state.data}
@@ -73,7 +91,8 @@ export default class BottleList extends React.Component {
 								avatar={require('../assets/paper.png')}
 								containerStyle={{borderBottomWidth: 0, borderTopWidth: 0, backgroundColor: '#fff', borderColor: '#fff'}}
 								button
-								onPress={() => navigate('Bottle', {name: item.content, type: item.genre, author: item.author})}
+								//onPress={() => navigate('Bottle', {name: item.content, type: item.genre, author: item.author})}
+                onPress={this.showModal}
 							/>
                         )}
 						keyExtractor={item => item._id}
@@ -87,6 +106,50 @@ export default class BottleList extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+		flex: 1,
+		backgroundColor: '#fff',
+		justifyContent: 'center',
+		alignItems: 'center',
+		padding: 20,
+		backgroundColor: '#ADD8E6',
+	},
+	content: {
+		alignItems: 'center',
+		justifyContent: 'center',
+		height: 360,
+		backgroundColor: 'rgba(255, 255, 255, 0)',
+		paddingHorizontal: 10,
+		marginLeft: 20,
+		fontFamily: 'Allura-Regular',
+		fontSize: 24,
+		marginBottom: 10,
+	},
+	author: {
+		alignItems: 'center',
+		justifyContent: 'center',
+		backgroundColor: 'rgba(255, 255, 255, 0)',
+		paddingHorizontal: 10,
+		marginLeft: 20,
+		fontFamily: 'Allura-Regular',
+		fontSize: 24,
+		marginBottom: 10,
+	},
+	buttonText: {
+		textAlign: 'center',
+		color: '#fff',
+		fontWeight: '700',
+	},
+	buttonContainer: {
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	button: {
+		paddingVertical: 15,
+		marginBottom: 20,
+		width: 250,
+		borderRadius: 10,
+	},
 
 });
 
