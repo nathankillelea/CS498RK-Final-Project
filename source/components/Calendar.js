@@ -19,8 +19,8 @@ export default class CalendarView extends React.Component {
 	};
 
 	componentWillMount(){
-        let hostname = "10.193.238.104"; //Alec's IP
-        let taskEndpt = 'http://' + hostname + '/api/tasks?where={\"owner\":\"boog\"}';
+        let hostname = "messageinarawr498.herokuapp.com"; //Alec's IP
+        let taskEndpt = 'https://' + hostname + '/api/tasks?where={\"owner\":\"boog\"}';
         axios.get(taskEndpt)
             .then((response) => {
 

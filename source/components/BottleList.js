@@ -57,10 +57,10 @@ export default class BottleList extends React.Component {
 			</View>
         );
     };
-    closeModal = () = > {
+    closeModal = () => {
       this.setState({showModal: false});
     };
-    showModal = () = > {
+    showModal = () => {
       this.setState({showModal: true});
     };
     render() {

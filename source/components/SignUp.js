@@ -22,21 +22,21 @@ export default class SignUp extends React.Component {
 		Keyboard.dismiss();
 		this.setState({errorMessage: false})
 		this.setState({createMessage: false})
-		console.log(this.state.beach_tier)
 		body = {
 			"username": this.state.username,
 			"email": this.state.email,
 			"password": this.state.password,
 		}
 		console.log(body)
-		let hostname = "10.193.238.104"; //NATHAN's computer
-		let bottleEndpt = "http://" + hostname + ":3000/api/register";
+		let hostname = "messageinarawr498.herokuapp.com"; //NATHAN's computer
+		let bottleEndpt = "https://" + hostname + "/api/register";
 		axios.post(bottleEndpt, body)
 			.then((response) => {
 				console.log("Response went through.");
 				console.log(response);
 				console.log("Is your response.");
-				this.setState({createMessage: true})
+				this.setState({createMessage: true});
+				//navigate('Login');
 			})
 			.catch((error) => {
 				console.log('Error', JSON.stringify(error));
