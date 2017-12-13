@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, AppRegistry, Button, Modal, Alert, TextInput, KeyboardAvoidingView, Image, Dimensions, ScrollView, TouchableOpacity } from 'react-native';
 import { Avatar } from 'react-native-elements'
+import axios from 'axios';
 
 export default class Settings extends React.Component {
 		static navigationOptions = {
@@ -14,13 +15,10 @@ export default class Settings extends React.Component {
             username: this.props.navigation.state.params.user_data.username,
             profilePicture: this.props.navigation.state.params.user_data.profilePicture,
             password: "",
-            preference: this.props.navigation.state.params.user_data.quoteType,
 						uri: require('../assets/avatars/beachball.jpg'),
-						pref: '',
 						showUsername: false,
 						showPassword: false,
 						showProfilePicture: false,
-						showPreferences: false,
 						textField: '',
 						user_data: this.props.navigation.state.params.user_data,
 						available_list: this.props.navigation.state.params.available_list,
@@ -29,48 +27,29 @@ export default class Settings extends React.Component {
     }
 
     componentWillMount() {
-        let pref = '';
-        //thankful, inspirational, comical, meme
-        switch(this.state.preference){
-            case 0:
-                pref = 'Thankful';
-                break;
-            case 1:
-                pref = 'Inspirational';
-                break;
-            case 2:
-                pref = 'Comical';
-                break;
-            case 3:
-                pref = 'Meme';
-                break;
-            //TODO: Personal Bottle Type Add to Schema
-        }
-        this.setState({pref: pref});
+
 
         let imgPath = require('../assets/avatars/beachball.jpg');
-        switch(this.state.profilePicture) {
-            case 0:
-                imgPath = require('../assets/avatars/beachball.jpg');
-                break;
-            case 1:
-                imgPath = require('../assets/avatars/crab.jpg');
-                break;
-            case 2:
-                imgPath = require('../assets/avatars/frog.jpg');
-                break;
-            case 3:
-                imgPath = require('../assets/avatars/mermaid.png');
-                break;
-            case 4:
-                imgPath = require('../assets/avatars/pelican.jpg');
-                break;
-            case 5:
-                imgPath = require('../assets/avatars/shark.png');
-                break;
-            case 6:
-                imgPath = require('../assets/avatars/treasurechest.jpg');
-                break;
+        if(this.state.profilePicture === "0") {
+        	imgPath = require('../assets/avatars/beachball.jpg');
+        }
+				else if(this.state.profilePicture === "1") {
+        	imgPath = require('../assets/avatars/crab.jpg');
+        }
+				else if(this.state.profilePicture === "2") {
+        	imgPath = require('../assets/avatars/frog.jpg');
+        }
+				else if(this.state.profilePicture === "3") {
+        	imgPath = require('../assets/avatars/mermaid.png');
+        }
+				else if(this.state.profilePicture === "4") {
+        	imgPath = require('../assets/avatars/pelican.jpg');
+        }
+				else if(this.state.profilePicture === "5") {
+        	imgPath = require('../assets/avatars/shark.png');
+        }
+				else if(this.state.profilePicture === "6") {
+        	imgPath = require('../assets/avatars/treasurechest.jpg');
         }
         this.setState({uri: imgPath})
 	}
@@ -82,88 +61,150 @@ export default class Settings extends React.Component {
     toggleProfilePicture = () => {
         this.setState({showProfilePicture:true});
     };
-
-    togglePreference = () => {
-        this.setState({showPreferences:true});
-    };
-
     changeUsername = () => {
     	let newUsername = this.state.textField;
-    	console.log(this.newUsername);
+    	console.log(newUsername);
     	this.setState({username: newUsername});
 			this.setState({showUsername: false});
+			let hostname = "messageinarawr498.herokuapp.com";
+			let bottleEndpt = "https://" + hostname + "/api/users/" + this.state.user_data._id;
+			body = {
+				username: newUsername,
+			}
+			axios.put(bottleEndpt, body)
+								.then((response) => {
+									console.log("username changed!!")
+								})
+								.catch((error) => {
+									console.log('Error With Put', JSON.stringify(error));
+								})
     };
 
     changeProfilePictureBall = () => {
 	    	this.setState({profilePicture:0});
 	      this.setState({showProfilePicture:false});
 				this.setState({uri: require('../assets/avatars/beachball.jpg')});
+				let hostname = "messageinarawr498.herokuapp.com";
+				let bottleEndpt = "https://" + hostname + "/api/users/" + this.state.user_data._id;
+				body = {
+					profilePicture: "0",
+				}
+				axios.put(bottleEndpt, body)
+									.then((response) => {
+
+									})
+									.catch((error) => {
+										console.log('Error With Put', JSON.stringify(error));
+									})
     };
 
     changeProfilePictureCrab = () => {
 	      this.setState({profilePicture:1});
 	      this.setState({showProfilePicture:false});
 				this.setState({uri: require('../assets/avatars/crab.jpg')});
+				let hostname = "messageinarawr498.herokuapp.com";
+				let bottleEndpt = "https://" + hostname + "/api/users/" + this.state.user_data._id;
+				body = {
+					profilePicture: "1",
+				}
+				axios.put(bottleEndpt, body)
+									.then((response) => {
+
+									})
+									.catch((error) => {
+										console.log('Error With Put', JSON.stringify(error));
+									})
     };
 
     changeProfilePictureFrog = () => {
         this.setState({profilePicture:2});
         this.setState({showProfilePicture:false});
 				this.setState({uri: require('../assets/avatars/frog.jpg')});
+				let hostname = "messageinarawr498.herokuapp.com";
+				let bottleEndpt = "https://" + hostname + "/api/users/" + this.state.user_data._id;
+				body = {
+					profilePicture: "2",
+				}
+				axios.put(bottleEndpt, body)
+									.then((response) => {
+
+									})
+									.catch((error) => {
+										console.log('Error With Put', JSON.stringify(error));
+									})
     };
 
     changeProfilePictureMermaid = () => {
         this.setState({profilePicture:3});
         this.setState({showProfilePicture:false});
 				this.setState({uri: require('../assets/avatars/mermaid.png')});
+				let hostname = "messageinarawr498.herokuapp.com";
+				let bottleEndpt = "https://" + hostname + "/api/users/" + this.state.user_data._id;
+				body = {
+					profilePicture: "3",
+				}
+				axios.put(bottleEndpt, body)
+									.then((response) => {
+
+									})
+									.catch((error) => {
+										console.log('Error With Put', JSON.stringify(error));
+									})
     };
 
     changeProfilePicturePelican = () => {
         this.setState({profilePicture:4});
         this.setState({showProfilePicture:false});
 				this.setState({uri: require('../assets/avatars/pelican.jpg')});
+				let hostname = "messageinarawr498.herokuapp.com";
+				let bottleEndpt = "https://" + hostname + "/api/users/" + this.state.user_data._id;
+				body = {
+					profilePicture: "4",
+				}
+				axios.put(bottleEndpt, body)
+									.then((response) => {
+
+									})
+									.catch((error) => {
+										console.log('Error With Put', JSON.stringify(error));
+									})
     };
 
     changeProfilePictureShark = () => {
         this.setState({profilePicture:5});
         this.setState({showProfilePicture:false});
 				this.setState({uri: require('../assets/avatars/shark.png')});
+				let hostname = "messageinarawr498.herokuapp.com";
+				let bottleEndpt = "https://" + hostname + "/api/users/" + this.state.user_data._id;
+				body = {
+					profilePicture: "5",
+				}
+				axios.put(bottleEndpt, body)
+									.then((response) => {
+
+									})
+									.catch((error) => {
+										console.log('Error With Put', JSON.stringify(error));
+									})
     };
 
     changeProfilePictureTreasure = () => {
         this.setState({profilePicture:6});
         this.setState({showProfilePicture:false});
 				this.setState({uri: require('../assets/avatars/treasurechest.jpg')});
-    };
+				let hostname = "messageinarawr498.herokuapp.com";
+				let bottleEndpt = "https://" + hostname + "/api/users/" + this.state.user_data._id;
+				body = {
+					profilePicture: "6",
+				}
+				axios.put(bottleEndpt, body)
+									.then((response) => {
 
-    changeThankful = () => {
-        this.setState({preference:0});
-        this.setState({showPreferences:false});
-				this.setState({pref: 'Thankful'});
+									})
+									.catch((error) => {
+										console.log('Error With Put', JSON.stringify(error));
+									})
     };
-
-    changeInspirational = () => {
-        this.setState({preference:1});
-        this.setState({showPreferences:false});
-				this.setState({pref: 'Inspirational'});
-    };
-
-    changeComical = () => {
-        this.setState({preference:2});
-        this.setState({showPreferences:false});
-				this.setState({pref: 'Comical'});
-    };
-
-    changeMeme = () => {
-        this.setState({preference:3});
-        this.setState({showPreferences:false});
-				this.setState({pref: 'Meme'});
-    };
-
-    togglePreference = () => {
-        this.setState({showPreferences:true});
-    };
-
     updateText = (text) => {
         this.setState({textField: text})
     };
@@ -218,28 +259,6 @@ export default class Settings extends React.Component {
 							</View>
 						</View>
 					</Modal>
-
-                <Modal id='Preferences' visible={this.state.showPreferences}>
-                    <View style={styles.container}>
-                        <Text style={styles.headerText}>Change Preferences</Text>
-												<View style={styles.preferencesContainer}>
-                        <TouchableOpacity style={[styles.button, {backgroundColor: '#2C5461'}]} onPress={this.changeThankful}>
-                            <Text style={[styles.buttonText, {color: '#fff'}]}>Thankful</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={[styles.button, {backgroundColor: '#2C5461'}]} onPress={this.changeInspirational}>
-                            <Text style={[styles.buttonText, {color: '#fff'}]}>Inspirational</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={[styles.button, {backgroundColor: '#2C5461'}]} onPress={this.changeComical}>
-                            <Text style={[styles.buttonText, {color: '#fff'}]}>Comical</Text>
-                        </TouchableOpacity>
-
-                        <TouchableOpacity style={[styles.button, {backgroundColor: '#2C5461'}]} onPress={this.changeMeme}>
-                            <Text style={[styles.buttonText, {color: '#fff'}]}>Meme</Text>
-                        </TouchableOpacity>
-												</View>
-                    </View>
-                </Modal>
-
 				<View style={styles.avatarContainer}>
 					<Avatar
 						xlarge
@@ -247,7 +266,6 @@ export default class Settings extends React.Component {
 						source={this.state.uri}
 					/>
 					<Text style={{marginTop: 10, fontWeight: "bold", fontSize: 24,}}>{this.state.username}</Text>
-					<Text style={{marginBottom: 25, marginTop: 5, fontSize: 20}}>Preference: {this.state.pref}</Text>
 				</View>
 				<View style={styles.buttonContainer}>
 					<TouchableOpacity style={styles.button} onPress={this.toggleProfilePicture}>
@@ -255,9 +273,6 @@ export default class Settings extends React.Component {
 					</TouchableOpacity>
 					<TouchableOpacity style={styles.button} onPress={this.toggleUserName}>
 						<Text style={styles.buttonText}>Change Username</Text>
-					</TouchableOpacity>
-					<TouchableOpacity style={styles.button} onPress={this.togglePreference}>
-						<Text style={styles.buttonText}>Change Quote Preference</Text>
 					</TouchableOpacity>
 					<TouchableOpacity style={styles.button} onPress={() => navigate('Login')}>
 						<Text style={styles.buttonText}>Logout</Text>
@@ -319,9 +334,6 @@ const styles = StyleSheet.create({
 		marginBottom: 10,
 		width: 250,
 		marginTop: 225,
-	},
-	preferencesContainer: {
-		marginTop: 150,
 	},
 	pictureContainer: {
 		marginTop: 75,
