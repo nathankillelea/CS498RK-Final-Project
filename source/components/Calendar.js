@@ -160,15 +160,8 @@ export default class CalendarView extends React.Component {
 
 				if(this.state.showTaskModal === false) {
 		       return (
-								<CalendarList
-									// Max amount of months allowed to scroll to the past. Default = 50
-									pastScrollRange={24}
-									// Max amount of months allowed to scroll to the future. Default = 50
-									futureScrollRange={24}
-									// Enable or disable scrolling of calendar list
-									scrollEnabled={true}
-									// Enable or disable vertical scroll indicator. Default = false
-									showScrollIndicator={true}
+								<Calendar
+                  style={{marginTop: 20, backgroundColor: '#fff'}}
 									// callback that gets called on day press
 									onDayPress={(day) => this.getTasksGivenDay(day)}
 								/>
