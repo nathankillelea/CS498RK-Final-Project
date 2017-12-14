@@ -216,7 +216,7 @@ export default class Home extends React.Component {
 				<ImageBackground source={require('../assets/beachtier0.png')} style={styles.background}>
 					<Modal visible={this.state.showModal} onRequestClose={()=> setState({showModal: false})}>
 						<View style={[styles.container]}>
-							<ImageBackground style={{flex: 1, justifyContent: 'center', alignSelf: 'center', width: '100%', height: '100%', marginTop: 30,}} source={require('../assets/lower-res-scroll2.png')}>
+							<ImageBackground style={{flex: 1, justifyContent: 'center', alignSelf: 'center', width: 375, height: 513, marginTop: 20,}} source={require('../assets/lower-res-scroll2.png')}>
 								<Text style={styles.content}>{this.state.modalMessage}</Text>
 								<Text style={styles.author}>-{this.state.modalAuthor}</Text>
 							</ImageBackground>
@@ -261,7 +261,7 @@ export default class Home extends React.Component {
 				<ImageBackground source={require('../assets/beachtier1.png')} style={styles.background}>
 					<Modal visible={this.state.showModal} onRequestClose={()=>setState({showModal: false})}>
 						<View style={[styles.container]}>
-							<ImageBackground style={{flex: 1, justifyContent: 'center', alignSelf: 'center', width: '100%', height: '100%', marginTop: 30,}} source={require('../assets/lower-res-scroll2.png')}>
+							<ImageBackground style={{flex: 1, justify: 'center', alignSelf: 'center', width: 375, height: 513, marginTop: 20,}} source={require('../assets/lower-res-scroll2.png')}>
 								<Text style={styles.content}>{this.state.modalMessage}</Text>
 								<Text style={styles.author}>-{this.state.modalAuthor}</Text>
 							</ImageBackground>
@@ -306,7 +306,7 @@ export default class Home extends React.Component {
 				<ImageBackground source={require('../assets/beachtier2.png')} style={styles.background}>
 					<Modal visible={this.state.showModal} onRequestClose={()=> setState({showModal: false})}>
 						<View style={[styles.container]}>
-							<ImageBackground style={{flex: 1, justifyContent: 'center', alignSelf: 'center', width: '100%', height: '100%', marginTop: 30,}} source={require('../assets/lower-res-scroll2.png')}>
+							<ImageBackground style={{flex: 1, justifyContent: 'center', alignSelf: 'center', width: 375, height: 513, marginTop: 20,}} source={require('../assets/lower-res-scroll2.png')}>
 								<Text style={styles.content}>{this.state.modalMessage}</Text>
 								<Text style={styles.author}>-{this.state.modalAuthor}</Text>
 							</ImageBackground>
@@ -351,7 +351,7 @@ export default class Home extends React.Component {
 				<ImageBackground source={require('../assets/beachtier3.png')} style={styles.background}>
 				<Modal visible={this.state.showModal} onRequestClose={()=> setState({showModal: false})}>
 						<View style={[styles.container]}>
-							<ImageBackground style={{flex: 1, justifyContent: 'center', alignSelf: 'center', width: '100%', height: '100%', marginTop: 30,}} source={require('../assets/lower-res-scroll2.png')}>
+							<ImageBackground style={{flex: 1, justifyContent: 'center', alignSelf: 'center', width: 375, height: 513, marginTop: 20,}} source={require('../assets/lower-res-scroll2.png')}>
 								<Text style={styles.content}>{this.state.modalMessage}</Text>
 								<Text style={styles.author}>-{this.state.modalAuthor}</Text>
 							</ImageBackground>
@@ -396,7 +396,7 @@ export default class Home extends React.Component {
 				<ImageBackground source={require('../assets/beachtier4.png')} style={styles.background}>
 				<Modal visible={this.state.showModal} onRequestClose={()=> setState({showModal: false})}>
 						<View style={[styles.container]}>
-							<ImageBackground style={{flex: 1, justifyContent: 'center', alignSelf: 'center', width: '100%', height: '100%', marginTop: 30,}} source={require('../assets/lower-res-scroll2.png')}>
+							<ImageBackground style={{flex: 1, justifyContent: 'center', alignSelf: 'center', width: 375, height: 513, marginTop: 20,}} source={require('../assets/lower-res-scroll2.png')}>
 								<Text style={styles.content}>{this.state.modalMessage}</Text>
 								<Text style={styles.author}>-{this.state.modalAuthor}</Text>
 							</ImageBackground>
@@ -441,7 +441,7 @@ export default class Home extends React.Component {
 				<ImageBackground source={require('../assets/beachtier5.png')} style={styles.background}>
 				<Modal visible={this.state.showModal} onRequestClose={()=> setState({showModal: false})}>
 						<View style={[styles.container]}>
-							<ImageBackground style={{flex: 1, justifyContent: 'center', alignSelf: 'center', width: '100%', height: '100%', marginTop: 30,}} source={require('../assets/lower-res-scroll2.png')}>
+							<ImageBackground style={{flex: 1, justifyContent: 'center', alignSelf: 'center', width: 375, height: 513, marginTop: 20,}} source={require('../assets/lower-res-scroll2.png')}>
 								<Text style={styles.content}>{this.state.modalMessage}</Text>
 								<Text style={styles.author}>-{this.state.modalAuthor}</Text>
 							</ImageBackground>
@@ -486,7 +486,7 @@ export default class Home extends React.Component {
 				<ImageBackground source={require('../assets/beachtier6.png')} style={styles.background}>
 				<Modal visible={this.state.showModal} onRequestClose={()=> setState({showModal: false})}>
 						<View style={[styles.container]}>
-							<ImageBackground style={{flex: 1, justifyContent: 'center', alignSelf: 'center', width: '100%', height: '100%', marginTop: 30,}} source={require('../assets/lower-res-scroll2.png')}>
+							<ImageBackground style={{flex:1, justifyContent: 'center', alignSelf: 'center', width: 375, height: 513, marginTop: 20,}} source={require('../assets/lower-res-scroll2.png')}>
 								<Text style={styles.content}>{this.state.modalMessage}</Text>
 								<Text style={styles.author}>-{this.state.modalAuthor}</Text>
 							</ImageBackground>
@@ -621,23 +621,24 @@ const styles = StyleSheet.create({
 	content: {
 		alignItems: 'center',
 		justifyContent: 'center',
-		height: 360,
+		height: 300,
 		backgroundColor: 'rgba(255, 255, 255, 0)',
-		paddingHorizontal: 10,
+		paddingHorizontal: 14,
 		marginLeft: 20,
 		fontFamily: 'DancingScript-Bold',
 		fontSize: 24,
 		marginBottom: 10,
+		marginTop: -60,
 	},
 	author: {
 		alignItems: 'center',
 		justifyContent: 'center',
 		backgroundColor: 'rgba(255, 255, 255, 0)',
-		paddingHorizontal: 10,
+		paddingHorizontal: 12.5,
 		marginLeft: 20,
 		fontFamily: 'DancingScript-Bold',
 		fontSize: 24,
-		marginBottom: 10,
+		marginBottom: 20,
 	},
 });
 

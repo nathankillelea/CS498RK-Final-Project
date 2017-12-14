@@ -50,7 +50,7 @@ export default class BottleList extends React.Component {
 			<View style={{backgroundColor: '#FFFFFF'}}>
         <Modal visible={this.state.showModal} onRequestClose={()=> setState({showModal: false})}>
           <View style={styles.container}>
-            <ImageBackground style={{flex:1, justifyContent: 'center', alignSelf: 'center', width: '100%', height: '100%', marginTop: 30,}} source={require('../assets/lower-res-scroll2.png')}>
+            <ImageBackground style={{flex:1, justifyContent: 'center', alignSelf: 'center', width: 375, height: 513, marginTop: 20,}} source={require('../assets/lower-res-scroll2.png')}>
               <Text style={styles.content}>{this.state.modalMessage}</Text>
               <Text style={styles.author}>-{this.state.modalAuthor}</Text>
             </ImageBackground>
@@ -80,7 +80,7 @@ export default class BottleList extends React.Component {
                     this.setState({modalMessage: item.content});
                     this.setState({modalAuthor: item.author})
                   }}/>
-                          )}
+              )}
   						keyExtractor={item => item._id}
   						ItemSeparatorComponent={this.renderSeparator}
   						ListHeaderComponent={this.renderHeader}
@@ -94,32 +94,29 @@ export default class BottleList extends React.Component {
 const styles = StyleSheet.create({
   container: {
 		flex: 1,
-		backgroundColor: '#fff',
-		justifyContent: 'center',
-		alignItems: 'center',
-		padding: 20,
 		backgroundColor: '#ADD8E6',
 	},
-	content: {
+  content: {
 		alignItems: 'center',
 		justifyContent: 'center',
-		height: 360,
+		height: 300,
 		backgroundColor: 'rgba(255, 255, 255, 0)',
-		paddingHorizontal: 10,
+		paddingHorizontal: 12.5,
 		marginLeft: 20,
 		fontFamily: 'DancingScript-Bold',
 		fontSize: 24,
 		marginBottom: 10,
+		marginTop: -60,
 	},
 	author: {
 		alignItems: 'center',
 		justifyContent: 'center',
 		backgroundColor: 'rgba(255, 255, 255, 0)',
-		paddingHorizontal: 10,
+    paddingHorizontal: 14,
 		marginLeft: 20,
 		fontFamily: 'DancingScript-Bold',
 		fontSize: 24,
-		marginBottom: 10,
+		marginBottom: 20,
 	},
 	buttonText: {
 		textAlign: 'center',

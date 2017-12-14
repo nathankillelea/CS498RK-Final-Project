@@ -69,7 +69,7 @@ export default class BlackBay extends React.Component {
 	        <ImageBackground style={{width: '100%', height: '100%'}} source={require('../assets/blackbay_nathan.jpg')}>
 				<Modal visible={this.state.showModal} onRequestClose={()=> setState(showModal: false)}>
 					<View style={[styles.container]}>
-						<ImageBackground style={{flex:1, justifyContent: 'center', alignSelf: 'center', width: '100%', height: '100%', marginTop: 30,}} source={require('../assets/lower-res-scroll2.png')}>
+						<ImageBackground style={{flex:1, justifyContent: 'center', alignSelf: 'center', width: 375, height: 513, marginTop: 20,}} source={require('../assets/lower-res-scroll2.png')}>
 						<TextInput style={styles.input}
 							placeholder='Vent Here...'
 							autoCorrect={true}
@@ -104,10 +104,10 @@ const styles = StyleSheet.create({
 		flex: 1,
 		backgroundColor: '#ADD8E6',
 	},
-    backgroundImage: {
+  backgroundImage: {
 		height: '100%',
 		width: '100%',
-    },
+  },
 	buttonContainer: {
 		justifyContent: 'center',
 		alignItems: 'center',
