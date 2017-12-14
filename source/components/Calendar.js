@@ -22,10 +22,18 @@ export default class CalendarView extends React.Component {
                 description: '',
                 deadline: '',
                 showModal: false,
-                currDay: 13,
-                currMonth: 12,
-                currYear: 2017,
-                currEpoch: 123
+                currDay: 0,
+                currMonth: 0,
+                currYear: 0,
+                currEpoch: 123,
+                showModalTask: false,
+                modalTask: '',
+                modalCompleted: '',
+                modalID: '',
+                modalTitle: '',
+                modalDeadline: '',
+                modalOwner: '',
+                modalDescription: '',
             }
         };
 
@@ -84,36 +92,106 @@ export default class CalendarView extends React.Component {
             });
         };
 
-        updateCompleteTask = (item) => {
+        updateNotCompleteTask = () => {
             //console.log(item);
             //update states first
             for (i = 0; i < this.state.all_tasks.length; i++) {
-                if (this.state.all_tasks[i]._id === item._id) {
-                    this.state.all_tasks[i].completed = true;
+                if (this.state.all_tasks[i]._id === this.state.modalID) {
+                    this.state.all_tasks[i].completed = false;
                 }
             }
             for (i = 0; i < this.state.my_tasks.length; i++) {
-                if (this.state.my_tasks[i]._id === item._id) {
-                    this.state.my_tasks[i].completed = true;
+                if (this.state.my_tasks[i]._id === this.state.modalID) {
+                    this.state.my_tasks[i].completed = false;
                 }
             }
-            //now update task info on backend
-            body = {
-                title: item.title,
-                deadline: item.deadline,
-                owner: item.owner,
-                description: item.description,
-                completed: true
+            for (i = 0; i < this.state.day_tasks.length; i++) {
+                if (this.state.day_tasks[i]._id === this.state.modalID) {
+                    this.state.day_tasks[i].completed = false;
+                }
+            }
+
+            let hostname = "messageinarawr498.herokuapp.com";
+            let bottleEndpt1 = "https://" + hostname + "/api/users/" + this.state.user_data._id;
+            this.state.user_data.completedTasks = this.state.user_data.completedTasks-1
+            body1 = {
+              completedTasks: this.state.user_data.completedTasks,
+            }
+            axios.put(bottleEndpt1, body1)
+                      .then((response) => {
+
+                      })
+                      .catch((error) => {
+                        console.log('Error With Put', JSON.stringify(error));
+                      });
+
+            body2 = {
+              title: this.state.modalTitle,
+              deadline: this.state.modalDeadline,
+              owner: this.state.modalOwner,
+              description : this.state.modalDescription,
+              completed: false,
             };
-            let hostname = "messageinarawr498.herokuapp.com"; //Alec's IP
-            let taskEndpt = 'https://' + hostname + '/api/tasks/' + item._id;
-            axios.put(taskEndpt, body)
+            let taskEndpt2 = 'https://' + hostname + '/api/tasks/' + this.state.modalID;
+            axios.put(taskEndpt2, body2)
                 .then((response) => {
                     console.log(response);
                 })
                 .catch((err) => {
                     console.log("Error Updating Task to Complete: " + err);
                 });
+            this.setState({showModalTask: false});
+        };
+        updateCompleteTask = () => {
+            //console.log(item);
+            //update states first
+            for (i = 0; i < this.state.all_tasks.length; i++) {
+                if (this.state.all_tasks[i]._id === this.state.modalID) {
+                    this.state.all_tasks[i].completed = true;
+                }
+            }
+            for (i = 0; i < this.state.my_tasks.length; i++) {
+                if (this.state.my_tasks[i]._id === this.state.modalID) {
+                    this.state.my_tasks[i].completed = true;
+                }
+            }
+            for (i = 0; i < this.state.day_tasks.length; i++) {
+                if (this.state.day_tasks[i]._id === this.state.modalID) {
+                    this.state.day_tasks[i].completed = true;
+                }
+            }
+
+            let hostname = "messageinarawr498.herokuapp.com";
+            let bottleEndpt1 = "https://" + hostname + "/api/users/" + this.state.user_data._id;
+            this.state.user_data.completedTasks = this.state.user_data.completedTasks+1
+            body1 = {
+              completedTasks: this.state.user_data.completedTasks,
+            }
+            axios.put(bottleEndpt1, body1)
+                      .then((response) => {
+
+                      })
+                      .catch((error) => {
+                        console.log('Error With Put', JSON.stringify(error));
+                      });
+
+            //now update task info on backend
+            body2 = {
+              title: this.state.modalTitle,
+              deadline: this.state.modalDeadline,
+              owner: this.state.modalOwner,
+              description : this.state.modalDescription,
+              completed: true,
+            };
+            let taskEndpt2 = 'https://' + hostname + '/api/tasks/' + this.state.modalID;
+            axios.put(taskEndpt2, body2)
+                .then((response) => {
+                    console.log(response);
+                })
+                .catch((err) => {
+                    console.log("Error Updating Task to Complete: " + err);
+                });
+            this.setState({showModalTask: false});
         };
 
         addTask = () => {
@@ -170,6 +248,17 @@ export default class CalendarView extends React.Component {
 		     else{
 		         return (
 									<View style={{backgroundColor: '#fff', height: '100%'}}>
+                    <Modal visible={this.state.showModalTask}>
+                      <Text style={{textAlign: 'center', fontWeight: 'bold', fontSize: 48, marginTop: 40,}}>Have you completed the task '{this.state.modalTitle}?'</Text>
+                      <View style={styles.buttonContainer}>
+                        <TouchableOpacity style={[styles.button]} onPress={this.updateCompleteTask}>
+                            <Text style={styles.buttonText}>Yes</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={[styles.button,{marginTop: 20,}]} onPress={this.updateNotCompleteTask}>
+                            <Text style={styles.buttonText}>No</Text>
+                        </TouchableOpacity>
+                    </View>
+                    </Modal>
 										<View style={{}}>
 										<List containerStyle={{borderTopWidth: 0, borderBottomWidth: 0, backgroundColor: '#FFFFFF', height: 400}}>
 											<FlatList
@@ -182,8 +271,14 @@ export default class CalendarView extends React.Component {
 														subtitle={"Completed: " + item.completed}
 														containerStyle={{borderBottomWidth: 0, borderTopWidth: 0, backgroundColor: '#fff', borderColor: '#fff'}}
 														button
-														onPress={(item) => {
-															this.updateCompleteTask(item)
+														onPress={() => {
+                              this.setState({showModalTask: true});
+                              this.setState({modalTitle: item.title});
+                              this.setState({modalID: item._id});
+                              this.setState({modalDeadline: item.deadline});
+                              this.setState({modalOwner: item.owner});
+                              this.setState({modalDescription: item.description});
+
 													}}
 												/>
 		                    )}
@@ -199,7 +294,7 @@ export default class CalendarView extends React.Component {
 										<TouchableOpacity style={[styles.button,{marginTop: 20,}]} onPress={this.returnToCalendar}>
 												<Text style={styles.buttonText}>Return to Calendar</Text>
 										</TouchableOpacity>
-										<Modal visible={this.state.showModal} onRequestClose={()=>setState(showModal: false)}>
+										<Modal visible={this.state.showModal} onRequestClose={()=> this.setState(showModal: false)}>
 											<View style={[styles.container, {backgroundColor: '#ADD8E6'}]}>
 												<TextInput style={styles.input}
 													placeholder="Title"

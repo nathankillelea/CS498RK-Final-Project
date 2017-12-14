@@ -481,7 +481,7 @@ export default class Home extends React.Component {
 				</ImageBackground>
 		  );
 		}
-		else if(this.state.user_data.completedTasks == 6) {
+		else if(this.state.user_data.completedTasks >= 6) {
 			return (
 				<ImageBackground source={require('../assets/beachtier6.png')} style={styles.background}>
 				<Modal visible={this.state.showModal} onRequestClose={()=> setState({showModal: false})}>
