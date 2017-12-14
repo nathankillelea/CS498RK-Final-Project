@@ -61,29 +61,31 @@ export default class BottleList extends React.Component {
             </View>
           </View>
         </Modal>
-				<List containerStyle={{borderTopWidth: 0, borderBottomWidth: 0, marginTop: 20, backgroundColor: '#FFFFFF'}}>
-					<FlatList
-						data={this.state.owned_list_bottles}
-						renderItem={({ item }) => (
-							<ListItem
-								roundAvatar
-								title={item.author}
-								subtitle={item.content}
-								avatar={require('../assets/paper.png')}
-								containerStyle={{borderBottomWidth: 0, borderTopWidth: 0, backgroundColor: '#fff', borderColor: '#fff'}}
-								button
-								//onPress={() => navigate('Bottle', {name: item.content, type: item.genre, author: item.author})}
-                onPress={() => {
-                  this.setState({showModal: true});
-                  this.setState({modalMessage: item.content});
-                  this.setState({modalAuthor: item.author})
-                }}/>
-                        )}
-						keyExtractor={item => item._id}
-						ItemSeparatorComponent={this.renderSeparator}
-						ListHeaderComponent={this.renderHeader}
-					/>
-				</List>
+  				<List containerStyle={{borderTopWidth: 0, borderBottomWidth: 0, marginTop: 20, backgroundColor: '#FFFFFF'}}>
+  					<FlatList
+              style={{backgroundColor: 'white', height: '100%'}}
+              removeClippedSubviews={false}
+  						data={this.state.owned_list_bottles}
+  						renderItem={({ item }) => (
+  							<ListItem
+  								roundAvatar
+  								title={item.author}
+  								subtitle={item.content}
+  								avatar={require('../assets/paper.png')}
+  								containerStyle={{borderBottomWidth: 0, borderTopWidth: 0, backgroundColor: '#fff', borderColor: '#fff'}}
+  								button
+  								//onPress={() => navigate('Bottle', {name: item.content, type: item.genre, author: item.author})}
+                  onPress={() => {
+                    this.setState({showModal: true});
+                    this.setState({modalMessage: item.content});
+                    this.setState({modalAuthor: item.author})
+                  }}/>
+                          )}
+  						keyExtractor={item => item._id}
+  						ItemSeparatorComponent={this.renderSeparator}
+  						ListHeaderComponent={this.renderHeader}
+  					/>
+        </List>
 			</View>
         );
     }
